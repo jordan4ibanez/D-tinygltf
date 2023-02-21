@@ -396,20 +396,19 @@ public:
     }
 
     // Valid only for object type.
-    bool Has(const(std) key) {
+    bool Has(const string key) {
         if (!IsObject()) return false;
-        Object::const_iterator it = object_value_.find(key);
+        Object.const_iterator it = object_value_.find(key);
         return (it != object_value_.end()) ? true : false;
     }
 
     // List keys
-    std::vector<std::string> Keys() const {
-        std::vector<std::string> keys;
+    string[] Keys() const {
+        string[] keys;
         if (!IsObject()) return keys;  // empty
 
-        for (Object it = object_value_.begin();
-            it != object_value_.end(); ++it) {
-        keys.push_back(it.first);
+        for (Object it = object_value_.begin(); it != object_value_.end(); ++it) {
+                keys.push_back(it.first);
         }
 
         return keys;
