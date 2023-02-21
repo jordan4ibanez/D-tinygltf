@@ -80,10 +80,6 @@ public import
 public import 
 public import 
 
-//Auto-detect C++14 standard version
-static if (!HasVersion!"TINYGLTF_USE_CPP14" && HasVersion!"none" && (__cplusplus >= 201402L)) {
-version = TINYGLTF_USE_CPP14;
-}
 
 version (TINYGLTF_USE_CPP14) {} else {
 public import 
