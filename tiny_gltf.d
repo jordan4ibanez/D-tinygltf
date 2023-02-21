@@ -207,26 +207,26 @@ enum _Type {
 }alias Type = _Type;
 
 pragma(inline, true) private int GetComponentSizeInBytes(uint componentType) {
-  if (componentType == TINYGLTF_COMPONENT_TYPE_BYTE) {
-    return 1;
-  } else if (componentType == TINYGLTF_COMPONENT_TYPE_UNSIGNED_BYTE) {
-    return 1;
-  } else if (componentType == TINYGLTF_COMPONENT_TYPE_SHORT) {
-    return 2;
-  } else if (componentType == TINYGLTF_COMPONENT_TYPE_UNSIGNED_SHORT) {
-    return 2;
-  } else if (componentType == TINYGLTF_COMPONENT_TYPE_INT) {
-    return 4;
-  } else if (componentType == TINYGLTF_COMPONENT_TYPE_UNSIGNED_INT) {
-    return 4;
-  } else if (componentType == TINYGLTF_COMPONENT_TYPE_FLOAT) {
-    return 4;
-  } else if (componentType == TINYGLTF_COMPONENT_TYPE_DOUBLE) {
-    return 8;
-  } else {
-    // Unknown component type
-    return -1;
-  }
+    if (componentType == TINYGLTF_COMPONENT_TYPE_BYTE) {
+        return 1;
+    } else if (componentType == TINYGLTF_COMPONENT_TYPE_UNSIGNED_BYTE) {
+        return 1;
+    } else if (componentType == TINYGLTF_COMPONENT_TYPE_SHORT) {
+        return 2;
+    } else if (componentType == TINYGLTF_COMPONENT_TYPE_UNSIGNED_SHORT) {
+        return 2;
+    } else if (componentType == TINYGLTF_COMPONENT_TYPE_INT) {
+        return 4;
+    } else if (componentType == TINYGLTF_COMPONENT_TYPE_UNSIGNED_INT) {
+        return 4;
+    } else if (componentType == TINYGLTF_COMPONENT_TYPE_FLOAT) {
+        return 4;
+    } else if (componentType == TINYGLTF_COMPONENT_TYPE_DOUBLE) {
+        return 8;
+    } else {
+        // Unknown component type
+        return -1;
+    }
 }
 
 pragma(inline, true) private int GetNumComponentsInType(uint ty) {
