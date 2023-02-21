@@ -251,6 +251,7 @@ bool IsDataURI(const(std) in_);
 bool DecodeDataURI(ubyte* out_, std mime_type, const(std) in_, size_t reqBytes, bool checkSize);
 
 // Simple class to represent JSON object
+//* Note: This whole thing is duck typed
 class Value {
 
  public:
@@ -265,6 +266,7 @@ class Value {
         this.boolean_value = false;
     }
     //! These are all constructors & converters
+    //TODO: Test all this nonsense
     this(bool b)(BOOL_TYPE) {
         boolean_value_ = b;
     }
@@ -286,39 +288,65 @@ class Value {
         move(string_value_, s);
     }
 
-    explicit type_(BINARY_TYPE) {
+    this(const char* p, size_t n)(BINARY_TYPE) {
         binary_value_.resize(n);
         memcpy(binary_value_.data(), p, n);
     }
 
-    explicit Value(ubyte v); noexcept
-        : type_(BINARY_TYPE),
-            binary_value_(std::move(v)) {}
-    explicit type_(ARRAY_TYPE) { array_value_ = a; }
-    explicit Value(Array a); noexcept : type_(ARRAY_TYPE),
-                                        array_value_(std::move(a)) {}
+    ref this(ubyte[] v)(BINARY_TYPE) {
+        move(binary_value_, v);
+    }
+    
+    this(const Array a)(ARRAY_TYPE) {
+        array_value_ = a;
+    }
 
-    explicit type_(OBJECT_TYPE) { object_value_ = o; }
-    explicit Value(Object o); noexcept : type_(OBJECT_TYPE),
-                                            object_value_(std::move(o)) {}
+    ref Value(Array a)(ARRAY_TYPE){
+        move(array_value_, a);
+    }
 
-    const { return static_cast<char_>(type_); }
+    this(const Object o)(OBJECT_TYPE) {
+        object_value_ = o;
+    }
+    ref this(Object o)(OBJECT_TYPE){
+        move(object_value_, o);
+    }
 
-    bool IsBool() { return (type_ == BOOL_TYPE); }
+    const char Type(){
+        return static_cast<char_>(type_);
+    }
 
-    bool IsInt() { return (type_ == INT_TYPE); }
+    bool IsBool() {
+        return (type_ == BOOL_TYPE);
+    }
 
-    bool IsNumber() { return (type_ == REAL_TYPE) || (type_ == INT_TYPE); }
+    bool IsInt() {
+        return (type_ == INT_TYPE);
+    }
 
-    bool IsReal() { return (type_ == REAL_TYPE); }
+    bool IsNumber() {
+        return (type_ == REAL_TYPE) || (type_ == INT_TYPE);
+    }
 
-    bool IsString() { return (type_ == STRING_TYPE); }
+    bool IsReal() {
+        return (type_ == REAL_TYPE);
+    }
 
-    bool IsBinary() { return (type_ == BINARY_TYPE); }
+    bool IsString() {
+        return (type_ == STRING_TYPE);
+    }
 
-    bool IsArray() { return (type_ == ARRAY_TYPE); }
+    bool IsBinary() {
+        return (type_ == BINARY_TYPE);
+    }
 
-    bool IsObject() { return (type_ == OBJECT_TYPE); }
+    bool IsArray() {
+        return (type_ == ARRAY_TYPE);
+    }
+
+    bool IsObject() {
+        return (type_ == OBJECT_TYPE);
+    }
 
     // Use this function if you want to have number value as double.
     double GetNumberAsDouble() {
