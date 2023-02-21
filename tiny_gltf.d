@@ -1,4 +1,7 @@
 module test.tiny_gltf;
+
+import std.algorithm.mutation;
+
 @nogc nothrow:
 extern(C): __gshared:
 
@@ -275,15 +278,20 @@ class Value {
         boolean_value_ = b;
     }
 
-    explicit type_(INT_TYPE) {
+    this(int i)(INT_TYPE) {
         int_value_ = i;
         real_value_ = i;
     }
-    explicit type_(REAL_TYPE) { real_value_ = n; }
-    explicit type_(STRING_TYPE) {
+
+    this(double n)(REAL_TYPE) {
+        real_value_ = n;
+    }
+
+    this(string s)(STRING_TYPE) {
         string_value_ = s;
     }
-    explicit type_(STRING_TYPE); 
+
+    this((STRING_TYPE); 
     explicit string_value_(std.move(s));
 
     explicit type_(BINARY_TYPE) {
