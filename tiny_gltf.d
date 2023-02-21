@@ -266,10 +266,12 @@ class Value {
     alias string = std;
     alias Object = std;
 
-    Value(): type_(NULL_TYPE),
-        int_value_(0),
-        real_value_(0.0),
-        boolean_value_(false) {}
+    this() {
+        this.type_ = NULL_TYPE;
+        this.int_value_ = 0;
+        this.real_value_ = 0.0;
+        this.boolean_value = false;
+    }
 
     explicit type_(BOOL_TYPE) { boolean_value_ = b; }
     explicit type_(INT_TYPE) {
