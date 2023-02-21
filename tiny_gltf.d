@@ -379,9 +379,7 @@ public:
         static Value null_value;
         assert(IsArray());
         assert(idx >= 0);
-        return (static_cast<size_t>(idx) < array_value_.size())
-                ? array_value_[static_cast<size_t>(idx)]
-                : null_value;
+        return (static_cast<size_t>(idx) < array_value_.size())? array_value_[static_cast<size_t>(idx)] : null_value;
     }
 
     // Lookup value from a key-value pair
