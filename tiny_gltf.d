@@ -558,20 +558,22 @@ struct AnimationChannel {
 }
 
 struct AnimationSampler {
-  int input;                  // required
-  int output;                 // required
-  std;/*::string interpolation !!*/  // "LINEAR", "STEP","CUBICSPLINE" or user defined
-                              // string. default "LINEAR"
-  Value extras;
-  ExtensionMap extensions;
+    int input;                        // required
+    int output;                       // required
+    string interpolation = "LINEAR";  // "LINEAR", "STEP","CUBICSPLINE" or user defined
+                                        // string. default "LINEAR"
+    Value extras;
+    ExtensionMap extensions;
 
-  // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-  std;/*::string extras_json_string !!*/
-  std;/*::string extensions_json_string !!*/
+    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
+    string extras_json_string;
+    string extensions_json_string;
+    
+    this(){
 
-  ;/*: input(-1), output(-1), interpolation("LINEAR") {}
-  DEFAULT_METHODS(AnimationSampler)
-  bool_ operator==cast(const(AnimationSampler) &) const !!*/
+    }/*: input(-1), output(-1), interpolation("LINEAR") {}
+    DEFAULT_METHODS(AnimationSampler)
+    bool_ operator==cast(const(AnimationSampler) &) const !!*/
 }
 
 struct Animation {
