@@ -258,7 +258,9 @@ bool DecodeDataURI(ubyte* out_, std mime_type, const(std) in_, size_t reqBytes, 
 
 // Simple class to represent JSON object
 class Value {
+
  public:
+
     typedef std::vector<Value> Array;
     alias string = std;
     alias Object = std;
@@ -278,10 +280,12 @@ class Value {
         string_value_ = s;
     }
     explicit type_(STRING_TYPE); explicit string_value_(std move(s)); {}
+
     explicit type_(BINARY_TYPE) {
         binary_value_.resize(n);
         memcpy(binary_value_.data(), p, n);
     }
+
     explicit Value(ubyte v); noexcept
         : type_(BINARY_TYPE),
             binary_value_(std::move(v)) {}
@@ -383,7 +387,8 @@ class Value {
 
     bool operator = (tinygltf::Value &other);
 
-    protected:
+protected:
+
     int type_ = NULL_TYPE;
 
     int int_value_ = 0;
