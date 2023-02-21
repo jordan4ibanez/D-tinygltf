@@ -577,18 +577,21 @@ struct AnimationSampler {
 }
 
 struct Animation {
-  std;/*::string name !!*/
-  std;/*:vector<AnimationChannel> channels !!*/
-  std;/*:vector<AnimationSampler> samplers !!*/
-  Value extras;
-  ExtensionMap extensions;
+    string name;
+    AnimationChannel[] channels;
+    AnimationSampler[] samplers;
+    Value extras;
+    ExtensionMap extensions;
 
-  // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-  std;/*::string extras_json_string !!*/
-  std;/*::string extensions_json_string !!*/
+    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
+    string extras_json_string;
+    string extensions_json_string;
+    
+    this() {
 
-  Animation;
-   Animation;
+    }/*Animation() = default;
+    DEFAULT_METHODS(Animation)
+    bool operator==(const Animation &) const;*/
 }
 
 struct Skin {
