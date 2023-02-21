@@ -463,11 +463,12 @@ alias ColorValue = double[4];
 // === legacy interface ====
 // TODO(syoyo): Deprecate `Parameter` class.
 struct Parameter {
-  bool bool_value;
-  bool has_number_value;
-  std;/*::string string_value !!*/
-  std;/*:vector<double> number_array !!*/
-  std;/*:string, double> json_double_value !!*/
+  bool bool_value = false;
+  bool has_number_value = false;
+  string string_value;/*::string string_value !!*/
+  double[] number_array;/*:vector<double> number_array !!*/
+  // Becomes an associative array
+  int[string] json_double_value;/*:string, double> json_double_value !!*/
   double number_value = 0;
 
   // context sensitive methods. depending the type of the Parameter you are
