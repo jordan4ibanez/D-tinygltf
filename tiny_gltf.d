@@ -432,9 +432,6 @@ protected:
     bool boolean_value_ = false;
 }
 
-version (__clang__) {
-#pragma clang diagnostic pop
-}
 
 enum string TINYGLTF_VALUE_GET(string ctype, string var) = `            \
   template <>                                     \
