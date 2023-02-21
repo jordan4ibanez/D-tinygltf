@@ -230,24 +230,24 @@ pragma(inline, true) private int GetComponentSizeInBytes(uint componentType) {
 }
 
 pragma(inline, true) private int GetNumComponentsInType(uint ty) {
-  if (ty == TINYGLTF_TYPE_SCALAR) {
-    return 1;
-  } else if (ty == TINYGLTF_TYPE_VEC2) {
-    return 2;
-  } else if (ty == TINYGLTF_TYPE_VEC3) {
-    return 3;
-  } else if (ty == TINYGLTF_TYPE_VEC4) {
-    return 4;
-  } else if (ty == TINYGLTF_TYPE_MAT2) {
-    return 4;
-  } else if (ty == TINYGLTF_TYPE_MAT3) {
-    return 9;
-  } else if (ty == TINYGLTF_TYPE_MAT4) {
-    return 16;
-  } else {
-    // Unknown component type
-    return -1;
-  }
+    if (ty == TINYGLTF_TYPE_SCALAR) {
+        return 1;
+    } else if (ty == TINYGLTF_TYPE_VEC2) {
+        return 2;
+    } else if (ty == TINYGLTF_TYPE_VEC3) {
+        return 3;
+    } else if (ty == TINYGLTF_TYPE_VEC4) {
+        return 4;
+    } else if (ty == TINYGLTF_TYPE_MAT2) {
+        return 4;
+    } else if (ty == TINYGLTF_TYPE_MAT3) {
+        return 9;
+    } else if (ty == TINYGLTF_TYPE_MAT4) {
+        return 16;
+    } else {
+        // Unknown component type
+        return -1;
+    }
 }
 
 // TODO(syoyo): Move these functions to TinyGLTF class
@@ -255,7 +255,7 @@ bool IsDataURI(const(std) in_);
 bool DecodeDataURI(ubyte* out_, std mime_type, const(std) in_, size_t reqBytes, bool checkSize);
 
 // Simple class to represent JSON object
-class_ Value {
+class Value {
  public:
   typedef std::vector<Value> Array;
   alias string = std;
