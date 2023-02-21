@@ -259,142 +259,141 @@ bool DecodeDataURI(ubyte* out_, std mime_type, const(std) in_, size_t reqBytes, 
 // Simple class to represent JSON object
 class Value {
  public:
-  typedef std::vector<Value> Array;
-  alias string = std;
-alias Object = std;
+    typedef std::vector<Value> Array;
+    alias string = std;
+    alias Object = std;
 
-  Value()
-      : type_(NULL_TYPE),
+    Value(): type_(NULL_TYPE),
         int_value_(0),
         real_value_(0.0),
         boolean_value_(false) {}
 
-  explicit type_(BOOL_TYPE) { boolean_value_ = b; }
-  explicit type_(INT_TYPE) {
-    int_value_ = i;
-    real_value_ = i;
-  }
-  explicit type_(REAL_TYPE) { real_value_ = n; }
-  explicit type_(STRING_TYPE) {
-    string_value_ = s;
-  }
-  explicit type_(STRING_TYPE); explicit string_value_(std move(s)); {}
-  explicit type_(BINARY_TYPE) {
-    binary_value_.resize(n);
-    memcpy(binary_value_.data(), p, n);
-  }
-  explicit Value(ubyte v); noexcept
-      : type_(BINARY_TYPE),
-        binary_value_(std::move(v)) {}
-  explicit type_(ARRAY_TYPE) { array_value_ = a; }
-  explicit Value(Array a); noexcept : type_(ARRAY_TYPE),
-                                       array_value_(std::move(a)) {}
-
-  explicit type_(OBJECT_TYPE) { object_value_ = o; }
-  explicit Value(Object o); noexcept : type_(OBJECT_TYPE),
-                                        object_value_(std::move(o)) {}
-
-   const { return static_cast<char_>(type_); }
-
-  bool IsBool() { return (type_ == BOOL_TYPE); }
-
-  bool IsInt() { return (type_ == INT_TYPE); }
-
-  bool IsNumber() { return (type_ == REAL_TYPE) || (type_ == INT_TYPE); }
-
-  bool IsReal() { return (type_ == REAL_TYPE); }
-
-  bool IsString() { return (type_ == STRING_TYPE); }
-
-  bool IsBinary() { return (type_ == BINARY_TYPE); }
-
-  bool IsArray() { return (type_ == ARRAY_TYPE); }
-
-  bool IsObject() { return (type_ == OBJECT_TYPE); }
-
-  // Use this function if you want to have number value as double.
-  double GetNumberAsDouble() {
-    if (type_ == INT_TYPE) {
-      return double(int_value_);
-    } else {
-      return real_value_;
+    explicit type_(BOOL_TYPE) { boolean_value_ = b; }
+    explicit type_(INT_TYPE) {
+        int_value_ = i;
+        real_value_ = i;
     }
-  }
-
-  // Use this function if you want to have number value as int.
-  // TODO(syoyo): Support int value larger than 32 bits
-  int GetNumberAsInt() {
-    if (type_ == REAL_TYPE) {
-      return int(real_value_);
-    } else {
-      return int_value_;
+    explicit type_(REAL_TYPE) { real_value_ = n; }
+    explicit type_(STRING_TYPE) {
+        string_value_ = s;
     }
-  }
+    explicit type_(STRING_TYPE); explicit string_value_(std move(s)); {}
+    explicit type_(BINARY_TYPE) {
+        binary_value_.resize(n);
+        memcpy(binary_value_.data(), p, n);
+    }
+    explicit Value(ubyte v); noexcept
+        : type_(BINARY_TYPE),
+            binary_value_(std::move(v)) {}
+    explicit type_(ARRAY_TYPE) { array_value_ = a; }
+    explicit Value(Array a); noexcept : type_(ARRAY_TYPE),
+                                        array_value_(std::move(a)) {}
 
-  // Accessor
-  template_ <typename T>
-  const T &Get() const;
-  template_ <typename T>
-  T &Get();
+    explicit type_(OBJECT_TYPE) { object_value_ = o; }
+    explicit Value(Object o); noexcept : type_(OBJECT_TYPE),
+                                            object_value_(std::move(o)) {}
 
-  // Lookup value from an array
-  const(Value) const {
-    static Value null_value;
-    assert(IsArray());
-    assert(idx >= 0);
-    return (static_cast<size_t>(idx) < array_value_.size())
-               ? array_value_[static_cast<size_t>(idx)]
-               : null_value;
-  }
+    const { return static_cast<char_>(type_); }
 
-  // Lookup value from a key-value pair
-  const(Value) const {
-    static Value null_value;
-    assert(IsObject());
-    Object::const_iterator it = object_value_.find(key);
-    return (it != object_value_.end()) ? it.second : null_value;
-  }
+    bool IsBool() { return (type_ == BOOL_TYPE); }
 
-  size_t ArrayLen() {
-    if (!IsArray()) return 0;
-    return array_value_.size();
-  }
+    bool IsInt() { return (type_ == INT_TYPE); }
 
-  // Valid only for object type.
-  bool Has(const(std) key) {
-    if (!IsObject()) return false;
-    Object::const_iterator it = object_value_.find(key);
-    return (it != object_value_.end()) ? true : false;
-  }
+    bool IsNumber() { return (type_ == REAL_TYPE) || (type_ == INT_TYPE); }
 
-  // List keys
-  std::vector<std::string> Keys() const {
-    std::vector<std::string> keys;
-    if (!IsObject()) return keys;  // empty
+    bool IsReal() { return (type_ == REAL_TYPE); }
 
-    for (Object it = object_value_.begin();
-         it != object_value_.end(); ++it) {
-      keys.push_back(it.first);
+    bool IsString() { return (type_ == STRING_TYPE); }
+
+    bool IsBinary() { return (type_ == BINARY_TYPE); }
+
+    bool IsArray() { return (type_ == ARRAY_TYPE); }
+
+    bool IsObject() { return (type_ == OBJECT_TYPE); }
+
+    // Use this function if you want to have number value as double.
+    double GetNumberAsDouble() {
+        if (type_ == INT_TYPE) {
+        return double(int_value_);
+        } else {
+        return real_value_;
+        }
     }
 
-    return keys;
-  }
+    // Use this function if you want to have number value as int.
+    // TODO(syoyo): Support int value larger than 32 bits
+    int GetNumberAsInt() {
+        if (type_ == REAL_TYPE) {
+        return int(real_value_);
+        } else {
+        return int_value_;
+        }
+    }
 
-  size_t Size() { return (IsArray() ? ArrayLen() : Keys().size()); }
+    // Accessor
+    template_ <typename T>
+    const T &Get() const;
+    template_ <typename T>
+    T &Get();
 
-  bool operator = (tinygltf::Value &other);
+    // Lookup value from an array
+    const(Value) const {
+        static Value null_value;
+        assert(IsArray());
+        assert(idx >= 0);
+        return (static_cast<size_t>(idx) < array_value_.size())
+                ? array_value_[static_cast<size_t>(idx)]
+                : null_value;
+    }
 
- protected:
-  int type_ = NULL_TYPE;
+    // Lookup value from a key-value pair
+    const(Value) const {
+        static Value null_value;
+        assert(IsObject());
+        Object::const_iterator it = object_value_.find(key);
+        return (it != object_value_.end()) ? it.second : null_value;
+    }
 
-  int int_value_ = 0;
-  double real_value_ = 0.0;
-  std::string string_value_;
-  std::vector<unsigned char_> binary_value_;
-  Array array_value_;
-  Object object_value_;
-  bool boolean_value_ = false;
-}{}
+    size_t ArrayLen() {
+        if (!IsArray()) return 0;
+        return array_value_.size();
+    }
+
+    // Valid only for object type.
+    bool Has(const(std) key) {
+        if (!IsObject()) return false;
+        Object::const_iterator it = object_value_.find(key);
+        return (it != object_value_.end()) ? true : false;
+    }
+
+    // List keys
+    std::vector<std::string> Keys() const {
+        std::vector<std::string> keys;
+        if (!IsObject()) return keys;  // empty
+
+        for (Object it = object_value_.begin();
+            it != object_value_.end(); ++it) {
+        keys.push_back(it.first);
+        }
+
+        return keys;
+    }
+
+    size_t Size() { return (IsArray() ? ArrayLen() : Keys().size()); }
+
+    bool operator = (tinygltf::Value &other);
+
+    protected:
+    int type_ = NULL_TYPE;
+
+    int int_value_ = 0;
+    double real_value_ = 0.0;
+    std::string string_value_;
+    std::vector<unsigned char_> binary_value_;
+    Array array_value_;
+    Object object_value_;
+    bool boolean_value_ = false;
+}
 
 version (__clang__) {
 #pragma clang diagnostic pop
