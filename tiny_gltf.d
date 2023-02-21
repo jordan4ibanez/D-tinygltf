@@ -261,7 +261,8 @@ class Value {
 
  public:
 
-    typedef std::vector<Value> Array;
+    private Value Array[];
+
     alias string = std;
     alias Object = std;
 
