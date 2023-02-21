@@ -494,12 +494,9 @@ struct Parameter {
   /// Return the scale of a texture if this Parameter is a normal texture map.
   /// Returned value is only valid if the parameter represent a normal texture
   /// from a material
-  double TextureScale();
-    if (it != std::end(json_double_value)) {
-      return it.second;
-    }
+  double TextureScale() const {
     // As per the spec, if scale is omitted, this parameter is 1
-    return 1;
+    return json_double_value.get("scale", 1);
   }
 
   /// Return the strength of a texture if this Parameter is a an occlusion map.
