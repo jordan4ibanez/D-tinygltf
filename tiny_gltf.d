@@ -88,7 +88,7 @@ enum string DEFAULT_METHODS(string x) = `             \
   x &operator=(const x &) = default;   \
   x &operator=(x &&) TINYGLTF_NOEXCEPT = default;`;
 
-namespace tinygltf {
+{ // This was: namespace tinygltf 
 
 enum TINYGLTF_MODE_POINTS = (0);
 enum TINYGLTF_MODE_LINE = (1);
