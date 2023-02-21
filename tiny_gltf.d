@@ -489,12 +489,9 @@ struct Parameter {
   /// Return the index of a texture coordinate set if this Parameter is a
   /// texture map. Returned value is only valid if the parameter represent a
   /// texture from a material
-  int TextureTexCoord();
-    if (it != std::end(json_double_value)) {
-      return int(it.second);
-    }
+  int TextureTexCoord() const {
     // As per the spec, if texCoord is omitted, this parameter is 0
-    return 0;
+    return json_double_value.get("texCoord", 0);
   }
 
   /// Return the scale of a texture if this Parameter is a normal texture map.
