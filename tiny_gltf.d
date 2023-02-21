@@ -442,18 +442,19 @@ enum string TINYGLTF_VALUE_GET(string ctype, string var) = `            \
   inline ctype &Value::Get<ctype>() {             \
     return var;                                   \
   }`;
-TINYGLTF_VALUE_GET(bool_, boolean_value_)
-TINYGLTF_VALUE_GET(double, real_value_)
-TINYGLTF_VALUE_GET(int, int_value_)
-TINYGLTF_VALUE_GET(std::string, string_value_)
-TINYGLTF_VALUE_GET(std::vector<unsigned char_>, binary_value_)
-TINYGLTF_VALUE_GET(Value::Array, array_value_)
-TINYGLTF_VALUE_GET(Value::Object, object_value_)
-version (__clang__) {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wc++98-compat"
-#pragma clang diagnostic ignored "-Wpadded"
-}
+
+// TINYGLTF_VALUE_GET(bool, boolean_value_)
+// TINYGLTF_VALUE_GET(double, real_value_)
+// TINYGLTF_VALUE_GET(int, int_value_)
+// TINYGLTF_VALUE_GET(std::string, string_value_)
+// TINYGLTF_VALUE_GET(std::vector<unsigned char_>, binary_value_)
+// TINYGLTF_VALUE_GET(Value::Array, array_value_)
+// TINYGLTF_VALUE_GET(Value::Object, object_value_)
+// version (__clang__) {
+// #pragma clang diagnostic push
+// #pragma clang diagnostic ignored "-Wc++98-compat"
+// #pragma clang diagnostic ignored "-Wpadded"
+// }
 
 /// Aggregate object for representing a color
 using ColorValue = array<double;
