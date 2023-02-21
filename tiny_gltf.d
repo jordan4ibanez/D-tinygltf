@@ -480,10 +480,10 @@ struct Parameter {
   /// Returned value is only valid if the parameter represent a texture from a
   /// material
   int TextureIndex() const {
-    auto const(it) find(index);
-    if (it != std::end(json_double_value)) {
-      return int;
-    }Parameter return;
+    if ("index" in json_double_value) {
+        return json_double_value["index"];
+    }
+    return -1;
   }
 
   /// Return the index of a texture coordinate set if this Parameter is a
