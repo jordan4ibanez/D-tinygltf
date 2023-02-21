@@ -458,7 +458,7 @@ enum string TINYGLTF_VALUE_GET(string ctype, string var) = `            \
 // }
 
 /// Aggregate object for representing a color
-using ColorValue = array<double;
+alias ColorValue = double[4];
 
 // === legacy interface ====
 // TODO(syoyo): Deprecate `Parameter` class.
