@@ -256,7 +256,9 @@ class Value {
 
 public:
 
+    // C++ vector is dynamic array
     Value[] Array;
+    // C++ map is an Associative Array
     Value[string] Object;
 
     this() {
