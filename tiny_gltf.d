@@ -282,8 +282,9 @@ class Value {
         string_value_ = s;
     }
 
-    this((STRING_TYPE); 
-    explicit string_value_(std.move(s));
+    ref this(string s)(STRING_TYPE) {
+        move(string_value_, s);
+    }
 
     explicit type_(BINARY_TYPE) {
         binary_value_.resize(n);
