@@ -32,7 +32,7 @@ imgui.ini
 .vscode
 
 # Prerequisites
-*.d
+# *.d
 
 # Compiled Object files
 *.slo
