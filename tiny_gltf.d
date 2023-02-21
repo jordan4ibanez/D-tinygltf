@@ -536,23 +536,25 @@ alias ParameterMap = Parameter[string];
 alias ExtensionMap = ExtensionMap[string];
 
 struct AnimationChannel {
-  int sampler;              // required
-  int target_node;          // optional index of the node to target (alternative
+    int sampler = -1;     // required
+    int target_node = -1; // optional index of the node to target (alternative
                             // target should be provided by extension)
-  std;/*::string target_path !!*/  // required with standard values of ["translation",
+    string target_path;   // required with standard values of ["translation",
                             // "rotation", "scale", "weights"]
-  Value extras;
-  ExtensionMap extensions;
-  ExtensionMap target_extensions;
+    Value extras;
+    ExtensionMap extensions;
+    ExtensionMap target_extensions;
 
-  // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-  std;/*::string extras_json_string !!*/
-  std;/*::string extensions_json_string !!*/
-  std;/*::string target_extensions_json_string !!*/
+    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
+    string extras_json_string;
+    string extensions_json_string;
+    string target_extensions_json_string;
 
-  ;/*: sampler(-1), target_node(-1) {}
-  DEFAULT_METHODS(AnimationChannel)
-  bool_ operator==cast(const(AnimationChannel) &) const !!*/
+    this() {
+
+    }/*: sampler(-1), target_node(-1) {}
+    DEFAULT_METHODS(AnimationChannel)
+    bool_ operator==cast(const(AnimationChannel) &) const !!*/
 }
 
 struct AnimationSampler {
