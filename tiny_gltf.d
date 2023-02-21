@@ -261,10 +261,8 @@ class Value {
 
  public:
 
-    private Value Array[];
-
-    alias string = std;
-    alias Object = std;
+    Value[] Array;
+    Value[string] Object;
 
     this() {
         this.type_ = NULL_TYPE;
@@ -272,8 +270,11 @@ class Value {
         this.real_value_ = 0.0;
         this.boolean_value = false;
     }
+    //! These are all constructors & converters
+    this(type_ BOOL_TYPE) {
+        boolean_value_ = b;
+    }
 
-    explicit type_(BOOL_TYPE) { boolean_value_ = b; }
     explicit type_(INT_TYPE) {
         int_value_ = i;
         real_value_ = i;
@@ -282,7 +283,8 @@ class Value {
     explicit type_(STRING_TYPE) {
         string_value_ = s;
     }
-    explicit type_(STRING_TYPE); explicit string_value_(std move(s)); {}
+    explicit type_(STRING_TYPE); 
+    explicit string_value_(std.move(s));
 
     explicit type_(BINARY_TYPE) {
         binary_value_.resize(n);
