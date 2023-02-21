@@ -105,8 +105,8 @@ enum TINYGLTF_COMPONENT_TYPE_UNSIGNED_SHORT = (5123);
 enum TINYGLTF_COMPONENT_TYPE_INT = (5124);
 enum TINYGLTF_COMPONENT_TYPE_UNSIGNED_INT = (5125);
 enum TINYGLTF_COMPONENT_TYPE_FLOAT = (5126);
-enum TINYGLTF_COMPONENT_TYPE_DOUBLE = \
-  (5130)  // OpenGL double type. Note that some of glTF 2.0 validator does not;
+enum TINYGLTF_COMPONENT_TYPE_DOUBLE = 
+  (5130);  // OpenGL double type. Note that some of glTF 2.0 validator does not;
           // support double type even the schema seems allow any value of
           // integer:
           // https://github.com/KhronosGroup/glTF/blob/b9884a2fd45130b4d673dd6c8a706ee21ee5c5f7/specification/2.0/schema/accessor.schema.json#L22
