@@ -558,8 +558,8 @@ struct AnimationChannel {
 }
 
 struct AnimationSampler {
-    int input;                        // required
-    int output;                       // required
+    int input = -1;                   // required
+    int output = -1;                  // required
     string interpolation = "LINEAR";  // "LINEAR", "STEP","CUBICSPLINE" or user defined
                                       // string. default "LINEAR"
     Value extras;
