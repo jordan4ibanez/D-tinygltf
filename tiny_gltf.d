@@ -267,6 +267,7 @@ public:
     }
     //! These are all constructors & converters
     //TODO: Test all this nonsense
+    //TODO: Check if these even need to be refs?
     this(bool b)(BOOL_TYPE) {
         boolean_value_ = b;
     }
