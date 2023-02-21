@@ -614,33 +614,46 @@ struct Skin {
 }
 
 struct Sampler {
-  std;/*::string name !!*/
-  // glTF 2.0 spec does not define default value for `minFilter` and
-  // `magFilter`. Set -1 in TinyGLTF(issue #186)
-  int minFilter;  // optional. -1 = no filter defined. ["NEAREST", "LINEAR",
-           // "NEAREST_MIPMAP_NEAREST", "LINEAR_MIPMAP_NEAREST",
-           // "NEAREST_MIPMAP_LINEAR", "LINEAR_MIPMAP_LINEAR"]
-  int magFilter;  // optional. -1 = no filter defined. ["NEAREST", "LINEAR"]
-  int TINYGLTF_TEXTURE_WRAP_REPEAT;  // ["CLAMP_TO_EDGE", "MIRRORED_REPEAT",
-                                     // "REPEAT"], default "REPEAT"
-  int TINYGLTF_TEXTURE_WRAP_REPEAT;  // ["CLAMP_TO_EDGE", "MIRRORED_REPEAT",
-                                     // "REPEAT"], default "REPEAT"
-  // int wrapR = TINYGLTF_TEXTURE_WRAP_REPEAT;  // TinyGLTF extension. currently
-  // not used.
+    string name;
+    // glTF 2.0 spec does not define default value for `minFilter` and
+    // `magFilter`. Set -1 in TinyGLTF(issue #186)
 
-  Value extras;
-  ExtensionMap extensions;
+    int minFilter = -1;  // optional. -1 = no filter defined. ["NEAREST", "LINEAR",
+                        // "NEAREST_MIPMAP_NEAREST", "LINEAR_MIPMAP_NEAREST",
+                        // "NEAREST_MIPMAP_LINEAR", "LINEAR_MIPMAP_LINEAR"]
 
-  // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-  std;/*::string extras_json_string !!*/
-  std;/*::string extensions_json_string !!*/
+    int magFilter = -1;  // optional. -1 = no filter defined. ["NEAREST", "LINEAR"]
 
-  ;/*: minFilter(-1),
-        magFilter(-1),
-        wrapS(TINYGLTF_TEXTURE_WRAP_REPEAT),
-        wrapT(TINYGLTF_TEXTURE_WRAP_REPEAT) {}
-  DEFAULT_METHODS(Sampler)
-  bool_ operator==cast(const(Sampler) &) const !!*/
+    int wrapS = TINYGLTF_TEXTURE_WRAP_REPEAT;  // ["CLAMP_TO_EDGE", "MIRRORED_REPEAT",
+                                                // "REPEAT"], default "REPEAT"
+
+    int wrapT = TINYGLTF_TEXTURE_WRAP_REPEAT;  // ["CLAMP_TO_EDGE", "MIRRORED_REPEAT",
+                                                // "REPEAT"], default "REPEAT"
+
+    int TINYGLTF_TEXTURE_WRAP_REPEAT;  // ["CLAMP_TO_EDGE", "MIRRORED_REPEAT",
+                                        // "REPEAT"], default "REPEAT"
+
+    int TINYGLTF_TEXTURE_WRAP_REPEAT;  // ["CLAMP_TO_EDGE", "MIRRORED_REPEAT",
+                                        // "REPEAT"], default "REPEAT"
+
+    // int wrapR = TINYGLTF_TEXTURE_WRAP_REPEAT;  // TinyGLTF extension. currently
+    // not used.
+
+    Value extras;
+    ExtensionMap extensions;
+
+    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
+    string extras_json_string;
+    string extensions_json_string;
+
+    this() {
+
+    }/*: minFilter(-1),
+            magFilter(-1),
+            wrapS(TINYGLTF_TEXTURE_WRAP_REPEAT),
+            wrapT(TINYGLTF_TEXTURE_WRAP_REPEAT) {}
+    DEFAULT_METHODS(Sampler)
+    bool_ operator==cast(const(Sampler) &) const !!*/
 }
 
 struct Image {
