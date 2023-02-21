@@ -502,27 +502,28 @@ struct Parameter {
   /// Return the strength of a texture if this Parameter is a an occlusion map.
   /// Returned value is only valid if the parameter represent an occlusion map
   /// from a material
-  double TextureStrength();
-    if (it != std::end(json_double_value)) {
-      return it.second;
-    }
+  double TextureStrength() const {
     // As per the spec, if strength is omitted, this parameter is 1
-    return 1;
+    return json_double_value.get("strength", 1);
   }
 
   /// Material factor, like the roughness or metalness of a material
   /// Returned value is only valid if the parameter represent a texture from a
   /// material
-  double Factor() { return number_value; }
+  double Factor() const {
+    return number_value;
+  }
 
   /// Return the color of a material
   /// Returned value is only valid if the parameter represent a texture from a
   /// material
   ColorValue ColorFactor() {
-    return {
-        {// this aggregate initialize the std::array object, and uses C++11 RVO.
+    //* Translation note: This is an alias now, we can just return double[4]
+    return
+        [// this aggregate initialize the std::array object, and uses C++11 RVO.
          number_array[0], number_array[1], number_array[2],
-         (number_array.size() > 3 ? number_array[3] : 1.0)}}{}
+         (number_array.size() > 3 ? number_array[3] : 1.0)
+        ];
   }
 
   Parameter() = default;
