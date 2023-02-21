@@ -416,7 +416,8 @@ public:
 
     size_t Size() { return (IsArray() ? ArrayLen() : Keys().size()); }
 
-    bool operator = (tinygltf::Value &other);
+    // This exists in D automatically
+    // bool operator == (tinygltf::Value &other);
 
 protected:
 
