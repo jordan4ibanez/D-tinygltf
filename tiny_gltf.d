@@ -443,6 +443,7 @@ enum string TINYGLTF_VALUE_GET(string ctype, string var) = `            \
     return var;                                   \
   }`;
 
+// * This is probably needed but check later
 // TINYGLTF_VALUE_GET(bool, boolean_value_)
 // TINYGLTF_VALUE_GET(double, real_value_)
 // TINYGLTF_VALUE_GET(int, int_value_)
