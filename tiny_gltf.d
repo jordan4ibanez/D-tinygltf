@@ -364,9 +364,9 @@ public:
     // TODO(syoyo): Support int value larger than 32 bits
     int GetNumberAsInt() {
         if (type_ == REAL_TYPE) {
-        return int(real_value_);
+            return int(real_value_);
         } else {
-        return int_value_;
+            return int_value_;
         }
     }
 
