@@ -532,15 +532,6 @@ struct Parameter {
     //    bool_; operator==cast(const(Parameter) &) const;
 }
 
-version (__clang__) {
-#pragma clang diagnostic pop
-}
-
-version (__clang__) {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wpadded"
-}
-
 alias string = std;
 alias ParameterMap = std;
 alias string = std;
