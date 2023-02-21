@@ -526,9 +526,11 @@ struct Parameter {
         ];
   }
 
-  Parameter() = default;
-   bool_; operator==cast(const(Parameter) &) const;
-}{}
+  // * Translation note: I think these are unneeded
+  //!TODO: Test if these are needed
+//   Parameter() = default;
+//    bool_; operator==cast(const(Parameter) &) const;
+}
 
 version (__clang__) {
 #pragma clang diagnostic pop
