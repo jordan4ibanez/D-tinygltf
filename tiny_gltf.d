@@ -188,15 +188,6 @@ enum TINYGLTF_SHADER_TYPE_FRAGMENT_SHADER = (35632);
 enum TINYGLTF_DOUBLE_EPS = (1.e-12);
 enum string TINYGLTF_DOUBLE_EQUAL(string a, string b) = ` (std::fabs((b) - (a)) < TINYGLTF_DOUBLE_EPS)`;
 
-version (__ANDROID__) {
-    version (TINYGLTF_ANDROID_LOAD_FROM_ASSETS) {
-        version (TINYGLTF_IMPLEMENTATION) {
-            AAssetManager* asset_manager = nullptr;
-        } else {
-            extern AAssetManager* asset_manager = void;
-        }
-    }
-}
 
 enum _Type {
     NULL_TYPE,
