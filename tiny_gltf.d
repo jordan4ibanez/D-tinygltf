@@ -532,10 +532,8 @@ struct Parameter {
     //    bool_; operator==cast(const(Parameter) &) const;
 }
 
-alias string = std;
-alias ParameterMap = std;
-alias string = std;
-alias ExtensionMap = std;
+alias ParameterMap = Parameter[string];
+alias ExtensionMap = ExtensionMap[string];
 
 struct AnimationChannel {
   int sampler;              // required
