@@ -561,7 +561,7 @@ struct AnimationSampler {
     int input;                        // required
     int output;                       // required
     string interpolation = "LINEAR";  // "LINEAR", "STEP","CUBICSPLINE" or user defined
-                                        // string. default "LINEAR"
+                                      // string. default "LINEAR"
     Value extras;
     ExtensionMap extensions;
 
