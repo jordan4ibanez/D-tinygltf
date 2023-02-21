@@ -254,7 +254,7 @@ bool DecodeDataURI(ubyte* out_, std mime_type, const(std) in_, size_t reqBytes, 
 //* Note: This whole thing is duck typed
 class Value {
 
- public:
+public:
 
     Value[] Array;
     Value[string] Object;
@@ -351,9 +351,9 @@ class Value {
     // Use this function if you want to have number value as double.
     double GetNumberAsDouble() {
         if (type_ == INT_TYPE) {
-        return double(int_value_);
+            return double(int_value_);
         } else {
-        return real_value_;
+            return real_value_;
         }
     }
 
