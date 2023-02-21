@@ -254,13 +254,6 @@ pragma(inline, true) private int GetNumComponentsInType(uint ty) {
 bool IsDataURI(const(std) in_);
 bool DecodeDataURI(ubyte* out_, std mime_type, const(std) in_, size_t reqBytes, bool checkSize);
 
-version (__clang__) {
-#pragma clang diagnostic push
-// Suppress warning for : static Value null_value
-#pragma clang diagnostic ignored "-Wexit-time-destructors"
-#pragma clang diagnostic ignored "-Wpadded"
-}
-
 // Simple class to represent JSON object
 class_ Value {
  public:
