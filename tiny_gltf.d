@@ -271,7 +271,7 @@ class Value {
         this.boolean_value = false;
     }
     //! These are all constructors & converters
-    this(type_ BOOL_TYPE) {
+    explicit type_(BOOL_TYPE) {
         boolean_value_ = b;
     }
 
