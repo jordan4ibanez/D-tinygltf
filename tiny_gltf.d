@@ -369,13 +369,11 @@ public:
     }
 
     // Accessor
-    template_ <typename T>
-    const T &Get() const;
-    template_ <typename T>
-    T &Get();
-
+    template typename(T) {
+        T typename;
+    }
     // Lookup value from an array
-    const(Value) const {
+    Value Get(int idx)(Value) const {
         static Value null_value;
         assert(IsArray());
         assert(idx >= 0);
@@ -385,10 +383,10 @@ public:
     }
 
     // Lookup value from a key-value pair
-    const(Value) const {
+    Value Get(const string key)(Value) const {
         static Value null_value;
         assert(IsObject());
-        Object::const_iterator it = object_value_.find(key);
+        Object.const_iterator it = object_value_.find(key);
         return (it != object_value_.end()) ? it.second : null_value;
     }
 
