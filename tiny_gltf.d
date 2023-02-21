@@ -8,12 +8,14 @@ private template HasVersion(string versionId) {
 import core.stdc.stddef: wchar_t;
 //
 // Header-only tiny glTF 2.0 loader and serializer.
+// But now it's a D project, amazing.
 //
 //
 // The MIT License (MIT)
 //
 // Copyright (c) 2015 - Present Syoyo Fujita, Aurélien Chatelain and many
 // contributors.
+// Now including jordan4ibanez, woo.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
