@@ -425,8 +425,8 @@ protected:
 
     int int_value_ = 0;
     double real_value_ = 0.0;
-    std::string string_value_;
-    std::vector<unsigned char_> binary_value_;
+    string string_value_;
+    ubyte[] binary_value_;
     Array array_value_;
     Object object_value_;
     bool boolean_value_ = false;
