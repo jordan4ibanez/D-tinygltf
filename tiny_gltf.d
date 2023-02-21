@@ -72,13 +72,13 @@ import core.stdc.stddef: wchar_t;
 
 
 version (__GNUC__) {
-static if ((__GNUC__ < 4) || ((__GNUC__ == 4) && (__GNUC_MINOR__ <= 8))) {
-version = TINYGLTF_NOEXCEPT;
+    static if ((__GNUC__ < 4) || ((__GNUC__ == 4) && (__GNUC_MINOR__ <= 8))) {
+        version = TINYGLTF_NOEXCEPT;
+    } else {
+        enum TINYGLTF_NOEXCEPT = noexcept;
+    }
 } else {
-enum TINYGLTF_NOEXCEPT = noexcept;
-}
-} else {
-enum TINYGLTF_NOEXCEPT = noexcept;
+    enum TINYGLTF_NOEXCEPT = noexcept;
 }
 
 enum string DEFAULT_METHODS(string x) = `             \
