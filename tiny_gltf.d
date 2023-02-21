@@ -595,24 +595,23 @@ struct Animation {
 }
 
 struct Skin {
-  std;/*::string name !!*/
-  int inverseBindMatrices;  // required here but not in the spec
-  int skeleton;             // The index of the node used as a skeleton root
-  std;/*:vector<int> joints !!*/  // Indices of skeleton nodes
+    string name;
+    int inverseBindMatrices = -1;  // required here but not in the spec
+    int skeleton = -1;             // The index of the node used as a skeleton root
+    int[] joints;                  // Indices of skeleton nodes
 
-  Value extras;
-  ExtensionMap extensions;
+    Value extras;
+    ExtensionMap extensions;
 
-  // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-  std;/*::string extras_json_string !!*/
-  std;/*::string extensions_json_string !!*/
+    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
+    string extras_json_string;
+    string extensions_json_string;
 
-  Skin() {
-    inverseBindMatrices = -1;
-    skeleton = -1;
-  }
-   bool_; operator==cast(const(Skin) &) const;
-}{}
+    this() {
+
+    }/*DEFAULT_METHODS(Skin)
+    bool operator==(const Skin &) const;*/
+}
 
 struct Sampler {
   std;/*::string name !!*/
