@@ -196,15 +196,17 @@ extern AAssetManager* asset_manager = void;
 }
 
 enum _Type {
-  NULL_TYPE,
-  REAL_TYPE,
-  INT_TYPE,
-  BOOL_TYPE,
-  STRING_TYPE,
-  ARRAY_TYPE,
-  BINARY_TYPE,
-  OBJECT_TYPE
-}alias Type = _Type;
+    NULL_TYPE,
+    REAL_TYPE,
+    INT_TYPE,
+    BOOL_TYPE,
+    STRING_TYPE,
+    ARRAY_TYPE,
+    BINARY_TYPE,
+    OBJECT_TYPE
+}
+
+alias Type = _Type;
 
 pragma(inline, true) private int GetComponentSizeInBytes(uint componentType) {
     if (componentType == TINYGLTF_COMPONENT_TYPE_BYTE) {
