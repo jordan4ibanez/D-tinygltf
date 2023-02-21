@@ -81,15 +81,6 @@ public import
 public import 
 
 
-version (TINYGLTF_USE_CPP14) {} else {
-public import 
-}
-
-version (__ANDROID__) {
-version (TINYGLTF_ANDROID_LOAD_FROM_ASSETS) {
-public import android/asset_manager;
-}
-}
 
 version (__GNUC__) {
 static if ((__GNUC__ < 4) || ((__GNUC__ == 4) && (__GNUC_MINOR__ <= 8))) {
