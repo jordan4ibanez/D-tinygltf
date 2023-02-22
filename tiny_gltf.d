@@ -1317,7 +1317,7 @@ alias FileExistsFunction = bool function(const(std) abs_filename, void*);
 ///
 /// ExpandFilePathFunction type. Signature for custom filesystem callbacks.
 ///
-alias string = ;
+alias string = ExpandFilePathFunction* function(const ref string, void *);
 
 ///
 /// ReadWholeFileFunction type. Signature for custom filesystem callbacks.
@@ -1354,7 +1354,7 @@ bool FileExists(const(std) abs_filename, void*);
 /// @param[in] filepath File path string. Assume UTF-8
 /// @param[in] userdata User data. Set to `nullptr` if you don't need it.
 ///
-std::string ExpandFilePath(const std::string &filepath, void *userdata);
+string ExpandFilePath(const std::string &filepath, void *userdata);
 
 bool ReadWholeFile(ubyte* out_, std* err, const(std) filepath, void*);
 
