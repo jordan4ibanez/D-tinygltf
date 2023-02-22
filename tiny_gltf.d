@@ -1160,19 +1160,21 @@ struct Scene {
 }
 
 struct SpotLight {
-  double innerConeAngle = 0;
-  double outerConeAngle = 0;
+    double innerConeAngle = 0.0;
+    double outerConeAngle = 0.7_853_981_634;
 
-  ;/*: innerConeAngle(0.0), outerConeAngle(0.7853981634) {}
-  DEFAULT_METHODS(SpotLight)
-  bool_ operator==cast(const(SpotLight) &) const !!*/
+    this() {
 
-  ExtensionMap extensions;
-  Value extras;
+    }/*: innerConeAngle(0.0), outerConeAngle(0.7853981634) {}
+    DEFAULT_METHODS(SpotLight)
+    bool_ operator==cast(const(SpotLight) &) const !!*/
 
-  // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-  std;/*::string extras_json_string !!*/
-  std;/*::string extensions_json_string !!*/
+    ExtensionMap extensions;
+    Value extras;
+
+    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
+    string extras_json_string;
+    string extensions_json_string;
 }
 
 struct Light {
