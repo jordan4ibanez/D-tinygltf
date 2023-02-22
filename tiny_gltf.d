@@ -1365,187 +1365,187 @@ bool WriteWholeFile(std* err, const(std) filepath, const(std) contents, void*);
 /// glTF Parser/Serializer context.
 ///
 class_ TinyGLTF {
- public:
-version (__clang__) {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wc++98-compat"
-}
+    public:
+    version (__clang__) {
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wc++98-compat"
+    }
 
-  TinyGLTF() : bin_data_(nullptr), bin_size_(0), is_binary_(false) {}
+    TinyGLTF() : bin_data_(nullptr), bin_size_(0), is_binary_(false) {}
 
-version (__clang__) {
-#pragma clang diagnostic pop
-}
+    version (__clang__) {
+    #pragma clang diagnostic pop
+    }
 
-  ~TinyGLTF() {}
+    ~TinyGLTF() {}
 
-  ///
-  /// Loads glTF ASCII asset from a file.
-  /// Set warning message to `warn` for example it fails to load asserts.
-  /// Returns false and set error string to `err` if there's an error.
-  ///
-  bool LoadASCIIFromFile(Model* model, std* err, std* warn, const(std) filename, uint REQUIRE_VERSION);
+    ///
+    /// Loads glTF ASCII asset from a file.
+    /// Set warning message to `warn` for example it fails to load asserts.
+    /// Returns false and set error string to `err` if there's an error.
+    ///
+    bool LoadASCIIFromFile(Model* model, std* err, std* warn, const(std) filename, uint REQUIRE_VERSION);
 
-  ///
-  /// Loads glTF ASCII asset from string(memory).
-  /// `length` = strlen(str);
-  /// `base_dir` is a search path of glTF asset(e.g. images). Path Must be an
-  /// expanded path (e.g. no tilde(`~`), no environment variables). Set warning
-  /// message to `warn` for example it fails to load asserts. Returns false and
-  /// set error string to `err` if there's an error.
-  ///
-  bool LoadASCIIFromString(Model* model, std* err, std* warn, const(char)* str, const(uint) length, const(std) base_dir, uint REQUIRE_VERSION);
+    ///
+    /// Loads glTF ASCII asset from string(memory).
+    /// `length` = strlen(str);
+    /// `base_dir` is a search path of glTF asset(e.g. images). Path Must be an
+    /// expanded path (e.g. no tilde(`~`), no environment variables). Set warning
+    /// message to `warn` for example it fails to load asserts. Returns false and
+    /// set error string to `err` if there's an error.
+    ///
+    bool LoadASCIIFromString(Model* model, std* err, std* warn, const(char)* str, const(uint) length, const(std) base_dir, uint REQUIRE_VERSION);
 
-  ///
-  /// Loads glTF binary asset from a file.
-  /// Set warning message to `warn` for example it fails to load asserts.
-  /// Returns false and set error string to `err` if there's an error.
-  ///
-  bool LoadBinaryFromFile(Model* model, std* err, std* warn, const(std) filename, uint REQUIRE_VERSION);
+    ///
+    /// Loads glTF binary asset from a file.
+    /// Set warning message to `warn` for example it fails to load asserts.
+    /// Returns false and set error string to `err` if there's an error.
+    ///
+    bool LoadBinaryFromFile(Model* model, std* err, std* warn, const(std) filename, uint REQUIRE_VERSION);
 
-  ///
-  /// Loads glTF binary asset from memory.
-  /// `length` = strlen(str);
-  /// `base_dir` is a search path of glTF asset(e.g. images). Path Must be an
-  /// expanded path (e.g. no tilde(`~`), no environment variables).
-  /// Set warning message to `warn` for example it fails to load asserts.
-  /// Returns false and set error string to `err` if there's an error.
-  ///
-  bool LoadBinaryFromMemory(Model* model, std* err, std* warn, const(ubyte)* bytes, const(uint) length, const(std) base_dir); bool unsigned = void; int check_sections = REQUIRE_VERSION;
+    ///
+    /// Loads glTF binary asset from memory.
+    /// `length` = strlen(str);
+    /// `base_dir` is a search path of glTF asset(e.g. images). Path Must be an
+    /// expanded path (e.g. no tilde(`~`), no environment variables).
+    /// Set warning message to `warn` for example it fails to load asserts.
+    /// Returns false and set error string to `err` if there's an error.
+    ///
+    bool LoadBinaryFromMemory(Model* model, std* err, std* warn, const(ubyte)* bytes, const(uint) length, const(std) base_dir); bool unsigned = void; int check_sections = REQUIRE_VERSION;
 
-  ///
-  /// Write glTF to stream, buffers and images will be embedded
-  ///
-  bool WriteGltfSceneToStream(const(Model)* model, std stream, bool prettyPrint, bool writeBinary);
+    ///
+    /// Write glTF to stream, buffers and images will be embedded
+    ///
+    bool WriteGltfSceneToStream(const(Model)* model, std stream, bool prettyPrint, bool writeBinary);
 
-  ///
-  /// Write glTF to file.
-  ///
-  bool WriteGltfSceneToFile(const(Model)* model, const(std) filename, bool embedImages, bool embedBuffers, bool prettyPrint, bool writeBinary);
+    ///
+    /// Write glTF to file.
+    ///
+    bool WriteGltfSceneToFile(const(Model)* model, const(std) filename, bool embedImages, bool embedBuffers, bool prettyPrint, bool writeBinary);
 
-  ///
-  /// Set callback to use for loading image data
-  ///
-  void SetImageLoader(LoadImageDataFunction LoadImageData, void* user_data);
+    ///
+    /// Set callback to use for loading image data
+    ///
+    void SetImageLoader(LoadImageDataFunction LoadImageData, void* user_data);
 
-  ///
-  /// Unset(remove) callback of loading image data
-  ///
-  void RemoveImageLoader();
+    ///
+    /// Unset(remove) callback of loading image data
+    ///
+    void RemoveImageLoader();
 
-  ///
-  /// Set callback to use for writing image data
-  ///
-  void SetImageWriter(WriteImageDataFunction WriteImageData, void* user_data);
+    ///
+    /// Set callback to use for writing image data
+    ///
+    void SetImageWriter(WriteImageDataFunction WriteImageData, void* user_data);
 
-  ///
-  /// Set callbacks to use for URI encoding and decoding and their user data
-  ///
-  void SetURICallbacks(URICallbacks callbacks);
+    ///
+    /// Set callbacks to use for URI encoding and decoding and their user data
+    ///
+    void SetURICallbacks(URICallbacks callbacks);
 
-  ///
-  /// Set callbacks to use for filesystem (fs) access and their user data
-  ///
-  void SetFsCallbacks(FsCallbacks callbacks);
+    ///
+    /// Set callbacks to use for filesystem (fs) access and their user data
+    ///
+    void SetFsCallbacks(FsCallbacks callbacks);
 
-  ///
-  /// Set serializing default values(default = false).
-  /// When true, default values are force serialized to .glTF.
-  /// This may be helpful if you want to serialize a full description of glTF
-  /// data.
-  ///
-  /// TODO(LTE): Supply parsing option as function arguments to
-  /// `LoadASCIIFromFile()` and others, not by a class method
-  ///
-  void SetSerializeDefaultValues(const(bool) enabled) {
-    serialize_default_values_ = enabled;
-  }
+    ///
+    /// Set serializing default values(default = false).
+    /// When true, default values are force serialized to .glTF.
+    /// This may be helpful if you want to serialize a full description of glTF
+    /// data.
+    ///
+    /// TODO(LTE): Supply parsing option as function arguments to
+    /// `LoadASCIIFromFile()` and others, not by a class method
+    ///
+    void SetSerializeDefaultValues(const(bool) enabled) {
+        serialize_default_values_ = enabled;
+    }
 
-  bool GetSerializeDefaultValues() { return serialize_default_values_; }
+    bool GetSerializeDefaultValues() { return serialize_default_values_; }
 
-  ///
-  /// Store original JSON string for `extras` and `extensions`.
-  /// This feature will be useful when the user want to reconstruct custom data
-  /// structure from JSON string.
-  ///
-  void SetStoreOriginalJSONForExtrasAndExtensions(const(bool) enabled) {
-    store_original_json_for_extras_and_extensions_ = enabled;
-  }
+    ///
+    /// Store original JSON string for `extras` and `extensions`.
+    /// This feature will be useful when the user want to reconstruct custom data
+    /// structure from JSON string.
+    ///
+    void SetStoreOriginalJSONForExtrasAndExtensions(const(bool) enabled) {
+        store_original_json_for_extras_and_extensions_ = enabled;
+    }
 
-  bool GetStoreOriginalJSONForExtrasAndExtensions() {
-    return store_original_json_for_extras_and_extensions_;
-  }
+    bool GetStoreOriginalJSONForExtrasAndExtensions() {
+        return store_original_json_for_extras_and_extensions_;
+    }
 
-  ///
-  /// Specify whether preserve image channels when loading images or not.
-  /// (Not effective when the user supplies their own LoadImageData callbacks)
-  ///
-  void SetPreserveImageChannels(bool onoff) {
-    preserve_image_channels_ = onoff;
-  }
+    ///
+    /// Specify whether preserve image channels when loading images or not.
+    /// (Not effective when the user supplies their own LoadImageData callbacks)
+    ///
+    void SetPreserveImageChannels(bool onoff) {
+        preserve_image_channels_ = onoff;
+    }
 
-  bool GetPreserveImageChannels() { return preserve_image_channels_; }
+    bool GetPreserveImageChannels() { return preserve_image_channels_; }
 
- private:
-  ///
-  /// Loads glTF asset from string(memory).
-  /// `length` = strlen(str);
-  /// Set warning message to `warn` for example it fails to load asserts
-  /// Returns false and set error string to `err` if there's an error.
-  ///
-  bool_ LoadFromString(Model *model, std::string *err, std::string *warn,
-                      const char_ *str, const unsigned int length,
-                      const std::string &base_dir, unsigned int check_sections);
+    private:
+    ///
+    /// Loads glTF asset from string(memory).
+    /// `length` = strlen(str);
+    /// Set warning message to `warn` for example it fails to load asserts
+    /// Returns false and set error string to `err` if there's an error.
+    ///
+    bool_ LoadFromString(Model *model, std::string *err, std::string *warn,
+                        const char_ *str, const unsigned int length,
+                        const std::string &base_dir, unsigned int check_sections);
 
-  const(ubyte)* bin_data_ = nullptr;
-  size_t bin_size_ = 0;
-  bool is_binary_ = false;
+    const(ubyte)* bin_data_ = nullptr;
+    size_t bin_size_ = 0;
+    bool is_binary_ = false;
 
-  bool serialize_default_values_ = false;  ///< Serialize default values?
+    bool serialize_default_values_ = false;  ///< Serialize default values?
 
-  bool store_original_json_for_extras_and_extensions_ = false;
+    bool store_original_json_for_extras_and_extensions_ = false;
 
-  bool preserve_image_channels_ = false;  /// Default false(expand channels to
-                                          /// RGBA) for backward compatibility.
+    bool preserve_image_channels_ = false;  /// Default false(expand channels to
+                                            /// RGBA) for backward compatibility.
 
-  // Warning & error messages
-  std::string warn_;
-  std::string err_;
+    // Warning & error messages
+    std::string warn_;
+    std::string err_;
 
-  FsCallbacks fs = {
-#ifndef TINYGLTF_NO_FS
-      &tinygltf::FileExists, &tinygltf::ExpandFilePath,
-      &tinygltf::ReadWholeFile, &tinygltf::WriteWholeFile,
+    FsCallbacks fs = {
+    #ifndef TINYGLTF_NO_FS
+        &tinygltf::FileExists, &tinygltf::ExpandFilePath,
+        &tinygltf::ReadWholeFile, &tinygltf::WriteWholeFile,
 
-      nullptr  // Fs callback user data
-#else
-      nullptr, nullptr, nullptr, nullptr,
+        nullptr  // Fs callback user data
+    #else
+        nullptr, nullptr, nullptr, nullptr,
 
-      nullptr  // Fs callback user data
-#endif
-  };
+        nullptr  // Fs callback user data
+    #endif
+    };
 
-  URICallbacks uri_cb = {
-      // Use paths as-is by default. This will use JSON string escaping.
-      nullptr,
-      // Decode all URIs before using them as paths as the application may have
-      // percent encoded them.
-      &tinygltf::URIDecode,
-      // URI callback user data
-      nullptr};
+    URICallbacks uri_cb = {
+        // Use paths as-is by default. This will use JSON string escaping.
+        nullptr,
+        // Decode all URIs before using them as paths as the application may have
+        // percent encoded them.
+        &tinygltf::URIDecode,
+        // URI callback user data
+        nullptr};
 
-  LoadImageDataFunction LoadImageData = LoadImageData;
-//! #else
-      nullptr;
-//! #endif
-  void *load_image_user_data_{nullptr};
-  bool user_image_loader_ {false};
+    LoadImageDataFunction LoadImageData = LoadImageData;
+    //! #else
+        nullptr;
+    //! #endif
+    void *load_image_user_data_{nullptr};
+    bool user_image_loader_ {false};
 
-  WriteImageDataFunction WriteImageData = WriteImageData;
-//! #else
-      nullptr;
-//! #endif
-  void *write_image_user_data_{nullptr};
+    WriteImageDataFunction WriteImageData = WriteImageData;
+    //! #else
+        nullptr;
+    //! #endif
+    void *write_image_user_data_{nullptr};
 }{}
 
 version (__clang__) {
