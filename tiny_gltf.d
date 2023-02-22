@@ -1490,8 +1490,8 @@ private:
     /// Returns false and set error string to `err` if there's an error.
     ///
     bool LoadFromString(Model *model, string *err, string *warn,
-                        const char_ *str, const unsigned int length,
-                        const std::string &base_dir, unsigned int check_sections);
+                        const char_ *str, const uint length,
+                        const ref string base_dir, uint check_sections);
 
     const(ubyte)* bin_data_ = nullptr;
     size_t bin_size_ = 0;
@@ -1527,16 +1527,19 @@ private:
         #endif
         */
     ];
+    
 
-    URICallbacks uri_cb = [
+    URICallbacks uri_cb = URICallbacks(null, &tinygltf.URIDecode, null);
+    /*
         // Use paths as-is by default. This will use JSON string escaping.
-        null,
+        cast(URIEncodeFunction)0,
         // Decode all URIs before using them as paths as the application may have
         // percent encoded them.
         &tinygltf::URIDecode,
         // URI callback user data
         null
-    ];
+    );
+    */
 
     LoadImageDataFunction LoadImageData = LoadImageData;
     //! #else
