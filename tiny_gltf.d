@@ -2084,7 +2084,7 @@ static void swap4(ref uint[4] val) {
     val = dst;
 }
 
-private std JoinPath(const(std) path0, const(std) path1) {
+private std JoinPath(const(string) path0, const(string) path1) {
     if (path0.empty()) {
         return path1;
     } else {
@@ -2098,22 +2098,22 @@ private std JoinPath(const(std) path0, const(std) path1) {
     }
 }
 
-private std FindFile(const(std) paths, const(std) filepath, FsCallbacks* fs) {
-if (fs == nullptr || fs.ExpandFilePath == nullptr ||
-    fs.FileExists == nullptr) {
-    // Error, fs callback[s] missing
-    return std::string();
-}
-
-for (size_t i = 0; i < paths.size(); i++) {
-    std::string absPath =
-        fs.ExpandFilePath(JoinPath(paths[i], filepath), fs.user_data);
-    if (fs.FileExists(absPath, fs.user_data)) {
-    return absPath;
+private string FindFile(const(string) paths, const(string) filepath, FsCallbacks* fs) {
+    if (fs == nullptr || fs.ExpandFilePath == nullptr ||
+        fs.FileExists == nullptr) {
+        // Error, fs callback[s] missing
+        return "";
     }
-}
 
-return std::string();
+    for (size_t i = 0; i < paths.size(); i++) {
+        string absPath =
+            fs.ExpandFilePath(JoinPath(paths[i], filepath), fs.user_data);
+        if (fs.FileExists(absPath, fs.user_data)) {
+        return absPath;
+        }
+    }
+
+    return "";
 }
 
 private std GetFilePathExtension(const(std) FileName) {
