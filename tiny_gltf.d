@@ -1364,7 +1364,7 @@ bool WriteWholeFile(std* err, const(std) filepath, const(std) contents, void*);
 ///
 /// glTF Parser/Serializer context.
 ///
-class_ TinyGLTF {
+class TinyGLTF {
     public:
     version (__clang__) {
     #pragma clang diagnostic push
@@ -1546,7 +1546,7 @@ class_ TinyGLTF {
         nullptr;
     //! #endif
     void *write_image_user_data_{nullptr};
-}{}
+}
 
 version (__clang__) {
 #pragma clang diagnostic pop  // -Wpadded
