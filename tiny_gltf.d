@@ -1354,7 +1354,7 @@ bool FileExists(const(std) abs_filename, void*);
 /// @param[in] filepath File path string. Assume UTF-8
 /// @param[in] userdata User data. Set to `nullptr` if you don't need it.
 ///
-string ExpandFilePath(const string &filepath, void *userdata);
+string ExpandFilePath(const ref string filepath, void *userdata);
 
 bool ReadWholeFile(ubyte* out_, std* err, const(std) filepath, void*);
 
