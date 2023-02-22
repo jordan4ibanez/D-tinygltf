@@ -1,6 +1,7 @@
 module test.tiny_gltf;
 
 import std.algorithm.mutation;
+import std.string;
 
 @nogc nothrow:
 extern(C): __gshared:
@@ -414,19 +415,22 @@ public:
         return keys;
     }
 
-    size_t Size() { return (IsArray() ? ArrayLen() : Keys().size()); }
+    size_t Size() {
+        return (IsArray() ? ArrayLen() : Keys().size());
+    }
 
     // This exists in D automatically
     // bool operator == (tinygltf::Value &other);
 
 
-    bool Get() {}
-    double Get() {}
-    int Get() {}
-    string Get() {}
-    ubyte[] Get() {}
-    Array Get() {}
-    Object Get() {}
+    //* Translation note: This is the more D way to do this than the weird mixin in C
+    mixin(TINYGLTF_VALUE_GET("bool", "boolean_value_"));
+    mixin(TINYGLTF_VALUE_GET("double", "real_value_"));
+    mixin(TINYGLTF_VALUE_GET("int", "int_value_"));
+    mixin(TINYGLTF_VALUE_GET("string", "string_value_"));
+    mixin(TINYGLTF_VALUE_GET("ubyte[]", "binary_value_"));
+    mixin(TINYGLTF_VALUE_GET("Array", "array_value_"));
+    mixin(TINYGLTF_VALUE_GET("Object", "object_value_"));
 
 protected:
 
@@ -439,19 +443,17 @@ protected:
     Array array_value_;
     Object object_value_;
     bool boolean_value_ = false;
+    
 }
 
 //* Translation note: This is a C mixin generator!
 string TINYGLTF_VALUE_GET(string ctype, string var) {
-     return `            \n
-     template <>                                     \n
-     inline const ctype &Value::Get<ctype>() const { \n
-         return var;                                   \n
-    }                                               \n
-    template <>                                     \n
-    inline ctype &Value::Get<ctype>() {             \n
-        return var;                                   \n
-    }`;
+    const string fancyCType = capitalize(ctype);
+    return
+    "\n" ~
+    ctype ~ " Get" ~ fancyCType ~ "() const {\n" ~
+         "return this." ~ var ~ ";\n" ~
+    "}";
 }
 
 // * This is probably needed but check later
