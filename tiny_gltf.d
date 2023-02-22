@@ -236,8 +236,8 @@ pragma(inline, true) private int GetNumComponentsInType(uint ty) {
 }
 
 // TODO(syoyo): Move these functions to TinyGLTF class
-bool IsDataURI(const(std) in_);
-bool DecodeDataURI(ubyte* out_, std mime_type, const(std) in_, size_t reqBytes, bool checkSize);
+// bool IsDataURI(const(std) in_);
+// bool DecodeDataURI(ubyte* out_, std mime_type, const(std) in_, size_t reqBytes, bool checkSize);
 
 // Simple class to represent JSON object
 //* Note: This whole thing is duck typed
@@ -246,9 +246,9 @@ class Value {
 public:
 
     // C++ vector is dynamic array
-    Value[] Array;
+    Value[] array;
     // C++ map is an Associative Array
-    Value[string] Object;
+    Value[string] object;
 
     this() {
         this.type_ = NULL_TYPE;
