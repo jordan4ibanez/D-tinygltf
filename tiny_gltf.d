@@ -282,25 +282,13 @@ public:
         this.type = STRING_TYPE;
     }
 
-    //* Translation Note: This is C nonsense
-    // this(const char* p, size_t n) {
-    //     binary_value_.resize(n);
-    //     memcpy(binary_value_.data(), p, n);
-    //     this.type = BINARY_TYPE;
-    // }
-
     this(ubyte[] v) {
         this.binary_value_ = v;
         this.type = BINARY_TYPE;
     }
     
-    this(const Array a) {
+    this(const Value[] a) {
         array_value_ = a;
-        this.type = ARRAY_TYPE;
-    }
-
-    this(Array a){
-        move(array_value_, a);
         this.type = ARRAY_TYPE;
     }
 
