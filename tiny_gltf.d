@@ -808,35 +808,37 @@ struct PbrMetallicRoughness {
 // members not in the values could be included in the ParameterMap
 // to keep a single material model
 struct Material {
-  std;/*::string name !!*/
+    string name;
 
-  std;/*:vector<double> emissiveFactor !!*/  // length 3. default [0, 0, 0]
-  std;/*::string alphaMode !!*/               // default "OPAQUE"
-  double alphaCutoff = 0;                  // default 0.5
-  bool doubleSided;                    // default false;
+    double[] emissiveFactor = [0.0,0.0,0.0];  // length 3. default [0, 0, 0]
+    string alphaMode = "OPAQUE";              // default "OPAQUE"
+    double alphaCutoff = 0.5;                 // default 0.5
+    bool doubleSided = false;                 // default false;
 
-  PbrMetallicRoughness pbrMetallicRoughness;
+    PbrMetallicRoughness pbrMetallicRoughness;
 
-  NormalTextureInfo normalTexture;
-  OcclusionTextureInfo occlusionTexture;
-  TextureInfo emissiveTexture;
+    NormalTextureInfo normalTexture;
+    OcclusionTextureInfo occlusionTexture;
+    TextureInfo emissiveTexture;
 
-  // For backward compatibility
-  // TODO(syoyo): Remove `values` and `additionalValues` in the next release.
-  ParameterMap values;
-  ParameterMap additionalValues;
+    // For backward compatibility
+    // TODO(syoyo): Remove `values` and `additionalValues` in the next release.
+    ParameterMap values;
+    ParameterMap additionalValues;
 
-  ExtensionMap extensions;
-  Value extras;
+    ExtensionMap extensions;
+    Value extras;
 
-  // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-  std;/*::string extras_json_string !!*/
-  std;/*::string extensions_json_string !!*/
+    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
+    string extras_json_string;
+    string extensions_json_string;
 
-  ;/*: alphaMode("OPAQUE"), alphaCutoff(0.5), doubleSided(false) {}
-  DEFAULT_METHODS(Material)
+    this() {
 
-  bool_ operator==cast(const(Material) &) const !!*/
+    }/*: alphaMode("OPAQUE"), alphaCutoff(0.5), doubleSided(false) {}
+    DEFAULT_METHODS(Material)
+
+    bool_ operator==cast(const(Material) &) const !!*/
 }
 
 struct BufferView {
