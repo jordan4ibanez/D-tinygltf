@@ -257,7 +257,9 @@ public:
         this.real_value_ = 0.0;
         this.boolean_value = false;
     }
-    
+
+    // The value becomes whatever it is constructed with
+    // It is a zeitgeist basically
     this(bool b) {
         boolean_value_ = b;
         this.type = BOOL_TYPE;
