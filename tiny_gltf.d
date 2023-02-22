@@ -760,22 +760,24 @@ struct NormalTextureInfo {
 }
 
 struct OcclusionTextureInfo {
-  int index;   // required
-  int texCoord;     // The set index of texture's TEXCOORD attribute used for
-                    // texture coordinate mapping.
-  double strength = 0;  // occludedColor = lerp(color, color * <sampled occlusion
-                    // texture value>, <occlusion strength>)
+    int index = -1;        // required
+    int texCoord = 0;      // The set index of texture's TEXCOORD attribute used for
+                           // texture coordinate mapping.
+    double strength = 1.0; // occludedColor = lerp(color, color * <sampled occlusion
+                           // texture value>, <occlusion strength>)
 
-  Value extras;
-  ExtensionMap extensions;
+    Value extras;
+    ExtensionMap extensions;
 
-  // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-  std;/*::string extras_json_string !!*/
-  std;/*::string extensions_json_string !!*/
+    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
+    string extras_json_string;
+    string extensions_json_string;
 
-  ;/*: index(-1), texCoord(0), strength(1.0) {}
-  DEFAULT_METHODS(OcclusionTextureInfo)
-  bool_ operator==cast(const(OcclusionTextureInfo) &) const !!*/
+    this(){
+
+    }/*: index(-1), texCoord(0), strength(1.0) {}
+    DEFAULT_METHODS(OcclusionTextureInfo)
+    bool_ operator==cast(const(OcclusionTextureInfo) &) const !!*/
 }
 
 // pbrMetallicRoughness class defined in glTF 2.0 spec.
