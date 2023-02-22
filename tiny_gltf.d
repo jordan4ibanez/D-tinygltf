@@ -1769,20 +1769,19 @@ namespace tinygltf {
             }  // TINYGLTF_USE_RAPIDJSON_CRTALLOCATOR
 
         } else {
-        using nlohmann;
-        using json_const_iterator = const_iterator;
-        using json_const_array_iterator = json_const_iterator;
-        using JsonDocument = json;
+            using nlohmann;
+            using json_const_iterator = const_iterator;
+            using json_const_array_iterator = json_const_iterator;
+            using JsonDocument = json;
         }
 
-        void JsonParse(JsonDocument doc, const(char)* str, size_t length,
-                    bool throwExc = false) {
-        version (TINYGLTF_USE_RAPIDJSON) {
-        cast(void)throwExc;
-        doc.Parse(str, length);
-        } else {
-        doc = detail::json::parse(str, str + length, nullptr, throwExc);
-        }
+        void JsonParse(JsonDocument doc, const(char)* str, size_t length, bool throwExc = false) {
+            version (TINYGLTF_USE_RAPIDJSON) {
+                cast(void)throwExc;
+                doc.Parse(str, length);
+            } else {
+                doc = detail::json::parse(str, str + length, nullptr, throwExc);
+            }
         }
     }  // namespace
 }
