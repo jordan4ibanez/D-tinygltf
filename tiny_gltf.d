@@ -1638,48 +1638,43 @@ version (TINYGLTF_NO_INCLUDE_JSON) {
     }
 }
 
+//! DRACO IMPORTED HERE
 version (TINYGLTF_ENABLE_DRACO) {
-public import draco.compression.decode;
-public import draco.core.decoder_buffer;
+    public import draco.compression.decode;
+    public import draco.core.decoder_buffer;
 }
 
+//! DEFINITION OF NO_STB_IMAGE AND STB_IMAGE IMPORT HERE!
 version (TINYGLTF_NO_STB_IMAGE) {} else {
-version (TINYGLTF_NO_INCLUDE_STB_IMAGE) {} else {
-public import stb_image;
-}
+    version (TINYGLTF_NO_INCLUDE_STB_IMAGE) {} else {
+      public import stb_image;
+    }
 }
 
+//! STB IMAGE_WRITE IMPORTED HEAR
 version (TINYGLTF_NO_STB_IMAGE_WRITE) {} else {
-version (TINYGLTF_NO_INCLUDE_STB_IMAGE_WRITE) {} else {
-public import stb_image_write;
-}
-}
-
-version (__clang__) {
-#pragma clang diagnostic pop
-}
-
-version (__GNUC__) {
-#pragma GCC diagnostic pop
+    version (TINYGLTF_NO_INCLUDE_STB_IMAGE_WRITE) {} else {
+      public import stb_image_write;
+    }
 }
 
 version (Windows) {
 
-// issue 143.
-// Define NOMINMAX to avoid min/max defines,
-// but undef it after included Windows.h
-version (NOMINMAX) {} else {
-version = TINYGLTF_INTERNAL_NOMINMAX;
-version = NOMINMAX;
+    // issue 143.
+    // Define NOMINMAX to avoid min/max defines,
+    // but undef it after included Windows.h
+    version (NOMINMAX) {} else {
+    version = TINYGLTF_INTERNAL_NOMINMAX;
+    version = NOMINMAX;
 }
 
  
 version = TINYGLTF_INTERNAL_WIN32_LEAN_AND_MEAN;
 
 version (Windows) {} else {
-public import Windows;  // include API for expanding a file path
+    public import Windows;  // include API for expanding a file path
 } version (Windows) {
-public import core.sys.windows.windows;
+    public import core.sys.windows.windows;
 }
 
 version (TINYGLTF_INTERNAL_WIN32_LEAN_AND_MEAN) {
