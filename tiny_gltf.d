@@ -1790,7 +1790,9 @@ struct LoadImageDataOption {
 
 // Equals function for Value, for recursivity
 private bool Equals(const(tinygltf) one, const(tinygltf) other) {
-    if (one.Type() != other.Type()) return false;
+    if (one.Type() != other.Type()) {
+        return false
+    };
 
     switch (one.Type()) {
         case NULL_TYPE: return true;
@@ -1807,7 +1809,7 @@ private bool Equals(const(tinygltf) one, const(tinygltf) other) {
             if (otherIt == otherObj.end()) return false;
 
             if (!Equals(it.second, otherIt.second)) return false;
-            
+
         }
         return true;
         }
@@ -1826,6 +1828,7 @@ private bool Equals(const(tinygltf) one, const(tinygltf) other) {
         // unhandled type
         return false;
         }
+    }
 }
 
 // Equals function for std::vector<double> using TINYGLTF_DOUBLE_EPSILON
