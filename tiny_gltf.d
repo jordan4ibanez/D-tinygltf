@@ -390,8 +390,8 @@ public:
         return keys;
     }
 
-    size_t Size() {
-        return (IsArray() ? ArrayLen() : Keys().size());
+    size_t size() {
+        return (this.isArray() ? this.arrayLen() : keys().length);
     }
 
     // This exists in D automatically
