@@ -1775,7 +1775,7 @@ private:
 //     }  // namespace
 // }
 
-    namespace tinygltf {
+// namespace tinygltf {
 
     ///
     /// Internal LoadImageDataOption struct.
@@ -7757,7 +7757,7 @@ private:
     }
     }
 
-}  // namespace tinygltf
+// }  // namespace tinygltf
 
 #ifdef __clang__
 #pragma clang diagnostic pop
