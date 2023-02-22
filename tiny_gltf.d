@@ -1489,7 +1489,7 @@ private:
     /// Set warning message to `warn` for example it fails to load asserts
     /// Returns false and set error string to `err` if there's an error.
     ///
-    bool_ LoadFromString(Model *model, std::string *err, std::string *warn,
+    bool LoadFromString(Model *model, string *err, string *warn,
                         const char_ *str, const unsigned int length,
                         const std::string &base_dir, unsigned int check_sections);
 
@@ -1505,21 +1505,28 @@ private:
                                             /// RGBA) for backward compatibility.
 
     // Warning & error messages
-    std::string warn_;
-    std::string err_;
+    string warn_;
+    string err_;
 
-    FsCallbacks fs = {
-    #ifndef TINYGLTF_NO_FS
-        &tinygltf::FileExists, &tinygltf::ExpandFilePath,
-        &tinygltf::ReadWholeFile, &tinygltf::WriteWholeFile,
+    FsCallbacks fs = [
+        null, null, null, null
+        /*
+        #ifndef TINYGLTF_NO_FS
 
-        nullptr  // Fs callback user data
-    #else
-        nullptr, nullptr, nullptr, nullptr,
+            &tinygltf::FileExists, &tinygltf::ExpandFilePath,
+            &tinygltf::ReadWholeFile, &tinygltf::WriteWholeFile,
 
-        nullptr  // Fs callback user data
-    #endif
-    };
+            nullptr  // Fs callback user data
+
+        #else
+
+            nullptr, nullptr, nullptr, nullptr,
+
+            nullptr  // Fs callback user data
+
+        #endif
+        */
+    ];
 
     URICallbacks uri_cb = {
         // Use paths as-is by default. This will use JSON string escaping.
