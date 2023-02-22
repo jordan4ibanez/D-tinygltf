@@ -191,6 +191,7 @@ enum Type {
     OBJECT_TYPE
 }
 
+
 pragma(inline, true) private int getComponentSizeInBytes(uint componentType) {
     if (componentType == TINYGLTF_COMPONENT_TYPE_BYTE) {
         return 1;
@@ -256,56 +257,65 @@ public:
         this.real_value_ = 0.0;
         this.boolean_value = false;
     }
-    //! These are all constructors & converters
-    //TODO: Test all this nonsense
-    //TODO: Check if these even need to be refs?
-    this(bool b)(BOOL_TYPE) {
+    
+    this(bool b) {
         boolean_value_ = b;
+        this.type = BOOL_TYPE;
     }
 
-    this(int i)(INT_TYPE) {
+    this(int i) {
         int_value_ = i;
         real_value_ = i;
+        this.type = INT_TYPE;
     }
 
-    this(double n)(REAL_TYPE) {
+    this(double n) {
         real_value_ = n;
+        this.type_ = REAL_TYPE;
     }
 
-    this(string s)(STRING_TYPE) {
+    this(string s) {
         string_value_ = s;
+        this.type = STRING_TYPE;
     }
 
-    ref this(string s)(STRING_TYPE) {
+    this(string s) {
         move(string_value_, s);
+        this.type = STRING_TYPE;
     }
 
-    this(const char* p, size_t n)(BINARY_TYPE) {
+    this(const char* p, size_t n) {
         binary_value_.resize(n);
         memcpy(binary_value_.data(), p, n);
+        this.type = BINARY_TYPE;
     }
 
-    ref this(ubyte[] v)(BINARY_TYPE) {
+    this(ubyte[] v) {
         move(binary_value_, v);
+        this.type = BINARY_TYPE;
     }
     
-    this(const Array a)(ARRAY_TYPE) {
+    this(const Array a) {
         array_value_ = a;
+        this.type = ARRAY_TYPE;
     }
 
-    ref Value(Array a)(ARRAY_TYPE){
+    this(Array a){
         move(array_value_, a);
+        this.type = ARRAY_TYPE;
     }
 
-    this(const Object o)(OBJECT_TYPE) {
+    this(const Object o) {
         object_value_ = o;
+        this.type = OBJECT_TYPE;
     }
-    ref this(Object o)(OBJECT_TYPE){
+    this(Object o){
         move(object_value_, o);
+        this.type = OBJECT_TYPE;
     }
 
-    const char Type(){
-        return static_cast<char_>(type_);
+    tinygltf.type type(){
+        return this.type_;
     }
 
     bool IsBool() {
