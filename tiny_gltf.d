@@ -1366,18 +1366,11 @@ bool WriteWholeFile(std* err, const(std) filepath, const(std) contents, void*);
 ///
 class TinyGLTF {
     public:
-    version (__clang__) {
-    #pragma clang diagnostic push
-    #pragma clang diagnostic ignored "-Wc++98-compat"
-    }
 
     TinyGLTF() : bin_data_(nullptr), bin_size_(0), is_binary_(false) {}
 
-    version (__clang__) {
-    #pragma clang diagnostic pop
-    }
-
-    ~TinyGLTF() {}
+    //* Translation note: This literally did nothing
+    // ~TinyGLTF() {}
 
     ///
     /// Loads glTF ASCII asset from a file.
