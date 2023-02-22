@@ -1549,11 +1549,6 @@ private:
     
     void *write_image_user_data_ = null;
 }
-
-version (__clang__) {
-#pragma clang diagnostic pop  // -Wpadded
-}
-
 // This was: }namespace tinygltf
 
   // TINY_GLTF_H_
@@ -1621,12 +1616,6 @@ static if (__has_warning("-Wextra-semi-stmt")) {
 #pragma clang diagnostic ignored "-Wextra-semi-stmt"
 }
 }
-
-// Disable GCC warnings
-version (__GNUC__) {
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wtype-limits"
-}  // __GNUC__
 
 version (TINYGLTF_NO_INCLUDE_JSON) {} else {
 version (TINYGLTF_USE_RAPIDJSON) {} else {
