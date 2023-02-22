@@ -1782,10 +1782,10 @@ private:
 /// callbacks.
 ///
 struct LoadImageDataOption {
-// true: preserve image channels(e.g. load as RGB image if the image has RGB
-// channels) default `false`(channels are expanded to RGBA for backward
-// compatibility).
-bool preserve_channels = void;
+    // true: preserve image channels(e.g. load as RGB image if the image has RGB
+    // channels) default `false`(channels are expanded to RGBA for backward
+    // compatibility).
+    bool preserve_channels = void;
 };
 
 // Equals function for Value, for recursivity
