@@ -1056,18 +1056,23 @@ struct Primitive {
 }
 
 struct Mesh {
-  std;/*::string name !!*/
-  std;/*:vector<Primitive> primitives !!*/
-  std;/*:vector<double> weights !!*/  // weights to be applied to the Morph Targets
-  ExtensionMap extensions;
-  Value extras;
+    string name;
+    Primitive[] primitives;
+    double[] weights;  // weights to be applied to the Morph Targets
 
-  // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-  std;/*::string extras_json_string !!*/
-  std;/*::string extensions_json_string !!*/
+    ExtensionMap extensions;
+    Value extras;
 
-  Mesh;
-   bool_;
+    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
+    string extras_json_string;
+    string extensions_json_string;
+
+    this() {
+
+    }
+    /*Mesh() = default;
+    DEFAULT_METHODS(Mesh)
+    bool operator==(const Mesh &) const;*/
 }
 
 class_ Node {
