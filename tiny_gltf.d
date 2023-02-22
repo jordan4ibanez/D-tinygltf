@@ -983,21 +983,23 @@ struct PerspectiveCamera {
 }
 
 struct OrthographicCamera {
-  double xmag = 0;   // required. must not be zero.
-  double ymag = 0;   // required. must not be zero.
-  double zfar = 0;   // required. `zfar` must be greater than `znear`.
-  double znear = 0;  // required
+    double xmag = 0.0;   // required. must not be zero.
+    double ymag = 0.0;   // required. must not be zero.
+    double zfar = 0.0;   // required. `zfar` must be greater than `znear`.
+    double znear = 0.0;  // required
 
-  ;/*: xmag(0.0), ymag(0.0), zfar(0.0), znear(0.0) {}
-  DEFAULT_METHODS(OrthographicCamera)
-  bool_ operator==cast(const(OrthographicCamera) &) const !!*/
+    this() {
 
-  ExtensionMap extensions;
-  Value extras;
+    }/*: xmag(0.0), ymag(0.0), zfar(0.0), znear(0.0) {}
+    DEFAULT_METHODS(OrthographicCamera)
+    bool_ operator==cast(const(OrthographicCamera) &) const !!*/
 
-  // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-  std;/*::string extras_json_string !!*/
-  std;/*::string extensions_json_string !!*/
+    ExtensionMap extensions;
+    Value extras;
+
+    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
+    string extras_json_string;
+    string extensions_json_string;
 }
 
 struct Camera {
