@@ -409,7 +409,7 @@ public:
 
 protected:
 
-    int type_ = NULL_TYPE;
+    Type type_ = Type.NULL_TYPE;
 
     int int_value_ = 0;
     double real_value_ = 0.0;
