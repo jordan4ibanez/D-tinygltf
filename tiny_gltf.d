@@ -1775,15 +1775,6 @@ namespace tinygltf {
     }  // namespace
 }
 
-version (OSX) {
-public import TargetConditionals;
-}
-
-version (__clang__) {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wc++98-compat"
-}
-
 namespace tinygltf {
 
 ///
