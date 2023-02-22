@@ -419,6 +419,15 @@ public:
     // This exists in D automatically
     // bool operator == (tinygltf::Value &other);
 
+
+    bool Get() {}
+    double Get() {}
+    int Get() {}
+    string Get() {}
+    ubyte[] Get() {}
+    Array Get() {}
+    Object Get() {}
+
 protected:
 
     int type_ = NULL_TYPE;
@@ -432,16 +441,18 @@ protected:
     bool boolean_value_ = false;
 }
 
-
-enum string TINYGLTF_VALUE_GET(string ctype, string var) = `            \
-  template <>                                     \
-  inline const ctype &Value::Get<ctype>() const { \
-    return var;                                   \
-  }                                               \
-  template <>                                     \
-  inline ctype &Value::Get<ctype>() {             \
-    return var;                                   \
-  }`;
+//* Translation note: This is a C mixin generator!
+string TINYGLTF_VALUE_GET(string ctype, string var) {
+     return `            \n
+     template <>                                     \n
+     inline const ctype &Value::Get<ctype>() const { \n
+         return var;                                   \n
+    }                                               \n
+    template <>                                     \n
+    inline ctype &Value::Get<ctype>() {             \n
+        return var;                                   \n
+    }`;
+}
 
 // * This is probably needed but check later
 // TINYGLTF_VALUE_GET(bool, boolean_value_)
