@@ -282,7 +282,7 @@ public:
     }
 
     this(string s) {
-        move(string_value_, s);
+        this.string_value_ = s;
         this.type = STRING_TYPE;
     }
 
