@@ -1755,10 +1755,6 @@ namespace tinygltf {
                     bool_ isNil = false;
                 }
 
-                version (__clang__) {
-                #pragma clang diagnostic pop
-                }
-
             }  // TINYGLTF_USE_RAPIDJSON_CRTALLOCATOR
 
         } else {
