@@ -700,38 +700,44 @@ struct Image {
 }
 
 struct Texture {
-  std;/*::string name !!*/
+    string name;
 
-  int sampler;
-  int source;
-  Value extras;
-  ExtensionMap extensions;
+    int sampler = -1;
+    int source = -1;
+    Value extras;
+    ExtensionMap extensions;
 
-  // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-  std;/*::string extras_json_string !!*/
-  std;/*::string extensions_json_string !!*/
+    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
+    string extras_json_string;
+    string extensions_json_string;
 
-  ;/*: sampler(-1), source(-1) {}
-  DEFAULT_METHODS(Texture)
+    this() {
+        
+    }/*: sampler(-1), source(-1) {}
+    DEFAULT_METHODS(Texture)
 
-  bool_ operator==cast(const(Texture) &) const !!*/
+    bool_ operator==cast(const(Texture) &) const !!*/
 }
 
 struct TextureInfo {
-  int index;  // required.
-  int texCoord;    // The set index of texture's TEXCOORD attribute used for
-                   // texture coordinate mapping.
+    int index = -1;     // required.
+    int texCoord = 0;   // The set index of texture's TEXCOORD attribute used for
+                        // texture coordinate mapping.
+    double scale = 1.0; // scaledNormal = normalize((<sampled normal texture value>
+                        // * 2.0 - 1.0) * vec3(<normal scale>, <normal scale>, 1.0))
 
-  Value extras;
-  ExtensionMap extensions;
+    Value extras;
+    ExtensionMap extensions;
 
-  // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-  std;/*::string extras_json_string !!*/
-  std;/*::string extensions_json_string !!*/
+    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
+    string extras_json_string;
+    string extensions_json_string;
 
-  ;/*: index(-1), texCoord(0) {}
-  DEFAULT_METHODS(TextureInfo)
-  bool_ operator==cast(const(TextureInfo) &) const !!*/
+    this() {
+
+    }/*: index(-1), texCoord(0) {}
+    DEFAULT_METHODS(TextureInfo)
+    bool_ operator==cast(const(TextureInfo) &) const !!*/
 }
 
 struct NormalTextureInfo {
