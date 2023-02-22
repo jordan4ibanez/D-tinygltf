@@ -1993,97 +1993,97 @@ return true;
 //     this_.has_number_value != other.has_number_value)
 //     return false;
 
-if (!TINYGLTF_DOUBLE_EQUAL(this_.number_value, other.number_value))
-    return false;
+// if (!TINYGLTF_DOUBLE_EQUAL(this_.number_value, other.number_value))
+//     return false;
 
-if (this_.json_double_value.size() != other.json_double_value.size())
-    return false;
-for (auto it otherIt = other.json_double_value.find(it.first);
-    if (otherIt == other.json_double_value.end()) return false;
+// if (this_.json_double_value.size() != other.json_double_value.size())
+//     return false;
+// for (auto it otherIt = other.json_double_value.find(it.first);
+//     if (otherIt == other.json_double_value.end()) return false;
 
-    if (!TINYGLTF_DOUBLE_EQUAL(it.second, otherIt.second)) return false;
-}
+//     if (!TINYGLTF_DOUBLE_EQUAL(it.second, otherIt.second)) return false;
+// }
 
-if (!Equals(this_.number_array, other.number_array)) return false;
+// if (!Equals(this_.number_array, other.number_array)) return false;
 
-if (this_.string_value != other.string_value) return false;
+// if (this_.string_value != other.string_value) return false;
 
-return true;
-}
-bool PerspectiveCamera::operator==(PerspectiveCamera &other) const {
-return TINYGLTF_DOUBLE_EQUAL(this_.aspectRatio, other.aspectRatio) &&
-        this_.extensions == other.extensions && this_.extras == other.extras &&
-        TINYGLTF_DOUBLE_EQUAL(this_.yfov, other.yfov) &&
-        TINYGLTF_DOUBLE_EQUAL(this_.zfar, other.zfar) &&
-        TINYGLTF_DOUBLE_EQUAL(this_.znear, other.znear);
-}
-bool Primitive::operator==(Primitive &other) const {
-return this_.attributes == other.attributes && this_.extras == other.extras &&
-        this_.indices == other.indices && this_.material == other.material &&
-        this_.mode == other.mode && this_.targets == other.targets;
-}
-bool Sampler::operator==(Sampler &other) const {
-return this_.extensions == other.extensions && this_.extras == other.extras &&
-        this_.magFilter == other.magFilter &&
-        this_.minFilter == other.minFilter && this_.name == other.name &&
-        this_.wrapS == other.wrapS && this_.wrapT == other.wrapT;
+// return true;
+// }
+// bool PerspectiveCamera::operator==(PerspectiveCamera &other) const {
+// return TINYGLTF_DOUBLE_EQUAL(this_.aspectRatio, other.aspectRatio) &&
+//         this_.extensions == other.extensions && this_.extras == other.extras &&
+//         TINYGLTF_DOUBLE_EQUAL(this_.yfov, other.yfov) &&
+//         TINYGLTF_DOUBLE_EQUAL(this_.zfar, other.zfar) &&
+//         TINYGLTF_DOUBLE_EQUAL(this_.znear, other.znear);
+// }
+// bool Primitive::operator==(Primitive &other) const {
+// return this_.attributes == other.attributes && this_.extras == other.extras &&
+//         this_.indices == other.indices && this_.material == other.material &&
+//         this_.mode == other.mode && this_.targets == other.targets;
+// }
+// bool Sampler::operator==(Sampler &other) const {
+// return this_.extensions == other.extensions && this_.extras == other.extras &&
+//         this_.magFilter == other.magFilter &&
+//         this_.minFilter == other.minFilter && this_.name == other.name &&
+//         this_.wrapS == other.wrapS && this_.wrapT == other.wrapT;
 
-// this->wrapR == other.wrapR
-}
-bool Scene::operator==(Scene &other) const {
-return this_.extensions == other.extensions && this_.extras == other.extras &&
-        this_.name == other.name && this_.nodes == other.nodes;
-}
-bool Skin::operator==(Skin &other) const {
-return this_.extensions == other.extensions && this_.extras == other.extras &&
-        this_.inverseBindMatrices == other.inverseBindMatrices &&
-        this_.joints == other.joints && this_.name == other.name &&
-        this_.skeleton == other.skeleton;
-}
-bool Texture::operator==(Texture &other) const {
-return this_.extensions == other.extensions && this_.extras == other.extras &&
-        this_.name == other.name && this_.sampler == other.sampler &&
-        this_.source == other.source;
-}
-bool TextureInfo::operator==(TextureInfo &other) const {
-return this_.extensions == other.extensions && this_.extras == other.extras &&
-        this_.index == other.index && this_.texCoord == other.texCoord;
-}
-bool NormalTextureInfo::operator==(NormalTextureInfo &other) const {
-return this_.extensions == other.extensions && this_.extras == other.extras &&
-        this_.index == other.index && this_.texCoord == other.texCoord &&
-        TINYGLTF_DOUBLE_EQUAL(this_.scale, other.scale);
-}
-bool OcclusionTextureInfo::operator==(OcclusionTextureInfo &other) const {
-return this_.extensions == other.extensions && this_.extras == other.extras &&
-        this_.index == other.index && this_.texCoord == other.texCoord &&
-        TINYGLTF_DOUBLE_EQUAL(this_.strength, other.strength);
-}
-bool PbrMetallicRoughness::operator==(PbrMetallicRoughness &other) const {
-return this_.extensions == other.extensions && this_.extras == other.extras &&
-        (this_.baseColorTexture == other.baseColorTexture) &&
-        (this_.metallicRoughnessTexture == other.metallicRoughnessTexture) &&
-        Equals(this_.baseColorFactor, other.baseColorFactor) &&
-        TINYGLTF_DOUBLE_EQUAL(this_.metallicFactor, other.metallicFactor) &&
-        TINYGLTF_DOUBLE_EQUAL(this_.roughnessFactor, other.roughnessFactor);
-}
-bool Value::operator==(Value &other) const {
-return Equals(*this_, other);
-}
+// // this->wrapR == other.wrapR
+// }
+// bool Scene::operator==(Scene &other) const {
+// return this_.extensions == other.extensions && this_.extras == other.extras &&
+//         this_.name == other.name && this_.nodes == other.nodes;
+// }
+// bool Skin::operator==(Skin &other) const {
+// return this_.extensions == other.extensions && this_.extras == other.extras &&
+//         this_.inverseBindMatrices == other.inverseBindMatrices &&
+//         this_.joints == other.joints && this_.name == other.name &&
+//         this_.skeleton == other.skeleton;
+// }
+// bool Texture::operator==(Texture &other) const {
+// return this_.extensions == other.extensions && this_.extras == other.extras &&
+//         this_.name == other.name && this_.sampler == other.sampler &&
+//         this_.source == other.source;
+// }
+// bool TextureInfo::operator==(TextureInfo &other) const {
+// return this_.extensions == other.extensions && this_.extras == other.extras &&
+//         this_.index == other.index && this_.texCoord == other.texCoord;
+// }
+// bool NormalTextureInfo::operator==(NormalTextureInfo &other) const {
+// return this_.extensions == other.extensions && this_.extras == other.extras &&
+//         this_.index == other.index && this_.texCoord == other.texCoord &&
+//         TINYGLTF_DOUBLE_EQUAL(this_.scale, other.scale);
+// }
+// bool OcclusionTextureInfo::operator==(OcclusionTextureInfo &other) const {
+// return this_.extensions == other.extensions && this_.extras == other.extras &&
+//         this_.index == other.index && this_.texCoord == other.texCoord &&
+//         TINYGLTF_DOUBLE_EQUAL(this_.strength, other.strength);
+// }
+// bool PbrMetallicRoughness::operator==(PbrMetallicRoughness &other) const {
+// return this_.extensions == other.extensions && this_.extras == other.extras &&
+//         (this_.baseColorTexture == other.baseColorTexture) &&
+//         (this_.metallicRoughnessTexture == other.metallicRoughnessTexture) &&
+//         Equals(this_.baseColorFactor, other.baseColorFactor) &&
+//         TINYGLTF_DOUBLE_EQUAL(this_.metallicFactor, other.metallicFactor) &&
+//         TINYGLTF_DOUBLE_EQUAL(this_.roughnessFactor, other.roughnessFactor);
+// }
+// bool Value::operator==(Value &other) const {
+// return Equals(*this_, other);
+// }
 
 static void swap4(unsigned int *val) {
-version (TINYGLTF_LITTLE_ENDIAN) {
-cast(void)val;
-} else {
-uint tmp = *val;
-ubyte* dst = reinterpret_cast<unsigned char_ *>(val);
-ubyte* src = reinterpret_cast<unsigned char_ *>(&tmp);
+    version (TINYGLTF_LITTLE_ENDIAN) {
+        cast(void)val;
+    } else {
+        uint tmp = *val;
+        ubyte* dst = reinterpret_cast<unsigned char_ *>(val);
+        ubyte* src = reinterpret_cast<unsigned char_ *>(&tmp);
 
-dst[0] = src[3];
-dst[1] = src[2];
-dst[2] = src[1];
-dst[3] = src[0];
-}
+        dst[0] = src[3];
+        dst[1] = src[2];
+        dst[2] = src[1];
+        dst[3] = src[0];
+    }
 }
 
 private std JoinPath(const(std) path0, const(std) path1) {
