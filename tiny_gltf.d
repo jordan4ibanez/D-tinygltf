@@ -241,15 +241,16 @@ pragma(inline, true) private int GetNumComponentsInType(uint ty) {
 // bool DecodeDataURI(ubyte* out_, std mime_type, const(std) in_, size_t reqBytes, bool checkSize);
 
 // Simple class to represent JSON object
-//* Note: This whole thing is duck typed
+//* Translation Note: This whole thing is duck typed
 class Value {
 
 public:
 
+    //* Translation Note: These were typedefs
     // C++ vector is dynamic array
-    Value[] array;
+    // Value[] array;
     // C++ map is an Associative Array
-    Value[string] object;
+    // Value[string] object;
 
     this() {
         this.type_ = NULL_TYPE;
@@ -303,12 +304,8 @@ public:
         this.type = ARRAY_TYPE;
     }
 
-    this(const Object o) {
-        object_value_ = o;
-        this.type = OBJECT_TYPE;
-    }
-    this(Object o){
-        move(object_value_, o);
+    this(const Value[string] o) {
+        this.object_value_ = o;
         this.type = OBJECT_TYPE;
     }
 
@@ -436,8 +433,8 @@ protected:
     double real_value_ = 0.0;
     string string_value_;
     ubyte[] binary_value_;
-    Array array_value_;
-    Object object_value_;
+    Value[] array_value_;
+    Value[string] object_value_;
     bool boolean_value_ = false;
     
 }
