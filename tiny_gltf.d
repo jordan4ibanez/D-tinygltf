@@ -348,7 +348,7 @@ public:
     // Use this function if you want to have number value as double.
     double GetNumberAsDouble() {
         if (type_ == INT_TYPE) {
-            return double(int_value_);
+            return cast(double)int_value_;
         } else {
             return real_value_;
         }
