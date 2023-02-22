@@ -959,25 +959,27 @@ struct Accessor {
 }
 
 struct PerspectiveCamera {
-  double aspectRatio = 0;  // min > 0
-  double yfov = 0;         // required. min > 0
-  double zfar = 0;         // min > 0
-  double znear = 0;        // required. min > 0
+    double aspectRatio = 0.0;  // min > 0
+    double yfov = 0.0;         // required. min > 0
+    double zfar = 0.0;         // min > 0
+    double znear = 0.0;        // required. min > 0
 
-  ;/*: aspectRatio(0.0),
-        yfov(0.0),
-        zfar(0.0)  // 0 = use infinite projection matrix
-        ,
-        znear(0.0) {}
-  DEFAULT_METHODS(PerspectiveCamera)
-  bool_ operator==cast(const(PerspectiveCamera) &) const !!*/
+    this() {
 
-  ExtensionMap extensions;
-  Value extras;
+    }/*: aspectRatio(0.0),
+            yfov(0.0),
+            zfar(0.0)  // 0 = use infinite projection matrix
+            ,
+            znear(0.0) {}
+    DEFAULT_METHODS(PerspectiveCamera)
+    bool_ operator==cast(const(PerspectiveCamera) &) const !!*/
 
-  // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-  std;/*::string extras_json_string !!*/
-  std;/*::string extensions_json_string !!*/
+    ExtensionMap extensions;
+    Value extras;
+
+    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
+    string extras_json_string;
+    string extensions_json_string;
 }
 
 struct OrthographicCamera {
