@@ -2117,22 +2117,27 @@ private string FindFile(const(string) paths, const(string) filepath, FsCallbacks
 }
 
 private std GetFilePathExtension(const(string) FileName) {
-    if (FileName.find_last_of(".") != string.length)
-        return FileName.substr(FileName.find_last_of(".") + 1);
-    return "";
+    const int foundIndex = FileName.lastIndexOf(".");
+    if (foundIndex != -1) {
+        return "";
+    }
+    return to!string(FileName[(foundIndex + 1)..FileName.length]);
 }
 
 private std GetBaseDir(const(string) filepath) {
-    if (filepath.find_last_of("/\\") != string.length)
-        return filepath.substr(0, filepath.find_last_of("/\\"));
-    return "";
+    const int foundIndex = filepath.lastIndexOf("/\\");
+    if (foundIndex != -1) {
+        return "";
+    }
+    return filepath[0..foundIndex];
 }
 
-private std GetBaseFilename(const(std) filepath) {
-    auto idx = filepath.find_last_of("/\\");
-    if (idx != string.length)
-        return filepath.substr(idx + 1);
-    return filepath;
+private std GetBaseFilename(const(string) filepath) {
+    auto idx = filepath.lastIndexOf("/\\");
+    if (idx == -1) {
+        return filepath;
+    }
+    return filepath[(idx + 1)..filepath.length];
 }
 
 //* Translation Note: Declarations
