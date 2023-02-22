@@ -1003,20 +1003,24 @@ struct OrthographicCamera {
 }
 
 struct Camera {
-  std;/*::string type !!*/  // required. "perspective" or "orthographic"
-  std;/*::string name !!*/
+    string type;  // required. "perspective" or "orthographic"
+    string name;
 
-  PerspectiveCamera perspective;
-  OrthographicCamera orthographic;
+    PerspectiveCamera perspective;
+    OrthographicCamera orthographic;
 
-  const();
+    ExtensionMap extensions;
+    Value extras;
 
-  ExtensionMap extensions;
-  Value extras;
+    this() {
 
-  // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-  std;/*::string extras_json_string !!*/
-  std;/*::string extensions_json_string !!*/
+    }/*Camera() {}
+    DEFAULT_METHODS(Camera)
+    bool operator==(const Camera &) const;*/
+
+    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
+    string extras_json_string;
+    string extensions_json_string;
 }
 
 struct Primitive {
