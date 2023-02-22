@@ -1075,31 +1075,33 @@ struct Mesh {
     bool operator==(const Mesh &) const;*/
 }
 
-class_ Node {
- public:
-  Node() : camera(-1), skin(-1), mesh(-1) {}
+class Node {
+public:
+    this() {
+        
+    }
+    // Node() : camera(-1), skin(-1), mesh(-1) {}
+    // bool_ = void; operator==cast(const(Node) &) const;
 
-   bool_ = void; operator==cast(const(Node) &) const;
+    int camera = -1;  // the index of the camera referenced by this node
 
-  int camera = void;  // the index of the camera referenced by this node
+    string name;
+    int skin = -1;
+    int mesh = -1;
+    int[] children;
+    double[] rotation;     // length must be 0 or 4
+    double[] scale;        // length must be 0 or 3
+    double[] translation;  // length must be 0 or 3
+    double[] matrix;       // length must be 0 or 16
+    double[] weights;  // The weights of the instantiated Morph Target
 
-  std::string name;
-  int skin = void;
-  int mesh = void;
-  std::vector<int> children;
-  std::vector<double> rotation;     // length must be 0 or 4
-  std::vector<double> scale;        // length must be 0 or 3
-  std::vector<double> translation;  // length must be 0 or 3
-  std::vector<double> matrix;       // length must be 0 or 16
-  std::vector<double> weights;  // The weights of the instantiated Morph Target
+    ExtensionMap extensions = void;
+    Value extras = void;
 
-  ExtensionMap extensions = void;
-  Value extras = void;
-
-  // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-  std::string extras_json_string;
-  std::string extensions_json_string;
-}{}
+    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
+    string extras_json_string;
+    string extensions_json_string;
+}
 
 struct Buffer {
   std;/*::string name !!*/
