@@ -303,40 +303,40 @@ public:
         return this.type_;
     }
 
-    bool IsBool() {
+    bool isBool() {
         return (this.type_ == BOOL_TYPE);
     }
 
-    bool IsInt() {
+    bool isInt() {
         return (this.type_ == INT_TYPE);
     }
 
-    bool IsNumber() {
+    bool isNumber() {
         return (this.type_ == REAL_TYPE) || (this.type_ == INT_TYPE);
     }
 
-    bool IsReal() {
+    bool isReal() {
         return (this.type_ == REAL_TYPE);
     }
 
-    bool IsString() {
+    bool isString() {
         return (this.type_ == STRING_TYPE);
     }
 
-    bool IsBinary() {
+    bool isBinary() {
         return (this.type_ == BINARY_TYPE);
     }
 
-    bool IsArray() {
+    bool isArray() {
         return (this.type_ == ARRAY_TYPE);
     }
 
-    bool IsObject() {
+    bool isObject() {
         return (this.type_ == OBJECT_TYPE);
     }
 
     // Use this function if you want to have number value as double.
-    double GetNumberAsDouble() {
+    double getNumberAsDouble() {
         if (this.type_ == INT_TYPE) {
             return cast(double)this.int_value_;
         } else {
@@ -346,7 +346,7 @@ public:
 
     // Use this function if you want to have number value as int.
     // TODO(syoyo): Support int value larger than 32 bits
-    int GetNumberAsInt() {
+    int getNumberAsInt() {
         if (this.type_ == REAL_TYPE) {
             return cast(int)this.real_value_;
         } else {
@@ -355,18 +355,18 @@ public:
     }
 
     // Lookup value from an array
-    Value Get(int idx) const {
+    Value get(int idx) const {
         static Value null_value;
-        assert(this.IsArray());
+        assert(this.isArray());
         assert(idx >= 0);
         return (idx < this.array_value_.length()) ? array_value_[idx] : null_value;
     }
 
     // Lookup value from a key-value pair
-    Value Get(const string key) const {
+    Value get(const string key) const {
         static Value null_value;
-        assert(this.IsArray());
-        assert(IsObject());
+        assert(this.isArray());
+        assert(this.isObject());
         Object.const_iterator it = object_value_.find(key);
         return (it != object_value_.end()) ? it.second : null_value;
     }
