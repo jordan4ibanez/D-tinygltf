@@ -1731,13 +1731,6 @@ namespace tinygltf {
                     return s_pActiveDocument.GetAllocator();
 
                 }
-
-                version (__clang__) {
-                #pragma clang diagnostic push
-                // Suppress JsonDocument(JsonDocument &&rhs) noexcept
-                #pragma clang diagnostic ignored "-Wunused-member-function"
-                }
-
                 JsonDocument Document {
                     JsonDocument() {
                         assert(s_pActiveDocument ==
