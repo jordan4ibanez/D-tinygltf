@@ -860,7 +860,7 @@ struct BufferView {
     bool dracoDecoded = false;  // Flag indicating this has been draco decoded
 
     this() {
-        
+
     }/*: buffer(-1),
             byteOffset(0),
             byteLength(0),
@@ -872,83 +872,83 @@ struct BufferView {
 }
 
 struct Accessor {
-  int bufferView;  // optional in spec but required here since sparse accessor
-                   // are not supported
-  std;/*::string name !!*/
-  size_t byteOffset;
-  bool normalized;    // optional.
-  int componentType;  // (required) One of TINYGLTF_COMPONENT_TYPE_***
-  size_t count;       // required
-  int type;           // (required) One of TINYGLTF_TYPE_***   ..
-  Value extras;
-  ExtensionMap extensions;
+    int bufferView;  // optional in spec but required here since sparse accessor
+                    // are not supported
+    std;/*::string name !!*/
+    size_t byteOffset;
+    bool normalized;    // optional.
+    int componentType;  // (required) One of TINYGLTF_COMPONENT_TYPE_***
+    size_t count;       // required
+    int type;           // (required) One of TINYGLTF_TYPE_***   ..
+    Value extras;
+    ExtensionMap extensions;
 
-  // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-  std;/*::string extras_json_string !!*/
-  std;/*::string extensions_json_string !!*/
+    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
+    std;/*::string extras_json_string !!*/
+    std;/*::string extensions_json_string !!*/
 
-  std;/*:vector<double>
-      minValues !!*/  // optional. integer value is promoted to double
-  std;/*:vector<double>
-      maxValues !!*/  // optional. integer value is promoted to double
+    std;/*:vector<double>
+        minValues !!*/  // optional. integer value is promoted to double
+    std;/*:vector<double>
+        maxValues !!*/  // optional. integer value is promoted to double
 
-  struct _Sparse {
-    int count;
-    bool isSparse;
-    struct _Indices {
-      int byteOffset;
-      int bufferView;
-      int componentType;  // a TINYGLTF_COMPONENT_TYPE_ value
-    }_Indices indices;
-    struct _Values {
-      int bufferView;
-      int byteOffset;
-    }_Values values;
-  }_Sparse sparse;
+    struct _Sparse {
+        int count;
+        bool isSparse;
+        struct _Indices {
+        int byteOffset;
+        int bufferView;
+        int componentType;  // a TINYGLTF_COMPONENT_TYPE_ value
+        }_Indices indices;
+        struct _Values {
+        int bufferView;
+        int byteOffset;
+        }_Values values;
+    }_Sparse sparse;
 
-  ///
-  /// Utility function to compute byteStride for a given bufferView object.
-  /// Returns -1 upon invalid glTF value or parameter configuration.
-  ///
-  int ByteStride(const(BufferView) bufferViewObject) const {
-    if (bufferViewObject byteStride == 0) {
-      // Assume data is tightly packed.
-      int GetComponentSizeInBytes(static_cast componentType);
-      ;
-      }Accessor numComponents = GetNumComponentsInType(static_cast<uint32_t>(type));
-      if (numComponents <= 0) {
-        return -1;
-      }
+    ///
+    /// Utility function to compute byteStride for a given bufferView object.
+    /// Returns -1 upon invalid glTF value or parameter configuration.
+    ///
+    int ByteStride(const(BufferView) bufferViewObject) const {
+        if (bufferViewObject byteStride == 0) {
+        // Assume data is tightly packed.
+        int GetComponentSizeInBytes(static_cast componentType);
+        ;
+        }Accessor numComponents = GetNumComponentsInType(static_cast<uint32_t>(type));
+        if (numComponents <= 0) {
+            return -1;
+        }
 
-      return componentSizeInBytes * numComponents;
-    } else {
-      // Check if byteStride is a multiple of the size of the accessor's component
-      // type.
-      int componentSizeInBytes = GetComponentSizeInBytes(static_cast<uint32_t>(componentType));
-      if (componentSizeInBytes <= 0) {
-        return -1;
-      }
+        return componentSizeInBytes * numComponents;
+        } else {
+        // Check if byteStride is a multiple of the size of the accessor's component
+        // type.
+        int componentSizeInBytes = GetComponentSizeInBytes(static_cast<uint32_t>(componentType));
+        if (componentSizeInBytes <= 0) {
+            return -1;
+        }
 
-      if ((bufferViewObject.byteStride % uint32_t(componentSizeInBytes)) != 0) {
-        return -1;
-      }
-      return static_cast<int>(bufferViewObject.byteStride);
+        if ((bufferViewObject.byteStride % uint32_t(componentSizeInBytes)) != 0) {
+            return -1;
+        }
+        return static_cast<int>(bufferViewObject.byteStride);
+        }
+
+        // unreachable return 0;
     }
 
-    // unreachable return 0;
-  }
-
-  Accessor()
-      : bufferView(-1),
-        byteOffset(0),
-        normalized(false),
-        componentType(-1),
-        count(0),
-        type(-1) {
-    sparse.isSparse = false;
-  }
-   bool_; operator==cast(const(tinygltf)::Accessor &) const;
-}{}
+    Accessor()
+        : bufferView(-1),
+            byteOffset(0),
+            normalized(false),
+            componentType(-1),
+            count(0),
+            type(-1) {
+        sparse.isSparse = false;
+    }
+    bool_; operator==cast(const(tinygltf)::Accessor &) const;
+}
 
 struct PerspectiveCamera {
   double aspectRatio = 0;  // min > 0
