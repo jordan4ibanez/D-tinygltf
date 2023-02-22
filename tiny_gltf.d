@@ -1200,38 +1200,40 @@ struct Light {
     string extensions_json_string;
 }
 
-class_ Model {
- public:
-  Model() = default;
-   bool_ = void; operator==cast(const(Model) &) const;
+class Model {
+public:
+    this() {
 
-  std::vector<Accessor> accessors;
-  std::vector<Animation> animations;
-  std::vector<Buffer> buffers;
-  std::vector<BufferView> bufferViews;
-  std::vector<Material> materials;
-  std::vector<Mesh> meshes;
-  std::vector<Node> nodes;
-  std::vector<Texture> textures;
-  std::vector<Image> images;
-  std::vector<Skin> skins;
-  std::vector<Sampler> samplers;
-  std::vector<Camera> cameras;
-  std::vector<Scene> scenes;
-  std::vector<Light> lights;
+    }/*Model() = default;
+    bool_ = void; operator==cast(const(Model) &) const;*/
 
-  int defaultScene = -1;
-  std::vector<std::string> extensionsUsed;
-  std::vector<std::string> extensionsRequired;
+    Accesso[] accessors;
+    Animation[] animations;
+    Buffer[] buffers;
+    BufferView[] bufferViews;
+    Material[] materials;
+    Mesh[] meshes;
+    Node[] nodes;
+    Texture[] textures;
+    Image[] images;
+    Skin[] skins;
+    Sampler[] samplers;
+    Camera[] cameras;
+    Scene[] scenes;
+    Light[] lights;
 
-  Asset asset = void;
+    int defaultScene = -1;
+    string extensionsUsed;
+    string extensionsRequired;
 
-  Value extras = void;
-  ExtensionMap extensions = void;
+    Asset asset = void;
 
-  // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-  std::string extras_json_string;
-  std::string extensions_json_string;
+    Value extras = void;
+    ExtensionMap extensions = void;
+
+    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
+    string extras_json_string;
+    string extensions_json_string;
 }{}
 
 enum SectionCheck {
