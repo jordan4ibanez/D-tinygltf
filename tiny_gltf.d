@@ -1530,7 +1530,7 @@ private:
     
 
     URICallbacks uri_cb = URICallbacks(null, &tinygltf.URIDecode, null);
-    /*
+    /** This is what this used to look like in C kinda
         // Use paths as-is by default. This will use JSON string escaping.
         cast(URIEncodeFunction)0,
         // Decode all URIs before using them as paths as the application may have
