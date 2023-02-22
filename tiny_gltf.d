@@ -180,7 +180,7 @@ enum TINYGLTF_DOUBLE_EPS = (1.e-12);
 enum string TINYGLTF_DOUBLE_EQUAL(string a, string b) = ` (std::fabs((b) - (a)) < TINYGLTF_DOUBLE_EPS)`;
 
 
-enum _Type {
+enum Type {
     NULL_TYPE,
     REAL_TYPE,
     INT_TYPE,
@@ -191,9 +191,7 @@ enum _Type {
     OBJECT_TYPE
 }
 
-alias Type = _Type;
-
-pragma(inline, true) private int GetComponentSizeInBytes(uint componentType) {
+pragma(inline, true) private int getComponentSizeInBytes(uint componentType) {
     if (componentType == TINYGLTF_COMPONENT_TYPE_BYTE) {
         return 1;
     } else if (componentType == TINYGLTF_COMPONENT_TYPE_UNSIGNED_BYTE) {
