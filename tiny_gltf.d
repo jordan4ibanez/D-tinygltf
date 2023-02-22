@@ -354,10 +354,6 @@ public:
         }
     }
 
-    // Accessor
-    template typename(T) {
-        T typename;
-    }
     // Lookup value from an array
     Value Get(int idx) const {
         static Value null_value;
