@@ -1541,18 +1541,13 @@ private:
     );
     */
 
-    LoadImageDataFunction LoadImageData = LoadImageData;
-    //! #else
-        nullptr;
-    //! #endif
-    void *load_image_user_data_{nullptr};
-    bool user_image_loader_ {false};
+    LoadImageDataFunction LoadImageData = null;
+    void *load_image_user_data_ = null;
+    bool user_image_loader_ = false;
 
-    WriteImageDataFunction WriteImageData = WriteImageData;
-    //! #else
-        nullptr;
-    //! #endif
-    void *write_image_user_data_{nullptr};
+    WriteImageDataFunction WriteImageData = null;
+    
+    void *write_image_user_data_ = null;
 }
 
 version (__clang__) {
