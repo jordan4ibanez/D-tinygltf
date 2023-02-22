@@ -657,45 +657,47 @@ struct Sampler {
 }
 
 struct Image {
-  std;/*::string name !!*/
-  int width;
-  int height;
-  int component;
-  int bits;        // bit depth per channel. 8(byte), 16 or 32.
-  int pixel_type;  // pixel type(TINYGLTF_COMPONENT_TYPE_***). usually
-                   // UBYTE(bits = 8) or USHORT(bits = 16)
-  std;/*:vector<unsigned char_> image !!*/
-  int bufferView;        // (required if no uri)
-  std;/*::string mimeType !!*/  // (required if no uri) ["image/jpeg", "image/png",
-                         // "image/bmp", "image/gif"]
-  std;/*::string uri !!*/       // (required if no mimeType) uri is not decoded(e.g.
-                         // whitespace may be represented as %20)
-  Value extras;
-  ExtensionMap extensions;
+    string name;
+    int width = -1;
+    int height = -1;
+    int component = -1;
+    int bits = -1;        // bit depth per channel. 8(byte), 16 or 32.
+    int pixel_type = -1;  // pixel type(TINYGLTF_COMPONENT_TYPE_***). usually
+                    // UBYTE(bits = 8) or USHORT(bits = 16)
+    ubyte[] image;
+    int bufferView = -1;        // (required if no uri)
+    string mimeType;  // (required if no uri) ["image/jpeg", "image/png",
+                            // "image/bmp", "image/gif"]
+    string uri;       // (required if no mimeType) uri is not decoded(e.g.
+                            // whitespace may be represented as %20)
+    Value extras;
+    ExtensionMap extensions;
 
-  // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-  std;/*::string extras_json_string !!*/
-  std;/*::string extensions_json_string !!*/
+    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
+    string extras_json_string;
+    string extensions_json_string;
 
-  // When this flag is true, data is stored to `image` in as-is format(e.g. jpeg
-  // compressed for "image/jpeg" mime) This feature is good if you use custom
-  // image loader function. (e.g. delayed decoding of images for faster glTF
-  // parsing) Default parser for Image does not provide as-is loading feature at
-  // the moment. (You can manipulate this by providing your own LoadImageData
-  // function)
-  bool as_is;
+    // When this flag is true, data is stored to `image` in as-is format(e.g. jpeg
+    // compressed for "image/jpeg" mime) This feature is good if you use custom
+    // image loader function. (e.g. delayed decoding of images for faster glTF
+    // parsing) Default parser for Image does not provide as-is loading feature at
+    // the moment. (You can manipulate this by providing your own LoadImageData
+    // function)
+    bool as_is = false;
 
-  ;/*: as_is(false) {
-    bufferView = -1 !!*/
-    width;
-    height;
-    component;
-    bits;
-    pixel_type;
-  }Image DEFAULT_METHODS(Image);
+    this() {
 
-  bool operator = cast(const(Image) &) const;
-}{}
+    }/*: as_is(false) {
+        bufferView = -1 !!
+        width;
+        height;
+        component;
+        bits;
+        pixel_type;
+    }Image DEFAULT_METHODS(Image);
+
+    bool operator = cast(const(Image) &) const;*/
+}
 
 struct Texture {
   std;/*::string name !!*/
