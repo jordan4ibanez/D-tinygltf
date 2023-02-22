@@ -1790,44 +1790,42 @@ struct LoadImageDataOption {
 
 // Equals function for Value, for recursivity
 private bool Equals(const(tinygltf) one, const(tinygltf) other) {
-if (one.Type() != other.Type()) return false;
+    if (one.Type() != other.Type()) return false;
 
-switch (one.Type()) {
-    case NULL_TYPE:
-    return true;
-    case BOOL_TYPE:
-    return one.Get<bool_>() == other.Get<bool_>();
-    case REAL_TYPE:
-    return TINYGLTF_DOUBLE_EQUAL(one.Get<double>(), other.Get<double>());
-    case INT_TYPE:
-    return one.Get<int>() == other.Get<int>();
-    case OBJECT_TYPE: {
-    auto oneObj = one.Get<tinygltf;
-    auto otherObj = other.Get<tinygltf;
-    if (oneObj.size() != otherObj.size()) return false;
-    for (auto it otherIt = otherObj.find(it.first);
-        if (otherIt == otherObj.end()) return false;
+    switch (one.Type()) {
+        case NULL_TYPE: return true;
+        case BOOL_TYPE: return one.Get<bool_>() == other.Get<bool_>();
+        case REAL_TYPE: return TINYGLTF_DOUBLE_EQUAL(one.Get<double>(), other.Get<double>());
+        case INT_TYPE: return one.Get<int>() == other.Get<int>();
+        case OBJECT_TYPE: { 
+            auto oneObj = one.Get<tinygltf;
+            auto otherObj = other.Get<tinygltf;
+            if (oneObj.size() != otherObj.size()) return false;
 
-        if (!Equals(it.second, otherIt.second)) return false;
-    }
-    return true;
-    }
-    case ARRAY_TYPE: {
-    if (one.Size() != other.Size()) return false;
-    for (int i = 0; i < int(one.Size()); ++i)
-        if (!Equals(one.Get(i), other.Get(i))) return false;
-    return true;
-    }
-    case STRING_TYPE:
-    return one.Get<std::string>() == other.Get<std::string>();
-    case BINARY_TYPE:
-    return one.Get<std::vector<unsigned char_> >() ==
-            other.Get<std::vector<unsigned char_> >();
-    default: {
-    // unhandled type
-    return false;
-    }
-}
+            for (auto it otherIt = otherObj.find(it.first);
+
+            if (otherIt == otherObj.end()) return false;
+
+            if (!Equals(it.second, otherIt.second)) return false;
+            
+        }
+        return true;
+        }
+        case ARRAY_TYPE: {
+        if (one.Size() != other.Size()) return false;
+        for (int i = 0; i < int(one.Size()); ++i)
+            if (!Equals(one.Get(i), other.Get(i))) return false;
+        return true;
+        }
+        case STRING_TYPE:
+        return one.Get<std::string>() == other.Get<std::string>();
+        case BINARY_TYPE:
+        return one.Get<std::vector<unsigned char_> >() ==
+                other.Get<std::vector<unsigned char_> >();
+        default: {
+        // unhandled type
+        return false;
+        }
 }
 
 // Equals function for std::vector<double> using TINYGLTF_DOUBLE_EPSILON
