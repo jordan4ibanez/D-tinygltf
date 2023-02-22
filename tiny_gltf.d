@@ -1812,24 +1812,28 @@ private bool Equals(const tinygltf.Value one, const tinygltf.Value other) {
         case NULL_TYPE:
             return true;
         case BOOL_TYPE:
-            return one.Get(bool)() == other.Get(bool)();
+            return one.GetBool() == other.GetBool();
         case REAL_TYPE: 
-            return TINYGLTF_DOUBLE_EQUAL(one.Get<double>(), other.Get<double>());
+            return TINYGLTF_DOUBLE_EQUAL(one.GetDouble(), other.GetDouble());
         case INT_TYPE: 
-            return one.Get<int>() == other.Get<int>();
+            return one.GetInt() == other.GetInt();
         case OBJECT_TYPE: { 
+
             auto oneObj = one.Get<tinygltf;
             auto otherObj = other.Get<tinygltf;
-            if (oneObj.size() != otherObj.size()) return false;
+
+            if (oneObj.size() != otherObj.size())
+                return false;
 
             for (auto it otherIt = otherObj.find(it.first);
 
-            if (otherIt == otherObj.end()) return false;
+            if (otherIt == otherObj.end())
+                return false;
 
-            if (!Equals(it.second, otherIt.second)) return false;
-
-        }
-        return true;
+            if (!Equals(it.second, otherIt.second))
+                return false;
+        
+            return true;
         }
         case ARRAY_TYPE: {
         if (one.Size() != other.Size()) return false;
