@@ -1819,20 +1819,22 @@ private bool Equals(const tinygltf.Value one, const tinygltf.Value other) {
             return one.GetInt() == other.GetInt();
         case OBJECT_TYPE: { 
 
-            auto oneObj = one.Get<tinygltf;
-            auto otherObj = other.Get<tinygltf;
+            //* These are: Value[string] Object;
+            const Value[string] oneObj = one.GetObject();
+            const Value[string] otherObj = other.GetObject();
 
             if (oneObj.size() != otherObj.size())
                 return false;
+            
+            foreach (const string it; oneObj) {
+                const string otherIt = otherObj.find(it.first());
 
-            for (auto it otherIt = otherObj.find(it.first);
+                if (otherIt == otherObj.end())
+                    return false;
 
-            if (otherIt == otherObj.end())
-                return false;
-
-            if (!Equals(it.second, otherIt.second))
-                return false;
-        
+                if (!Equals(it.second, otherIt.second))
+                    return false;
+            }
             return true;
         }
         case ARRAY_TYPE: {
@@ -3192,11 +3194,11 @@ return it != o.end();
 }
 
 const(detail) GetValue(detail it) {
-version (TINYGLTF_USE_RAPIDJSON) {
-return it.value;
-} else {
-return it.value();
-}
+    version (TINYGLTF_USE_RAPIDJSON) {
+        return it.value;
+    } else {
+        return it.value();
+    }
 }
 
 std::string JsonToString(const detail::json &o, int spacing = -1) {
