@@ -663,13 +663,13 @@ struct Image {
     int component = -1;
     int bits = -1;        // bit depth per channel. 8(byte), 16 or 32.
     int pixel_type = -1;  // pixel type(TINYGLTF_COMPONENT_TYPE_***). usually
-                    // UBYTE(bits = 8) or USHORT(bits = 16)
+                          // UBYTE(bits = 8) or USHORT(bits = 16)
     ubyte[] image;
-    int bufferView = -1;        // (required if no uri)
-    string mimeType;  // (required if no uri) ["image/jpeg", "image/png",
-                            // "image/bmp", "image/gif"]
-    string uri;       // (required if no mimeType) uri is not decoded(e.g.
-                            // whitespace may be represented as %20)
+    int bufferView = -1;  // (required if no uri)
+    string mimeType;      // (required if no uri) ["image/jpeg", "image/png",
+                          // "image/bmp", "image/gif"]
+    string uri;           // (required if no mimeType) uri is not decoded(e.g.
+                          // whitespace may be represented as %20)
     Value extras;
     ExtensionMap extensions;
 
