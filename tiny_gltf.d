@@ -1617,18 +1617,25 @@ static if (__has_warning("-Wextra-semi-stmt")) {
 }
 }
 
-version (TINYGLTF_NO_INCLUDE_JSON) {} else {
-version (TINYGLTF_USE_RAPIDJSON) {} else {
-public import json.h;
-} version (TINYGLTF_USE_RAPIDJSON) {
-version (TINYGLTF_NO_INCLUDE_RAPIDJSON) {} else {
-public import document;
-public import prettywriter;
-public import rapidjson;
-public import stringbuffer;
-public import writer;
-}
-}
+version (TINYGLTF_NO_INCLUDE_JSON) {
+
+} else {
+    version (TINYGLTF_USE_RAPIDJSON) {
+
+    } else {
+        public import json.h;
+    } 
+    version (TINYGLTF_USE_RAPIDJSON) {
+        version (TINYGLTF_NO_INCLUDE_RAPIDJSON) {
+            
+        } else {
+        public import document;
+        public import prettywriter;
+        public import rapidjson;
+        public import stringbuffer;
+        public import writer;
+        }
+    }
 }
 
 version (TINYGLTF_ENABLE_DRACO) {
