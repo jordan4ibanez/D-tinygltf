@@ -375,7 +375,7 @@ public:
         T typename;
     }
     // Lookup value from an array
-    Value Get(int idx)(Value) const {
+    Value Get(int idx) const {
         static Value null_value;
         assert(IsArray());
         assert(idx >= 0);
@@ -383,7 +383,7 @@ public:
     }
 
     // Lookup value from a key-value pair
-    Value Get(const string key)(Value) const {
+    Value Get(const string key) const {
         static Value null_value;
         assert(IsObject());
         Object.const_iterator it = object_value_.find(key);
@@ -1789,16 +1789,21 @@ struct LoadImageDataOption {
 };
 
 // Equals function for Value, for recursivity
-private bool Equals(const(tinygltf) one, const(tinygltf) other) {
+private bool Equals(const tinygltf.Value one, const tinygltf.Value other) {
+    
     if (one.Type() != other.Type()) {
-        return false
+        return false;
     };
 
     switch (one.Type()) {
-        case NULL_TYPE: return true;
-        case BOOL_TYPE: return one.Get<bool_>() == other.Get<bool_>();
-        case REAL_TYPE: return TINYGLTF_DOUBLE_EQUAL(one.Get<double>(), other.Get<double>());
-        case INT_TYPE: return one.Get<int>() == other.Get<int>();
+        case NULL_TYPE:
+            return true;
+        case BOOL_TYPE:
+            return one.Get(bool)() == other.Get(bool)();
+        case REAL_TYPE: 
+            return TINYGLTF_DOUBLE_EQUAL(one.Get<double>(), other.Get<double>());
+        case INT_TYPE: 
+            return one.Get<int>() == other.Get<int>();
         case OBJECT_TYPE: { 
             auto oneObj = one.Get<tinygltf;
             auto otherObj = other.Get<tinygltf;
