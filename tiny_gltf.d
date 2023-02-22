@@ -1234,7 +1234,7 @@ public:
     // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
     string extras_json_string;
     string extensions_json_string;
-}{}
+}
 
 enum SectionCheck {
   NO_REQUIRE = 0x00,
