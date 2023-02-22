@@ -1334,12 +1334,12 @@ alias WriteWholeFileFunction = bool function(std*, const(std) string, const(std)
 /// their user data.
 ///
 struct FsCallbacks {
-  FileExistsFunction FileExists;
-  ExpandFilePathFunction ExpandFilePath;
-  ReadWholeFileFunction ReadWholeFile;
-  WriteWholeFileFunction WriteWholeFile;
+    FileExistsFunction FileExists;
+    ExpandFilePathFunction ExpandFilePath;
+    ReadWholeFileFunction ReadWholeFile;
+    WriteWholeFileFunction WriteWholeFile;
 
-  void* user_data;  // An argument that is passed to all fs callbacks
+    void* user_data;  // An argument that is passed to all fs callbacks
 }
 
 version (TINYGLTF_NO_FS) {} else {
@@ -1354,7 +1354,7 @@ bool FileExists(const(std) abs_filename, void*);
 /// @param[in] filepath File path string. Assume UTF-8
 /// @param[in] userdata User data. Set to `nullptr` if you don't need it.
 ///
-string ExpandFilePath(const std::string &filepath, void *userdata);
+string ExpandFilePath(const string &filepath, void *userdata);
 
 bool ReadWholeFile(ubyte* out_, std* err, const(std) filepath, void*);
 
