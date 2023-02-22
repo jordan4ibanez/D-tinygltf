@@ -1142,18 +1142,21 @@ struct Asset {
 }
 
 struct Scene {
-  std;/*::string name !!*/
-  std;/*:vector<int> nodes !!*/
+    string name;
+    int[] nodes;
 
-  ExtensionMap extensions;
-  Value extras;
+    ExtensionMap extensions;
+    Value extras;
 
-  // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-  std;/*::string extras_json_string !!*/
-  std;/*::string extensions_json_string !!*/
+    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
+    string extras_json_string;
+    string extensions_json_string;
 
-  Scene;
-   Scene;
+    this() {
+
+    }/*Scene() = default;
+    DEFAULT_METHODS(Scene)
+    bool operator==(const Scene &) const;*/
 }
 
 struct SpotLight {
