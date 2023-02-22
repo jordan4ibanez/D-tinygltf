@@ -782,24 +782,26 @@ struct OcclusionTextureInfo {
 
 // pbrMetallicRoughness class defined in glTF 2.0 spec.
 struct PbrMetallicRoughness {
-  std;/*:vector<double> baseColorFactor !!*/  // len = 4. default [1,1,1,1]
-  TextureInfo baseColorTexture;
-  double metallicFactor = 0;   // default 1
-  double roughnessFactor = 0;  // default 1
-  TextureInfo metallicRoughnessTexture;
+    double[] baseColorFactor = [1.0,1.0,1.0,1.0];  // len = 4. default [1,1,1,1]
+    TextureInfo baseColorTexture;
+    double metallicFactor = 1.0;   // default 1
+    double roughnessFactor = 1.0;  // default 1
+    TextureInfo metallicRoughnessTexture;
 
-  Value extras;
-  ExtensionMap extensions;
+    Value extras;
+    ExtensionMap extensions;
 
-  // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-  std;/*::string extras_json_string !!*/
-  std;/*::string extensions_json_string !!*/
+    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
+    string extras_json_string;
+    string extensions_json_string;
 
-  ;/*: baseColorFactor(std::vector<double>{1.0, 1.0, 1.0, 1.0}),
-        metallicFactor(1.0),
-        roughnessFactor(1.0) {}
-  DEFAULT_METHODS(PbrMetallicRoughness)
-  bool_ operator==cast(const(PbrMetallicRoughness) &) const !!*/
+    this() {
+        
+    }/*: baseColorFactor(std::vector<double>{1.0, 1.0, 1.0, 1.0}),
+            metallicFactor(1.0),
+            roughnessFactor(1.0) {}
+    DEFAULT_METHODS(PbrMetallicRoughness)
+    bool_ operator==cast(const(PbrMetallicRoughness) &) const !!*/
 }
 
 // Each extension should be stored in a ParameterMap.
