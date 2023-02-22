@@ -1281,10 +1281,10 @@ bool URIDecode(const(std) in_uri, std* out_uri, void* user_data);
 /// A structure containing URI callbacks and a pointer to their user data.
 ///
 struct URICallbacks {
-  URIEncodeFunction encode;  // Optional encode method
-  URIDecodeFunction decode;  // Required decode method
+    URIEncodeFunction encode;  // Optional encode method
+    URIDecodeFunction decode;  // Required decode method
 
-  void* user_data;  // An argument that is passed to all uri callbacks
+    void* user_data;  // An argument that is passed to all uri callbacks
 }
 
 ///
@@ -1300,13 +1300,13 @@ alias LoadImageDataFunction = bool function(Image*, const(int), std*, std*, int,
 alias WriteImageDataFunction = bool function(const(std)* basepath, const(std)* filename, const(Image)* image, bool embedImages, const(URICallbacks)* uri_cb, std* out_uri, void* user_pointer);
 
 version (TINYGLTF_NO_STB_IMAGE) {} else {
-// Declaration of default image loader callback
-bool LoadImageData(Image* image, const(int) image_idx, std* err, std* warn, int req_width, int req_height, const(ubyte)* bytes, int size, void*);
+    // Declaration of default image loader callback
+    bool LoadImageData(Image* image, const(int) image_idx, std* err, std* warn, int req_width, int req_height, const(ubyte)* bytes, int size, void*);
 }
 
 version (TINYGLTF_NO_STB_IMAGE_WRITE) {} else {
-// Declaration of default image writer callback
-bool WriteImageData(const(std)* basepath, const(std)* filename, const(Image)* image, bool embedImages, const(URICallbacks)* uri_cb, std* out_uri, void*);
+    // Declaration of default image writer callback
+    bool WriteImageData(const(std)* basepath, const(std)* filename, const(Image)* image, bool embedImages, const(URICallbacks)* uri_cb, std* out_uri, void*);
 }
 
 ///
