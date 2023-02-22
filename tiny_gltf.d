@@ -1703,77 +1703,77 @@ private:
 // }
 // }
 
-namespace tinygltf {
-    namespace detail {
-        version (TINYGLTF_USE_RAPIDJSON) {
-            version (TINYGLTF_USE_RAPIDJSON_CRTALLOCATOR) {
+// namespace tinygltf {
+//     namespace detail {
+//         version (TINYGLTF_USE_RAPIDJSON) {
+//             version (TINYGLTF_USE_RAPIDJSON_CRTALLOCATOR) {
 
-                    // This uses the RapidJSON CRTAllocator.  It is thread safe and multiple
-                    // documents may be active at once.
-                    using json = UTF8, CrtAllocator = void;
-                    using json_const_iterator = ConstMemberIterator;
-                    using json_const_array_iterator = const;
-                    using JsonDocument = UTF8, CrtAllocator = void;
-                    rapidjson::CrtAllocator s_CrtAllocator;  // stateless and thread safe
-                    rapidjson::CrtAllocator &GetAllocator() { return s_CrtAllocator; }
+//                     // This uses the RapidJSON CRTAllocator.  It is thread safe and multiple
+//                     // documents may be active at once.
+//                     using json = UTF8, CrtAllocator = void;
+//                     using json_const_iterator = ConstMemberIterator;
+//                     using json_const_array_iterator = const;
+//                     using JsonDocument = UTF8, CrtAllocator = void;
+//                     rapidjson::CrtAllocator s_CrtAllocator;  // stateless and thread safe
+//                     rapidjson::CrtAllocator &GetAllocator() { return s_CrtAllocator; }
 
-                } else {
+//                 } else {
 
-                    // This uses the default RapidJSON MemoryPoolAllocator.  It is very fast, but
-                    // not thread safe. Only a single JsonDocument may be active at any one time,
-                    // meaning only a single gltf load/save can be active any one time.
-                    using json = rapidjson;
-                    using json_const_iterator = ConstMemberIterator;
-                    using json_const_array_iterator = const;
-                    rapidjson::Document *s_pActiveDocument = nullptr;
-                    rapidjson::Document::AllocatorType &GetAllocator() {
-                    assert(s_pActiveDocument);  // Root json node must be JsonDocument type
-                    return s_pActiveDocument.GetAllocator();
+//                     // This uses the default RapidJSON MemoryPoolAllocator.  It is very fast, but
+//                     // not thread safe. Only a single JsonDocument may be active at any one time,
+//                     // meaning only a single gltf load/save can be active any one time.
+//                     using json = rapidjson;
+//                     using json_const_iterator = ConstMemberIterator;
+//                     using json_const_array_iterator = const;
+//                     rapidjson::Document *s_pActiveDocument = nullptr;
+//                     rapidjson::Document::AllocatorType &GetAllocator() {
+//                     assert(s_pActiveDocument);  // Root json node must be JsonDocument type
+//                     return s_pActiveDocument.GetAllocator();
 
-                }
-                JsonDocument Document {
-                    JsonDocument() {
-                        assert(s_pActiveDocument ==
-                            nullptr);  // When using default allocator, only one document can be
-                                        // active at a time, if you need multiple active at once,
-                                        // define TINYGLTF_USE_RAPIDJSON_CRTALLOCATOR
-                        s_pActiveDocument = this_;
-                    }
-                    delete = void;
-                    JsonDocument(JsonDocument &&rhs) noexcept
-                        : rapidjson::Document(std::move(rhs)) {
-                        s_pActiveDocument = this_;
-                        rhs.isNil = true;
-                    }
-                    ~JsonDocument() {
-                        if (!isNil) {
-                        s_pActiveDocument = nullptr;
-                        }
-                    }
+//                 }
+//                 JsonDocument Document {
+//                     JsonDocument() {
+//                         assert(s_pActiveDocument ==
+//                             nullptr);  // When using default allocator, only one document can be
+//                                         // active at a time, if you need multiple active at once,
+//                                         // define TINYGLTF_USE_RAPIDJSON_CRTALLOCATOR
+//                         s_pActiveDocument = this_;
+//                     }
+//                     delete = void;
+//                     JsonDocument(JsonDocument &&rhs) noexcept
+//                         : rapidjson::Document(std::move(rhs)) {
+//                         s_pActiveDocument = this_;
+//                         rhs.isNil = true;
+//                     }
+//                     ~JsonDocument() {
+//                         if (!isNil) {
+//                         s_pActiveDocument = nullptr;
+//                         }
+//                     }
 
-                    private:
-                    bool_ isNil = false;
-                }
+//                     private:
+//                     bool_ isNil = false;
+//                 }
 
-            }  // TINYGLTF_USE_RAPIDJSON_CRTALLOCATOR
+//             }  // TINYGLTF_USE_RAPIDJSON_CRTALLOCATOR
 
-        } else {
-            using nlohmann;
-            using json_const_iterator = const_iterator;
-            using json_const_array_iterator = json_const_iterator;
-            using JsonDocument = json;
-        }
+//         } else {
+//             using nlohmann;
+//             using json_const_iterator = const_iterator;
+//             using json_const_array_iterator = json_const_iterator;
+//             using JsonDocument = json;
+//         }
 
-        void JsonParse(JsonDocument doc, const(char)* str, size_t length, bool throwExc = false) {
-            version (TINYGLTF_USE_RAPIDJSON) {
-                cast(void)throwExc;
-                doc.Parse(str, length);
-            } else {
-                doc = detail::json::parse(str, str + length, nullptr, throwExc);
-            }
-        }
-    }  // namespace
-}
+//         void JsonParse(JsonDocument doc, const(char)* str, size_t length, bool throwExc = false) {
+//             version (TINYGLTF_USE_RAPIDJSON) {
+//                 cast(void)throwExc;
+//                 doc.Parse(str, length);
+//             } else {
+//                 doc = detail::json::parse(str, str + length, nullptr, throwExc);
+//             }
+//         }
+//     }  // namespace
+// }
 
 namespace tinygltf {
 
