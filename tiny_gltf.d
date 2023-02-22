@@ -1365,7 +1365,8 @@ bool WriteWholeFile(std* err, const(std) filepath, const(std) contents, void*);
 /// glTF Parser/Serializer context.
 ///
 class TinyGLTF {
-    public:
+    
+public:
 
     TinyGLTF() : bin_data_(nullptr), bin_size_(0), is_binary_(false) {}
 
@@ -1479,7 +1480,7 @@ class TinyGLTF {
 
     bool GetPreserveImageChannels() { return preserve_image_channels_; }
 
-    private:
+private:
     ///
     /// Loads glTF asset from string(memory).
     /// `length` = strlen(str);
