@@ -428,7 +428,7 @@ public:
     mixin(TINYGLTF_VALUE_GET("double", "real_value_"));
     mixin(TINYGLTF_VALUE_GET("int", "int_value_"));
     mixin(TINYGLTF_VALUE_GET("string", "string_value_"));
-    mixin(TINYGLTF_VALUE_GET("ubyte[]", "binary_value_"));
+    mixin(TINYGLTF_VALUE_GET("ubyteArray", "binary_value_", "ubyte[]"));
     mixin(TINYGLTF_VALUE_GET("Array", "array_value_"));
     mixin(TINYGLTF_VALUE_GET("Object", "object_value_"));
 
@@ -447,11 +447,14 @@ protected:
 }
 
 //* Translation note: This is a C mixin generator!
-string TINYGLTF_VALUE_GET(string ctype, string var) {
+string TINYGLTF_VALUE_GET(string ctype, string var, string returnType = "") {
+    if (returnType == "") {
+        returnType = ctype;
+    }
     const string fancyCType = capitalize(ctype);
     return
     "\n" ~
-    ctype ~ " Get" ~ fancyCType ~ "() const {\n" ~
+    returnType ~ " Get" ~ fancyCType ~ "() const {\n" ~
          "return this." ~ var ~ ";\n" ~
     "}";
 }
@@ -1838,19 +1841,19 @@ private bool Equals(const tinygltf.Value one, const tinygltf.Value other) {
             return true;
         }
         case ARRAY_TYPE: {
-        if (one.Size() != other.Size()) return false;
-        for (int i = 0; i < int(one.Size()); ++i)
-            if (!Equals(one.Get(i), other.Get(i))) return false;
-        return true;
+            if (one.Size() != other.Size()) return false;
+            for (int i = 0; i < int(one.Size()); ++i)
+                if (!Equals(one.Get(i), other.Get(i)))
+                    return false;
+            return true;
         }
         case STRING_TYPE:
-        return one.Get<std::string>() == other.Get<std::string>();
+            return one.GetString() == other.GetString();
         case BINARY_TYPE:
-        return one.Get<std::vector<unsigned char_> >() ==
-                other.Get<std::vector<unsigned char_> >();
+            return one.GetUbyteArray() == other.GetUbyteArray();
         default: {
-        // unhandled type
-        return false;
+            // unhandled type
+            return false;
         }
     }
 }
