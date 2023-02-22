@@ -1104,20 +1104,22 @@ public:
 }
 
 struct Buffer {
-  std;/*::string name !!*/
-  std;/*:vector<unsigned char_> data !!*/
-  std;/*::string
-      uri !!*/  // considered as required here but not in the spec (need to clarify)
-            // uri is not decoded(e.g. whitespace may be represented as %20)
-  Value extras;
-  ExtensionMap extensions;
+    string name;
+    ubyte[] data;
+    string uri;  // considered as required here but not in the spec (need to clarify)
+                 // uri is not decoded(e.g. whitespace may be represented as %20)
+    Value extras;
+    ExtensionMap extensions;
 
-  // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-  std;/*::string extras_json_string !!*/
-  std;/*::string extensions_json_string !!*/
+    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
+    string extras_json_string;
+    string extensions_json_string;
 
-  Buffer;
-   Buffer;
+    this() {
+        
+    }/*Buffer() = default;
+    DEFAULT_METHODS(Buffer)
+    bool operator==(const Buffer &) const;*/
 }
 
 struct Asset {
