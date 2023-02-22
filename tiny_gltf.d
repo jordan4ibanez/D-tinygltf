@@ -1553,155 +1553,155 @@ private:
 
   // TINY_GLTF_H_
 
-static if (HasVersion!"TINYGLTF_IMPLEMENTATION" || HasVersion!"__INTELLISENSE__") {
-public import 
-//#include <cassert>
-version (TINYGLTF_NO_FS) {} else {
-public import 
-public import 
-}
-public import 
+// static if (HasVersion!"TINYGLTF_IMPLEMENTATION" || HasVersion!"__INTELLISENSE__") {
+// public import 
+// //#include <cassert>
+// version (TINYGLTF_NO_FS) {} else {
+// public import 
+// public import 
+// }
+// public import 
 
-version (__clang__) {
-// Disable some warnings for external files.
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wfloat-equal"
-#pragma clang diagnostic ignored "-Wexit-time-destructors"
-#pragma clang diagnostic ignored "-Wconversion"
-#pragma clang diagnostic ignored "-Wold-style-cast"
-#pragma clang diagnostic ignored "-Wglobal-constructors"
-static if (__has_warning("-Wreserved-id-macro_")) {
-#pragma clang diagnostic ignored "-Wreserved-id-macro"
-}
-#pragma clang diagnostic ignored "-Wdisabled-macro-expansion"
-#pragma clang diagnostic ignored "-Wpadded"
-#pragma clang diagnostic ignored "-Wc++98-compat"
-#pragma clang diagnostic ignored "-Wc++98-compat-pedantic"
-#pragma clang diagnostic ignored "-Wdocumentation-unknown-command"
-#pragma clang diagnostic ignored "-Wswitch-enum"
-#pragma clang diagnostic ignored "-Wimplicit-fallthrough"
-#pragma clang diagnostic ignored "-Wweak-vtables"
-#pragma clang diagnostic ignored "-Wcovered-switch-default"
-static if (__has_warning("-Wdouble-promotion")) {
-#pragma clang diagnostic ignored "-Wdouble-promotion"
-}
-#if __has_warning("-Wcomma")
-#pragma clang diagnostic ignored "-Wcomma"
-}
-static if (__has_warning("-Wzero-as-null-pointer-constant")) {
-#pragma clang diagnostic ignored "-Wzero-as-null-pointer-constant"
-}
-static if (__has_warning("-Wcast-qual")) {
-#pragma clang diagnostic ignored "-Wcast-qual"
-}
-static if (__has_warning("-Wmissing-variable-declarations")) {
-#pragma clang diagnostic ignored "-Wmissing-variable-declarations"
-}
-static if (__has_warning("-Wmissing-prototypes")) {
-#pragma clang diagnostic ignored "-Wmissing-prototypes"
-}
-static if (__has_warning("-Wcast-align_")) {
-#pragma clang diagnostic ignored "-Wcast-align"
-}
-static if (__has_warning("-Wnewline-eof")) {
-#pragma clang diagnostic ignored "-Wnewline-eof"
-}
-static if (__has_warning("-Wunused-parameter")) {
-#pragma clang diagnostic ignored "-Wunused-parameter"
-}
-static if (__has_warning("-Wmismatched-tags")) {
-#pragma clang diagnostic ignored "-Wmismatched-tags"
-}
-static if (__has_warning("-Wextra-semi-stmt")) {
-#pragma clang diagnostic ignored "-Wextra-semi-stmt"
-}
-}
+// version (__clang__) {
+// // Disable some warnings for external files.
+// #pragma clang diagnostic push
+// #pragma clang diagnostic ignored "-Wfloat-equal"
+// #pragma clang diagnostic ignored "-Wexit-time-destructors"
+// #pragma clang diagnostic ignored "-Wconversion"
+// #pragma clang diagnostic ignored "-Wold-style-cast"
+// #pragma clang diagnostic ignored "-Wglobal-constructors"
+// static if (__has_warning("-Wreserved-id-macro_")) {
+// #pragma clang diagnostic ignored "-Wreserved-id-macro"
+// }
+// #pragma clang diagnostic ignored "-Wdisabled-macro-expansion"
+// #pragma clang diagnostic ignored "-Wpadded"
+// #pragma clang diagnostic ignored "-Wc++98-compat"
+// #pragma clang diagnostic ignored "-Wc++98-compat-pedantic"
+// #pragma clang diagnostic ignored "-Wdocumentation-unknown-command"
+// #pragma clang diagnostic ignored "-Wswitch-enum"
+// #pragma clang diagnostic ignored "-Wimplicit-fallthrough"
+// #pragma clang diagnostic ignored "-Wweak-vtables"
+// #pragma clang diagnostic ignored "-Wcovered-switch-default"
+// static if (__has_warning("-Wdouble-promotion")) {
+// #pragma clang diagnostic ignored "-Wdouble-promotion"
+// }
+// #if __has_warning("-Wcomma")
+// #pragma clang diagnostic ignored "-Wcomma"
+// }
+// static if (__has_warning("-Wzero-as-null-pointer-constant")) {
+// #pragma clang diagnostic ignored "-Wzero-as-null-pointer-constant"
+// }
+// static if (__has_warning("-Wcast-qual")) {
+// #pragma clang diagnostic ignored "-Wcast-qual"
+// }
+// static if (__has_warning("-Wmissing-variable-declarations")) {
+// #pragma clang diagnostic ignored "-Wmissing-variable-declarations"
+// }
+// static if (__has_warning("-Wmissing-prototypes")) {
+// #pragma clang diagnostic ignored "-Wmissing-prototypes"
+// }
+// static if (__has_warning("-Wcast-align_")) {
+// #pragma clang diagnostic ignored "-Wcast-align"
+// }
+// static if (__has_warning("-Wnewline-eof")) {
+// #pragma clang diagnostic ignored "-Wnewline-eof"
+// }
+// static if (__has_warning("-Wunused-parameter")) {
+// #pragma clang diagnostic ignored "-Wunused-parameter"
+// }
+// static if (__has_warning("-Wmismatched-tags")) {
+// #pragma clang diagnostic ignored "-Wmismatched-tags"
+// }
+// static if (__has_warning("-Wextra-semi-stmt")) {
+// #pragma clang diagnostic ignored "-Wextra-semi-stmt"
+// }
+// }
 
-version (TINYGLTF_NO_INCLUDE_JSON) {
+// version (TINYGLTF_NO_INCLUDE_JSON) {
 
-} else {
-    version (TINYGLTF_USE_RAPIDJSON) {
+// } else {
+//     version (TINYGLTF_USE_RAPIDJSON) {
 
-    } else {
-        public import json.h;
-    } 
-    version (TINYGLTF_USE_RAPIDJSON) {
-        version (TINYGLTF_NO_INCLUDE_RAPIDJSON) {
+//     } else {
+//         public import json.h;
+//     } 
+//     version (TINYGLTF_USE_RAPIDJSON) {
+//         version (TINYGLTF_NO_INCLUDE_RAPIDJSON) {
             
-        } else {
-        public import document;
-        public import prettywriter;
-        public import rapidjson;
-        public import stringbuffer;
-        public import writer;
-        }
-    }
-}
+//         } else {
+//         public import document;
+//         public import prettywriter;
+//         public import rapidjson;
+//         public import stringbuffer;
+//         public import writer;
+//         }
+//     }
+// }
 
-//! DRACO IMPORTED HERE
-version (TINYGLTF_ENABLE_DRACO) {
-    public import draco.compression.decode;
-    public import draco.core.decoder_buffer;
-}
+// //! DRACO IMPORTED HERE
+// version (TINYGLTF_ENABLE_DRACO) {
+//     public import draco.compression.decode;
+//     public import draco.core.decoder_buffer;
+// }
 
-//! DEFINITION OF NO_STB_IMAGE AND STB_IMAGE IMPORT HERE!
-version (TINYGLTF_NO_STB_IMAGE) {} else {
-    version (TINYGLTF_NO_INCLUDE_STB_IMAGE) {} else {
-      public import stb_image;
-    }
-}
+// //! DEFINITION OF NO_STB_IMAGE AND STB_IMAGE IMPORT HERE!
+// version (TINYGLTF_NO_STB_IMAGE) {} else {
+//     version (TINYGLTF_NO_INCLUDE_STB_IMAGE) {} else {
+//       public import stb_image;
+//     }
+// }
 
-//! STB IMAGE_WRITE IMPORTED HEAR
-version (TINYGLTF_NO_STB_IMAGE_WRITE) {} else {
-    version (TINYGLTF_NO_INCLUDE_STB_IMAGE_WRITE) {} else {
-      public import stb_image_write;
-    }
-}
+// //! STB IMAGE_WRITE IMPORTED HERE
+// version (TINYGLTF_NO_STB_IMAGE_WRITE) {} else {
+//     version (TINYGLTF_NO_INCLUDE_STB_IMAGE_WRITE) {} else {
+//       public import stb_image_write;
+//     }
+// }
 
-version (Windows) {
+// version (Windows) {
 
-    // issue 143.
-    // Define NOMINMAX to avoid min/max defines,
-    // but undef it after included Windows.h
-    version (NOMINMAX) {} else {
-    version = TINYGLTF_INTERNAL_NOMINMAX;
-    version = NOMINMAX;
-}
+//     // issue 143.
+//     // Define NOMINMAX to avoid min/max defines,
+//     // but undef it after included Windows.h
+//     version (NOMINMAX) {} else {
+//     version = TINYGLTF_INTERNAL_NOMINMAX;
+//     version = NOMINMAX;
+// }
 
  
-version = TINYGLTF_INTERNAL_WIN32_LEAN_AND_MEAN;
+// version = TINYGLTF_INTERNAL_WIN32_LEAN_AND_MEAN;
 
-version (Windows) {} else {
-    public import Windows;  // include API for expanding a file path
-} version (Windows) {
-    public import core.sys.windows.windows;
-}
+// version (Windows) {} else {
+// public import Windows;  // include API for expanding a file path
+// } version (Windows) {
+// public import core.sys.windows.windows;
+// }
 
-version (TINYGLTF_INTERNAL_WIN32_LEAN_AND_MEAN) {
-}
+// version (TINYGLTF_INTERNAL_WIN32_LEAN_AND_MEAN) {
+// }
 
-version (TINYGLTF_INTERNAL_NOMINMAX) {
-}
+// version (TINYGLTF_INTERNAL_NOMINMAX) {
+// }
 
-version (__GLIBCXX__) {  // mingw
+// version (__GLIBCXX__) {  // mingw
 
-public import core.sys.posix.fcntl;  // _O_RDONLY
+// public import core.sys.posix.fcntl;  // _O_RDONLY
 
-public import ext/stdio_filebuf;  // fstream (all sorts of IO stuff) + stdio_filebuf (=streambuf)
+// public import ext/stdio_filebuf;  // fstream (all sorts of IO stuff) + stdio_filebuf (=streambuf)
 
-}
+// }
 
-} else static if (!HasVersion!"__ANDROID__" && !HasVersion!"__OpenBSD__") {
-//#include <wordexp.h>
-}
+// } else static if (!HasVersion!"__ANDROID__" && !HasVersion!"__OpenBSD__") {
+// //#include <wordexp.h>
+// }
 
-static if (HasVersion!"__sparcv9" || HasVersion!"__powerpc__") {
-// Big endian
-} else {
-static if ((__BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__) || MINIZ_X86_OR_X64_CPU) {
-enum TINYGLTF_LITTLE_ENDIAN = 1;
-}
-}
+// static if (HasVersion!"__sparcv9" || HasVersion!"__powerpc__") {
+// // Big endian
+// } else {
+// static if ((__BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__) || MINIZ_X86_OR_X64_CPU) {
+// enum TINYGLTF_LITTLE_ENDIAN = 1;
+// }
+// }
 
 namespace tinygltf {
 namespace detail {
