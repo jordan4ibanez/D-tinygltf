@@ -1867,130 +1867,131 @@ for (int i = 0; i < int(one.size()); ++i) {
 return true;
 }
 
-bool Accessor::operator==(Accessor &other) const {
-return this_.bufferView == other.bufferView &&
-        this_.byteOffset == other.byteOffset &&
-        this_.componentType == other.componentType &&
-        this_.count == other.count && this_.extensions == other.extensions &&
-        this_.extras == other.extras &&
-        Equals(this_.maxValues, other.maxValues) &&
-        Equals(this_.minValues, other.minValues) && this_.name == other.name &&
-        this_.normalized == other.normalized && this_.type == other.type;
-}
-bool Animation::operator==(Animation &other) const {
-return this_.channels == other.channels &&
-        this_.extensions == other.extensions && this_.extras == other.extras &&
-        this_.name == other.name && this_.samplers == other.samplers;
-}
-bool AnimationChannel::operator==(AnimationChannel &other) const {
-return this_.extensions == other.extensions && this_.extras == other.extras &&
-        this_.target_node == other.target_node &&
-        this_.target_path == other.target_path &&
-        this_.sampler == other.sampler;
-}
-bool AnimationSampler::operator==(AnimationSampler &other) const {
-return this_.extras == other.extras && this_.extensions == other.extensions &&
-        this_.input == other.input &&
-        this_.interpolation == other.interpolation &&
-        this_.output == other.output;
-}
-bool Asset::operator==(Asset &other) const {
-return this_.copyright == other.copyright &&
-        this_.extensions == other.extensions && this_.extras == other.extras &&
-        this_.generator == other.generator &&
-        this_.minVersion == other.minVersion && this_.version_ == other.version_;
-}
-bool Buffer::operator==(Buffer &other) const {
-return this_.data == other.data && this_.extensions == other.extensions &&
-        this_.extras == other.extras && this_.name == other.name &&
-        this_.uri == other.uri;
-}
-bool BufferView::operator==(BufferView &other) const {
-return this_.buffer == other.buffer && this_.byteLength == other.byteLength &&
-        this_.byteOffset == other.byteOffset &&
-        this_.byteStride == other.byteStride && this_.name == other.name &&
-        this_.target == other.target && this_.extensions == other.extensions &&
-        this_.extras == other.extras &&
-        this_.dracoDecoded == other.dracoDecoded;
-}
-bool Camera::operator==(Camera &other) const {
-return this_.name == other.name && this_.extensions == other.extensions &&
-        this_.extras == other.extras &&
-        this_.orthographic == other.orthographic &&
-        this_.perspective == other.perspective && this_.type == other.type;
-}
-bool Image::operator==(Image &other) const {
-return this_.bufferView == other.bufferView &&
-        this_.component == other.component &&
-        this_.extensions == other.extensions && this_.extras == other.extras &&
-        this_.height == other.height && this_.image == other.image &&
-        this_.mimeType == other.mimeType && this_.name == other.name &&
-        this_.uri == other.uri && this_.width == other.width;
-}
-bool Light::operator==(Light &other) const {
-return Equals(this_.color, other.color) && this_.name == other.name &&
-        this_.type == other.type;
-}
-bool Material::operator==(Material &other) const {
-return (this_.pbrMetallicRoughness == other.pbrMetallicRoughness) &&
-        (this_.normalTexture == other.normalTexture) &&
-        (this_.occlusionTexture == other.occlusionTexture) &&
-        (this_.emissiveTexture == other.emissiveTexture) &&
-        Equals(this_.emissiveFactor, other.emissiveFactor) &&
-        (this_.alphaMode == other.alphaMode) &&
-        TINYGLTF_DOUBLE_EQUAL(this_.alphaCutoff, other.alphaCutoff) &&
-        (this_.doubleSided == other.doubleSided) &&
-        (this_.extensions == other.extensions) &&
-        (this_.extras == other.extras) && (this_.values == other.values) &&
-        (this_.additionalValues == other.additionalValues) &&
-        (this_.name == other.name);
-}
-bool Mesh::operator==(Mesh &other) const {
-return this_.extensions == other.extensions && this_.extras == other.extras &&
-        this_.name == other.name && Equals(this_.weights, other.weights) &&
-        this_.primitives == other.primitives;
-}
-bool Model::operator==(Model &other) const {
-return this_.accessors == other.accessors &&
-        this_.animations == other.animations && this_.asset == other.asset &&
-        this_.buffers == other.buffers &&
-        this_.bufferViews == other.bufferViews &&
-        this_.cameras == other.cameras &&
-        this_.defaultScene == other.defaultScene &&
-        this_.extensions == other.extensions &&
-        this_.extensionsRequired == other.extensionsRequired &&
-        this_.extensionsUsed == other.extensionsUsed &&
-        this_.extras == other.extras && this_.images == other.images &&
-        this_.lights == other.lights && this_.materials == other.materials &&
-        this_.meshes == other.meshes && this_.nodes == other.nodes &&
-        this_.samplers == other.samplers && this_.scenes == other.scenes &&
-        this_.skins == other.skins && this_.textures == other.textures;
-}
-bool Node::operator==(Node &other) const {
-return this_.camera == other.camera && this_.children == other.children &&
-        this_.extensions == other.extensions && this_.extras == other.extras &&
-        Equals(this_.matrix, other.matrix) && this_.mesh == other.mesh &&
-        this_.name == other.name && Equals(this_.rotation, other.rotation) &&
-        Equals(this_.scale, other.scale) && this_.skin == other.skin &&
-        Equals(this_.translation, other.translation) &&
-        Equals(this_.weights, other.weights);
-}
-bool SpotLight::operator==(SpotLight &other) const {
-return this_.extensions == other.extensions && this_.extras == other.extras &&
-        TINYGLTF_DOUBLE_EQUAL(this_.innerConeAngle, other.innerConeAngle) &&
-        TINYGLTF_DOUBLE_EQUAL(this_.outerConeAngle, other.outerConeAngle);
-}
-bool OrthographicCamera::operator==(OrthographicCamera &other) const {
-return this_.extensions == other.extensions && this_.extras == other.extras &&
-        TINYGLTF_DOUBLE_EQUAL(this_.xmag, other.xmag) &&
-        TINYGLTF_DOUBLE_EQUAL(this_.ymag, other.ymag) &&
-        TINYGLTF_DOUBLE_EQUAL(this_.zfar, other.zfar) &&
-        TINYGLTF_DOUBLE_EQUAL(this_.znear, other.znear);
-}
-bool Parameter::operator==(Parameter &other) const {
-if (this_.bool_value != other.bool_value ||
-    this_.has_number_value != other.has_number_value)
-    return false;
+// bool Accessor.operator==(Accessor other) const {
+
+//     return this_.bufferView == other.bufferView &&
+//             this_.byteOffset == other.byteOffset &&
+//             this_.componentType == other.componentType &&
+//             this_.count == other.count && this_.extensions == other.extensions &&
+//             this_.extras == other.extras &&
+//             Equals(this_.maxValues, other.maxValues) &&
+//             Equals(this_.minValues, other.minValues) && this_.name == other.name &&
+//             this_.normalized == other.normalized && this_.type == other.type;
+// }
+// bool Animation::operator==(Animation &other) const {
+// return this_.channels == other.channels &&
+//         this_.extensions == other.extensions && this_.extras == other.extras &&
+//         this_.name == other.name && this_.samplers == other.samplers;
+// }
+// bool AnimationChannel::operator==(AnimationChannel &other) const {
+// return this_.extensions == other.extensions && this_.extras == other.extras &&
+//         this_.target_node == other.target_node &&
+//         this_.target_path == other.target_path &&
+//         this_.sampler == other.sampler;
+// }
+// bool AnimationSampler::operator==(AnimationSampler &other) const {
+// return this_.extras == other.extras && this_.extensions == other.extensions &&
+//         this_.input == other.input &&
+//         this_.interpolation == other.interpolation &&
+//         this_.output == other.output;
+// }
+// bool Asset::operator==(Asset &other) const {
+// return this_.copyright == other.copyright &&
+//         this_.extensions == other.extensions && this_.extras == other.extras &&
+//         this_.generator == other.generator &&
+//         this_.minVersion == other.minVersion && this_.version_ == other.version_;
+// }
+// bool Buffer::operator==(Buffer &other) const {
+// return this_.data == other.data && this_.extensions == other.extensions &&
+//         this_.extras == other.extras && this_.name == other.name &&
+//         this_.uri == other.uri;
+// }
+// bool BufferView::operator==(BufferView &other) const {
+// return this_.buffer == other.buffer && this_.byteLength == other.byteLength &&
+//         this_.byteOffset == other.byteOffset &&
+//         this_.byteStride == other.byteStride && this_.name == other.name &&
+//         this_.target == other.target && this_.extensions == other.extensions &&
+//         this_.extras == other.extras &&
+//         this_.dracoDecoded == other.dracoDecoded;
+// }
+// bool Camera::operator==(Camera &other) const {
+// return this_.name == other.name && this_.extensions == other.extensions &&
+//         this_.extras == other.extras &&
+//         this_.orthographic == other.orthographic &&
+//         this_.perspective == other.perspective && this_.type == other.type;
+// }
+// bool Image::operator==(Image &other) const {
+// return this_.bufferView == other.bufferView &&
+//         this_.component == other.component &&
+//         this_.extensions == other.extensions && this_.extras == other.extras &&
+//         this_.height == other.height && this_.image == other.image &&
+//         this_.mimeType == other.mimeType && this_.name == other.name &&
+//         this_.uri == other.uri && this_.width == other.width;
+// }
+// bool Light::operator==(Light &other) const {
+// return Equals(this_.color, other.color) && this_.name == other.name &&
+//         this_.type == other.type;
+// }
+// bool Material::operator==(Material &other) const {
+// return (this_.pbrMetallicRoughness == other.pbrMetallicRoughness) &&
+//         (this_.normalTexture == other.normalTexture) &&
+//         (this_.occlusionTexture == other.occlusionTexture) &&
+//         (this_.emissiveTexture == other.emissiveTexture) &&
+//         Equals(this_.emissiveFactor, other.emissiveFactor) &&
+//         (this_.alphaMode == other.alphaMode) &&
+//         TINYGLTF_DOUBLE_EQUAL(this_.alphaCutoff, other.alphaCutoff) &&
+//         (this_.doubleSided == other.doubleSided) &&
+//         (this_.extensions == other.extensions) &&
+//         (this_.extras == other.extras) && (this_.values == other.values) &&
+//         (this_.additionalValues == other.additionalValues) &&
+//         (this_.name == other.name);
+// }
+// bool Mesh::operator==(Mesh &other) const {
+// return this_.extensions == other.extensions && this_.extras == other.extras &&
+//         this_.name == other.name && Equals(this_.weights, other.weights) &&
+//         this_.primitives == other.primitives;
+// }
+// bool Model::operator==(Model &other) const {
+// return this_.accessors == other.accessors &&
+//         this_.animations == other.animations && this_.asset == other.asset &&
+//         this_.buffers == other.buffers &&
+//         this_.bufferViews == other.bufferViews &&
+//         this_.cameras == other.cameras &&
+//         this_.defaultScene == other.defaultScene &&
+//         this_.extensions == other.extensions &&
+//         this_.extensionsRequired == other.extensionsRequired &&
+//         this_.extensionsUsed == other.extensionsUsed &&
+//         this_.extras == other.extras && this_.images == other.images &&
+//         this_.lights == other.lights && this_.materials == other.materials &&
+//         this_.meshes == other.meshes && this_.nodes == other.nodes &&
+//         this_.samplers == other.samplers && this_.scenes == other.scenes &&
+//         this_.skins == other.skins && this_.textures == other.textures;
+// }
+// bool Node::operator==(Node &other) const {
+// return this_.camera == other.camera && this_.children == other.children &&
+//         this_.extensions == other.extensions && this_.extras == other.extras &&
+//         Equals(this_.matrix, other.matrix) && this_.mesh == other.mesh &&
+//         this_.name == other.name && Equals(this_.rotation, other.rotation) &&
+//         Equals(this_.scale, other.scale) && this_.skin == other.skin &&
+//         Equals(this_.translation, other.translation) &&
+//         Equals(this_.weights, other.weights);
+// }
+// bool SpotLight::operator==(SpotLight &other) const {
+// return this_.extensions == other.extensions && this_.extras == other.extras &&
+//         TINYGLTF_DOUBLE_EQUAL(this_.innerConeAngle, other.innerConeAngle) &&
+//         TINYGLTF_DOUBLE_EQUAL(this_.outerConeAngle, other.outerConeAngle);
+// }
+// bool OrthographicCamera::operator==(OrthographicCamera &other) const {
+// return this_.extensions == other.extensions && this_.extras == other.extras &&
+//         TINYGLTF_DOUBLE_EQUAL(this_.xmag, other.xmag) &&
+//         TINYGLTF_DOUBLE_EQUAL(this_.ymag, other.ymag) &&
+//         TINYGLTF_DOUBLE_EQUAL(this_.zfar, other.zfar) &&
+//         TINYGLTF_DOUBLE_EQUAL(this_.znear, other.znear);
+// }
+// bool Parameter::operator==(Parameter &other) const {
+// if (this_.bool_value != other.bool_value ||
+//     this_.has_number_value != other.has_number_value)
+//     return false;
 
 if (!TINYGLTF_DOUBLE_EQUAL(this_.number_value, other.number_value))
     return false;
