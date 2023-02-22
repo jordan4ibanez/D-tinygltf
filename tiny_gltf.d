@@ -357,14 +357,15 @@ public:
     // Lookup value from an array
     Value Get(int idx) const {
         static Value null_value;
-        assert(IsArray());
+        assert(this.IsArray());
         assert(idx >= 0);
-        return (static_cast<size_t>(idx) < array_value_.size())? array_value_[static_cast<size_t>(idx)] : null_value;
+        return (idx < this.array_value_.length()) ? array_value_[idx] : null_value;
     }
 
     // Lookup value from a key-value pair
     Value Get(const string key) const {
         static Value null_value;
+        assert(this.IsArray());
         assert(IsObject());
         Object.const_iterator it = object_value_.find(key);
         return (it != object_value_.end()) ? it.second : null_value;
