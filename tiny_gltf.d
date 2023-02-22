@@ -1365,10 +1365,12 @@ bool WriteWholeFile(std* err, const(std) filepath, const(std) contents, void*);
 /// glTF Parser/Serializer context.
 ///
 class TinyGLTF {
-    
+
 public:
 
-    TinyGLTF() : bin_data_(nullptr), bin_size_(0), is_binary_(false) {}
+    this() {
+
+    }/*TinyGLTF() : bin_data_(nullptr), bin_size_(0), is_binary_(false) {}*/
 
     //* Translation note: This literally did nothing
     // ~TinyGLTF() {}
