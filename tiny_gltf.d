@@ -367,8 +367,7 @@ public:
         static Value null_value;
         assert(this.isArray());
         assert(this.isObject());
-        Object.const_iterator it = object_value_.find(key);
-        return (it != object_value_.end()) ? it.second : null_value;
+        return object_value_.get(key, null_value);
     }
 
     size_t ArrayLen() {
