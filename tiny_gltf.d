@@ -384,14 +384,9 @@ public:
     }
 
     // List keys
-    string[] Keys() const {
-        string[] keys;
-        if (!IsObject()) return keys;  // empty
-
-        for (Object it = object_value_.begin(); it != object_value_.end(); ++it) {
-                keys.push_back(it.first);
-        }
-
+    string[] keys() const {
+        // Clone in memory
+        string[] keys = this.object_value_;
         return keys;
     }
 
