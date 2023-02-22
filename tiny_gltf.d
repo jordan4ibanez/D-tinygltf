@@ -1024,32 +1024,36 @@ struct Camera {
 }
 
 struct Primitive {
-  std;/*:string, int> attributes !!*/  // (required) A dictionary object of
-                                          // integer, where each integer
-                                          // is the index of the accessor
-                                          // containing an attribute.
-  int material;  // The index of the material to apply to this primitive
-                 // when rendering.
-  int indices;   // The index of the accessor that contains the indices.
-  int mode;      // one of TINYGLTF_MODE_***
-  std;/*:string, int> > targets !!*/  // array of morph targets,
-  // where each target is a dict with attributes in ["POSITION, "NORMAL",
-  // "TANGENT"] pointing
-  // to their corresponding accessors
-  ExtensionMap extensions;
-  Value extras;
+    int[string] attributes; // (required) A dictionary object of
+                            // integer, where each integer
+                            // is the index of the accessor
+                            // containing an attribute.
+    int material = -1;  // The index of the material to apply to this primitive
+                        // when rendering.
+    int indices = -1;   // The index of the accessor that contains the indices.
+    int mode = -1;      // one of TINYGLTF_MODE_***
 
-  // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-  std;/*::string extras_json_string !!*/
-  std;/*::string extensions_json_string !!*/
+    int[string][] targets;  // array of morph targets,
+                            // where each target is a dict with attributes in ["POSITION, "NORMAL",
+                            // "TANGENT"] pointing
+                            // to their corresponding accessors
 
-  Primitive() {
-    material = -1;
-    indices = -1;
-    mode = -1;
-  }
-   bool_; operator==cast(const(Primitive) &) const;
-}{}
+    ExtensionMap extensions;
+    Value extras;
+
+    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
+    string extras_json_string;
+    string extensions_json_string;
+
+    this() {
+
+    }/*Primitive() {
+        material = -1;
+        indices = -1;
+        mode = -1;
+    }
+    bool_; operator==cast(const(Primitive) &) const;*/
+}
 
 struct Mesh {
   std;/*::string name !!*/
