@@ -359,7 +359,7 @@ public:
         static Value null_value;
         assert(this.isArray());
         assert(idx >= 0);
-        return (idx < this.array_value_.length()) ? array_value_[idx] : null_value;
+        return (idx < this.array_value_.length) ? array_value_[idx] : null_value;
     }
 
     // Lookup value from a key-value pair
@@ -370,16 +370,17 @@ public:
         return object_value_.get(key, null_value);
     }
 
-    size_t ArrayLen() {
-        if (!IsArray()) return 0;
-        return array_value_.size();
+    size_t arrayLen() {
+        if (!this.isArray())
+            return 0;
+        return array_value_.length;
     }
 
     // Valid only for object type.
-    bool Has(const string key) {
-        if (!IsObject()) return false;
-        Object.const_iterator it = object_value_.find(key);
-        return (it != object_value_.end()) ? true : false;
+    bool has(const string key) {
+        if (!this.isObject())
+            return false;
+        return (key in object_value_) != null;
     }
 
     // List keys
