@@ -1528,14 +1528,15 @@ private:
         */
     ];
 
-    URICallbacks uri_cb = {
+    URICallbacks uri_cb = [
         // Use paths as-is by default. This will use JSON string escaping.
-        nullptr,
+        null,
         // Decode all URIs before using them as paths as the application may have
         // percent encoded them.
         &tinygltf::URIDecode,
         // URI callback user data
-        nullptr};
+        null
+    ];
 
     LoadImageDataFunction LoadImageData = LoadImageData;
     //! #else
