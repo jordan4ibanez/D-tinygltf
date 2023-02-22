@@ -262,19 +262,20 @@ public:
     // The value becomes whatever it is constructed with
     // It is a zeitgeist basically
     // The period of time in this zeitgeist is the life time of it
+    // this. is not required, but I like it
     this(bool b) {
-        boolean_value_ = b;
+        this.boolean_value_ = b;
         this.type = BOOL_TYPE;
     }
 
     this(int i) {
-        int_value_ = i;
-        real_value_ = i;
+        this.int_value_ = i;
+        this.real_value_ = i;
         this.type = INT_TYPE;
     }
 
     this(double n) {
-        real_value_ = n;
+        this.real_value_ = n;
         this.type_ = REAL_TYPE;
     }
 
@@ -289,7 +290,7 @@ public:
     }
     
     this(const Value[] a) {
-        array_value_ = a;
+        this.array_value_ = a;
         this.type = ARRAY_TYPE;
     }
 
@@ -303,53 +304,53 @@ public:
     }
 
     bool IsBool() {
-        return (type_ == BOOL_TYPE);
+        return (this.type_ == BOOL_TYPE);
     }
 
     bool IsInt() {
-        return (type_ == INT_TYPE);
+        return (this.type_ == INT_TYPE);
     }
 
     bool IsNumber() {
-        return (type_ == REAL_TYPE) || (type_ == INT_TYPE);
+        return (this.type_ == REAL_TYPE) || (this.type_ == INT_TYPE);
     }
 
     bool IsReal() {
-        return (type_ == REAL_TYPE);
+        return (this.type_ == REAL_TYPE);
     }
 
     bool IsString() {
-        return (type_ == STRING_TYPE);
+        return (this.type_ == STRING_TYPE);
     }
 
     bool IsBinary() {
-        return (type_ == BINARY_TYPE);
+        return (this.type_ == BINARY_TYPE);
     }
 
     bool IsArray() {
-        return (type_ == ARRAY_TYPE);
+        return (this.type_ == ARRAY_TYPE);
     }
 
     bool IsObject() {
-        return (type_ == OBJECT_TYPE);
+        return (this.type_ == OBJECT_TYPE);
     }
 
     // Use this function if you want to have number value as double.
     double GetNumberAsDouble() {
-        if (type_ == INT_TYPE) {
-            return cast(double)int_value_;
+        if (this.type_ == INT_TYPE) {
+            return cast(double)this.int_value_;
         } else {
-            return real_value_;
+            return this.real_value_;
         }
     }
 
     // Use this function if you want to have number value as int.
     // TODO(syoyo): Support int value larger than 32 bits
     int GetNumberAsInt() {
-        if (type_ == REAL_TYPE) {
-            return cast(int)real_value_;
+        if (this.type_ == REAL_TYPE) {
+            return cast(int)this.real_value_;
         } else {
-            return int_value_;
+            return this.int_value_;
         }
     }
 
