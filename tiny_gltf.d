@@ -7754,10 +7754,3 @@ if (writeBinary) {
     return WriteGltfFile(filename, detail::JsonToString(output, (prettyPrint ? 2 : -1)));
 }
 }
-
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-//! #endif
-
-//! #endif  // TINYGLTF_IMPLEMENTATION
