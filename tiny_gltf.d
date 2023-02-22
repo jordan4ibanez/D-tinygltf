@@ -277,11 +277,6 @@ public:
     }
 
     this(string s) {
-        string_value_ = s;
-        this.type = STRING_TYPE;
-    }
-
-    this(string s) {
         this.string_value_ = s;
         this.type = STRING_TYPE;
     }
