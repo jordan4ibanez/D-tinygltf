@@ -1178,24 +1178,26 @@ struct SpotLight {
 }
 
 struct Light {
-  std;/*::string name !!*/
-  std;/*:vector<double> color !!*/
-  double intensity = 0;
-  std;/*::string type !!*/
-  double range = 0;  // 0.0 = infinite
-  SpotLight spot;
+    string name;
+    double[] color;
+    double intensity = 1.0;
+    string type;
+    double range = 0.0;  // 0.0 = infinite
+    SpotLight spot;
 
-  ;/*: intensity(1.0), range(0.0) {}
-  DEFAULT_METHODS(Light)
+    this() {
 
-  bool_ operator==cast(const(Light) &) const !!*/
+    }/*: intensity(1.0), range(0.0) {}
+    DEFAULT_METHODS(Light)
 
-  ExtensionMap extensions;
-  Value extras;
+    bool_ operator==cast(const(Light) &) const !!*/
 
-  // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-  std;/*::string extras_json_string !!*/
-  std;/*::string extensions_json_string !!*/
+    ExtensionMap extensions;
+    Value extras;
+
+    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
+    string extras_json_string;
+    string extensions_json_string;
 }
 
 class_ Model {
