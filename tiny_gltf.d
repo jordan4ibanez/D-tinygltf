@@ -2071,19 +2071,17 @@ return true;
 // return Equals(*this_, other);
 // }
 
-static void swap4(unsigned int *val) {
-    version (TINYGLTF_LITTLE_ENDIAN) {
-        cast(void)val;
-    } else {
-        uint tmp = *val;
-        ubyte* dst = reinterpret_cast<unsigned char_ *>(val);
-        ubyte* src = reinterpret_cast<unsigned char_ *>(&tmp);
+static void swap4(ref uint[4] val) {
+    
+    ubyte[4] dst = val;
+    ubyte[4] src = val;
 
-        dst[0] = src[3];
-        dst[1] = src[2];
-        dst[2] = src[1];
-        dst[3] = src[0];
-    }
+    dst[0] = src[3];
+    dst[1] = src[2];
+    dst[2] = src[1];
+    dst[3] = src[0];
+    
+    val = dst;
 }
 
 private std JoinPath(const(std) path0, const(std) path1) {
