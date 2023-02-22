@@ -2080,22 +2080,22 @@ static void swap4(ref uint[4] val) {
     dst[1] = src[2];
     dst[2] = src[1];
     dst[3] = src[0];
-    
+
     val = dst;
 }
 
 private std JoinPath(const(std) path0, const(std) path1) {
-if (path0.empty()) {
-    return path1;
-} else {
-    // check '/'
-    char lastChar = *path0.rbegin();
-    if (lastChar != '/') {
-    return path0 + std::string("/") + path1;
+    if (path0.empty()) {
+        return path1;
     } else {
-    return path0 + path1;
+        // check '/'
+        char lastChar = *path0.rbegin();
+        if (lastChar != '/') {
+            return path0 ~ string("/") ~ path1;
+        } else {
+            return path0 ~ path1;
+        }
     }
-}
 }
 
 private std FindFile(const(std) paths, const(std) filepath, FsCallbacks* fs) {
