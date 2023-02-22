@@ -1775,8 +1775,6 @@ private:
 //     }  // namespace
 // }
 
-// namespace tinygltf {
-
 ///
 /// Internal LoadImageDataOption struct.
 /// This struct is passed through `user_pointer` in LoadImageData.
@@ -7757,7 +7755,6 @@ if (writeBinary) {
 }
 }
 
-// }  // namespace tinygltf
 
 #ifdef __clang__
 #pragma clang diagnostic pop
