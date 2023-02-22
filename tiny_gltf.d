@@ -1317,7 +1317,7 @@ alias FileExistsFunction = bool function(const(std) abs_filename, void*);
 ///
 /// ExpandFilePathFunction type. Signature for custom filesystem callbacks.
 ///
-alias string = ExpandFilePathFunction* function(const ref string, void *);
+alias ExpandFilePathFunction = string function(const ref string, void *);
 
 ///
 /// ReadWholeFileFunction type. Signature for custom filesystem callbacks.
