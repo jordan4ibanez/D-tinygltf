@@ -261,6 +261,7 @@ public:
 
     // The value becomes whatever it is constructed with
     // It is a zeitgeist basically
+    // The period of time in this zeitgeist is the life time of it
     this(bool b) {
         boolean_value_ = b;
         this.type = BOOL_TYPE;
