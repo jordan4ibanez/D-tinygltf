@@ -1123,19 +1123,22 @@ struct Buffer {
 }
 
 struct Asset {
-  std;/*::string version_ = "2.0" !!*/  // required
-  std;/*::string generator !!*/
-  std;/*::string minVersion !!*/
-  std;/*::string copyright !!*/
-  ExtensionMap extensions;
-  Value extras;
+    string version_ = "2.0"; // required
+    string generator;
+    string minVersion;
+    string copyright;
+    ExtensionMap extensions;
+    Value extras;
 
-  // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-  std;/*::string extras_json_string !!*/
-  std;/*::string extensions_json_string !!*/
+    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
+    string extras_json_string;
+    string extensions_json_string;
 
-  Asset;
-   Asset;
+    this() {
+        
+    }/*Asset() = default;
+    DEFAULT_METHODS(Asset)
+    bool operator==(const Asset &) const;*/
 }
 
 struct Scene {
