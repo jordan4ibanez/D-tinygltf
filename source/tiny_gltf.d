@@ -1201,8 +1201,6 @@ private:
         // Then we need to go down them because they're packed pretty tight
         foreach (key,value; this.jsonData.objectNoRef) {
 
-            // writeln(key);
-
             // Key's could be corrupted, so we need a default catch all
             //* key is a string, value is a JSONValue object
             switch(key) {
@@ -1210,7 +1208,7 @@ private:
                     this.grabAccessorsData(value);
                     break;
                 }
-                default: //TODO: do a thing here or something, no idea yet
+                default: // Unknown
             }
         }
     }
