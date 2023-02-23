@@ -1241,11 +1241,18 @@ private:
                     }
                     // Integer
                     case "byteOffset": {
+                        assert(arrayValue.type() == JSONType.integer);
+                        accessorObject.byteOffset = cast(int)arrayValue.integer;
+                        write(accessorObject.byteOffset);
+                        break;
 
                     }
-                    // TINYGLTF_COMPONENT_TYPE_
+                    // TINYGLTF_COMPONENT_TYPE_ (Which is an integer)
                     case "componentType": {
-
+                        assert(arrayValue.type() == JSONType.integer);
+                        accessorObject.componentType = cast(int)arrayValue.integer;
+                        write(accessorObject.componentType);
+                        break;
                     }
                     // Integer
                     case "count": {
