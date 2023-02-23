@@ -1010,7 +1010,7 @@ class PerspectiveCamera {
     string extensions_json_string;
 }
 
-struct OrthographicCamera {
+class OrthographicCamera {
     double xmag = 0.0;   // required. must not be zero.
     double ymag = 0.0;   // required. must not be zero.
     double zfar = 0.0;   // required. `zfar` must be greater than `znear`.
@@ -1033,7 +1033,7 @@ struct OrthographicCamera {
     string extensions_json_string;
 }
 
-struct Camera {
+class Camera {
     string type;  // required. "perspective" or "orthographic"
     string name;
 
@@ -1076,8 +1076,10 @@ struct Primitive {
     string extras_json_string;
     string extensions_json_string;
 
-    this() {
-
+    this(int material = -1, int indices = -1, int mode = -1) {
+        this.material = material;
+        this.indices = indices;
+        this.mode = mode;
     }/*Primitive() {
         material = -1;
         indices = -1;
@@ -1086,7 +1088,7 @@ struct Primitive {
     bool_; operator==cast(const(Primitive) &) const;*/
 }
 
-struct Mesh {
+class Mesh {
     string name;
     Primitive[] primitives;
     double[] weights;  // weights to be applied to the Morph Targets
