@@ -1109,9 +1109,12 @@ class Mesh {
 }
 
 class Node {
+
 public:
-    this() {
-        
+    this(int camera = -1, int skin = -1, int mesh = -1) {
+        this.camera = camera;
+        this.skin = skin;
+        this.mesh = mesh;
     }
     // Node() : camera(-1), skin(-1), mesh(-1) {}
     // bool_ = void; operator==cast(const(Node) &) const;
@@ -1136,7 +1139,7 @@ public:
     string extensions_json_string;
 }
 
-struct Buffer {
+class Buffer {
     string name;
     ubyte[] data;
     string uri;  // considered as required here but not in the spec (need to clarify)
@@ -1155,7 +1158,7 @@ struct Buffer {
     bool operator==(const Buffer &) const;*/
 }
 
-struct Asset {
+class Asset {
     string version_ = "2.0"; // required
     string generator;
     string minVersion;
@@ -1174,7 +1177,7 @@ struct Asset {
     bool operator==(const Asset &) const;*/
 }
 
-struct Scene {
+class Scene {
     string name;
     int[] nodes;
 
@@ -1192,12 +1195,13 @@ struct Scene {
     bool operator==(const Scene &) const;*/
 }
 
-struct SpotLight {
+class SpotLight {
     double innerConeAngle = 0.0;
     double outerConeAngle = 0.7_853_981_634;
 
-    this() {
-
+    this(double innerConeAngle = 0.0, double outerConeAngle = 0.7_853_981_634) {
+        this.innerConeAngle = innerConeAngle;
+        this.outerConeAngle = outerConeAngle;
     }/*: innerConeAngle(0.0), outerConeAngle(0.7853981634) {}
     DEFAULT_METHODS(SpotLight)
     bool_ operator==cast(const(SpotLight) &) const !!*/
@@ -1210,7 +1214,7 @@ struct SpotLight {
     string extensions_json_string;
 }
 
-struct Light {
+class Light {
     string name;
     double[] color;
     double intensity = 1.0;
@@ -1218,8 +1222,9 @@ struct Light {
     double range = 0.0;  // 0.0 = infinite
     SpotLight spot;
 
-    this() {
-
+    this(double intensity = 1.0, double range = 0.0) {
+        this.intensity = intensity;
+        this.range = range;
     }/*: intensity(1.0), range(0.0) {}
     DEFAULT_METHODS(Light)
 
@@ -1234,6 +1239,7 @@ struct Light {
 }
 
 class Model {
+    
 public:
     this() {
 
