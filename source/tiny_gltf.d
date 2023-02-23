@@ -1213,7 +1213,7 @@ private:
         }
     }
     
-    static void grabAccessorsData(JSONValue dataObject) {
+    void grabAccessorsData(JSONValue dataObject) {
                         
     }
 
