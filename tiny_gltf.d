@@ -4,13 +4,6 @@ module test.tiny_gltf;
 import std.stdio;
 import std.string;
 
-// @nogc nothrow:
-// extern(C): __gshared:
-
-// private template HasVersion(string versionId) {
-// 	mixin("version("~versionId~") {enum HasVersion = true;} else {enum HasVersion = false;}");
-// }
-
 // import core.stdc.stddef: wchar_t;
 //
 // Header-only tiny glTF 2.0 loader and serializer.
