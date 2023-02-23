@@ -567,9 +567,11 @@ class AnimationSampler {
     string extensions_json_string;
     
     this(int input = -1, int output = -1, string interpolation = "LINEAR"){
+
         this.input = input;
         this.output = output;
         this.interpolation = interpolation;
+        
     }/*: input(-1), output(-1), interpolation("LINEAR") {}
     DEFAULT_METHODS(AnimationSampler)
     bool_ operator==cast(const(AnimationSampler) &) const !!*/
