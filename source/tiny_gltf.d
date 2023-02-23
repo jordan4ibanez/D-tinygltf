@@ -1172,8 +1172,12 @@ alias REQUIRE_ALL = SectionCheck.REQUIRE_ALL;
 /// glTF Parser/Serializer context.
 ///
 class TinyGLTF {
-
-public:
+    //!* Translation Note: This is probaly ONLY going to support:
+    //* Vertex positions
+    //* Indices
+    //* Texture coordinates
+    //* Bones
+    //* Animations
 
     // Only accepts serialized gltf json for now
     this(string fileLocation) {
@@ -1183,36 +1187,8 @@ public:
 
     //* Translation note: This literally did nothing
     // ~TinyGLTF() {}
-
     
 
-    //!* Translation Note: This is probaly ONLY going to support:
-    //* Vertex positions
-    //* Indices
-    //* Texture coordinates
-    //* Bones
-    //* Animations
-private:
-    ///
-    /// Loads glTF asset from string(memory).
-    /// `length` = strlen(str);
-    /// Set warning message to `warn` for example it fails to load asserts
-    /// Returns false and set error string to `err` if there's an error.
-    ///
-    // bool LoadFromString(Model *model, string *err, string *warn,
-    //                     const char_ *str, const uint length,
-    //                     const ref string base_dir, uint check_sections);
-
-    // ubyte[] bin_data_ = null;
-    // size_t bin_size_ = 0;
-    // bool is_binary_ = false;
-
-    // bool serialize_default_values_ = false;  ///< Serialize default values?
-
-    // bool store_original_json_for_extras_and_extensions_ = false;
-
-    // bool preserve_image_channels_ = false;  /// Default false(expand channels to
-    //                                         /// RGBA) for backward compatibility.
 }
 
 unittest {
