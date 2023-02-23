@@ -1167,7 +1167,16 @@ class Model {
         }
         
         // Turn the raw disk data into a usable JSON object with the std.json library.
-        this.loadJson();
+        // Can throw an exception, which we catch and return as false.
+        // Going to be extra nice and throw in a link to it straight in the terminal.
+        if (!this.loadJson()) {
+            writeDebug(
+                "I'm very sorry, but the file:\n"~
+                this.fileLocation ~ "\n" ~
+                "appears to be corrupted, please double-check this model with the Khronos GLTF validator.\n" ~
+                "Link: https://github.khronos.org/glTF-Validator/\n"
+            );
+        }
 
         // Now it has to iterate the JSON object and store the data.
         this.collectJSONInfo();
@@ -1182,6 +1191,7 @@ private:
     JSONValue jsonData;
 
     void collectJSONInfo() {
+        // This might look a bit complicated, but we're just iterating the tree of data
         foreach (key,val; this.jsonData.object) {
             writeln(key, " ", val);
         }
@@ -1192,10 +1202,30 @@ private:
         return exists(this.fileLocation);
     }
 
-    void loadJson() {
-        void[] rawData = read(this.fileLocation);
-        string jsonString = cast(string)rawData;
-        this.jsonData = parseJSON(jsonString);
+    // Returns parsing the JSON success;
+    bool loadJson() {
+        void[] rawData;
+        string jsonString;
+        
+        try {
+            rawData = read(this.fileLocation);
+        } catch (Exception e) {
+            return false;
+        }
+
+        try {
+            jsonString = cast(string)rawData;
+        } catch (Exception e) {
+            return false;
+        }
+
+        try {
+            this.jsonData = parseJSON(jsonString);
+        } catch (Exception e) {
+            return false;
+        }
+
+        return true;
     }
 
 
@@ -1233,4 +1263,6 @@ unittest {
     Model successModel = new Model("models/Cube/Cube.gltf");
     assert(successModel !is null);
     assert(successModel.loadFile() == true);
+
+    //TODO: Corrupted model check
 }
