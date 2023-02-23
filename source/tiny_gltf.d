@@ -983,14 +983,17 @@ class Accessor {
     bool_; operator==cast(const(tinygltf)::Accessor &) const;*/
 }
 
-struct PerspectiveCamera {
+class PerspectiveCamera {
     double aspectRatio = 0.0;  // min > 0
     double yfov = 0.0;         // required. min > 0
     double zfar = 0.0;         // min > 0
     double znear = 0.0;        // required. min > 0
 
-    this() {
-
+    this(double aspectRatio = 0.0, double yfov = 0.0, double zfar = 0.0, double znear = 0.0) {
+        this.aspectRatio = aspectRatio;
+        this.yfov = yfov;
+        this.zfar = zfar;
+        this.znear = znear;
     }/*: aspectRatio(0.0),
             yfov(0.0),
             zfar(0.0)  // 0 = use infinite projection matrix
@@ -1013,8 +1016,11 @@ struct OrthographicCamera {
     double zfar = 0.0;   // required. `zfar` must be greater than `znear`.
     double znear = 0.0;  // required
 
-    this() {
-
+    this(double xmag = 0.0, double ymag = 0.0, double zfar = 0.0, double znear = 0.0) {
+        this.xmag = xmag;
+        this.ymag = ymag;
+        this.zfar = zfar;
+        this.znear = znear;
     }/*: xmag(0.0), ymag(0.0), zfar(0.0), znear(0.0) {}
     DEFAULT_METHODS(OrthographicCamera)
     bool_ operator==cast(const(OrthographicCamera) &) const !!*/
