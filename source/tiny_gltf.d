@@ -1160,16 +1160,17 @@ class Model {
         if (!this.fileExists()) {
             writeDebug(
                 "I'm very sorry, but the file:\n" ~
-                fileLocation ~ "\n" ~
+                this.fileLocation ~ "\n" ~
                 "does not exist on the drive. Perhaps you are polling the wrong directory?\n"
             );
             return false;
         }
+        
+        // Turn the raw disk data into a usable JSON object with the std.json library.
+        this.loadJson();
 
-        //* Implementation Note: This converts the data into a usable object from raw data.
-        void[] rawData = std.file.read(this.fileLocation);
-        string jsonString = cast(string)rawData;
-        this.jsonData = parseJSON(jsonString);
+        // Now it has to iterate the JSON object and store the data.
+        this.collectJSONInfo();
 
         return true;
     }
@@ -1180,14 +1181,21 @@ private:
     bool debugInfo = false;
     JSONValue jsonData;
 
+    void collectJSONInfo() {
+        foreach (key,val; this.jsonData.object) {
+            writeln(key, " ", val);
+        }
+    }
+
     //* This is just a passthrough to keep it looking neat :)
     bool fileExists() {
         return exists(this.fileLocation);
     }
 
-    void loadJson(string fileLocation) {
-        string s = `{ "language": "D", "rating": 3.5, "code": "42" }`;
-
+    void loadJson() {
+        void[] rawData = read(this.fileLocation);
+        string jsonString = cast(string)rawData;
+        this.jsonData = parseJSON(jsonString);
     }
 
 
