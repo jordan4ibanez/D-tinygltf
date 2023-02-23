@@ -380,7 +380,7 @@ public:
     bool has(const string key) {
         if (!this.isObject())
             return false;
-        return (key in this.object_value_) != null;
+        return (key in this.object_value_) !is null;
     }
 
     // List keys
@@ -1179,7 +1179,6 @@ public:
     this(string fileLocation) {
         writeln("hello world");
 
-
     }/*TinyGLTF() : bin_data_(nullptr), bin_size_(0), is_binary_(false) {}*/
 
     //* Translation note: This literally did nothing
@@ -1217,5 +1216,6 @@ private:
 }
 
 unittest {
-    Loader = 
+    TinyGLTF loader = new TinyGLTF("here is the data");
+    assert(loader !is null);
 }
