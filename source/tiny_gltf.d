@@ -1054,7 +1054,7 @@ class Camera {
     string extensions_json_string;
 }
 
-struct Primitive {
+class Primitive {
     int[string] attributes; // (required) A dictionary object of
                             // integer, where each integer
                             // is the index of the accessor
@@ -1239,7 +1239,7 @@ class Light {
 }
 
 class Model {
-    
+
 public:
     this() {
 
