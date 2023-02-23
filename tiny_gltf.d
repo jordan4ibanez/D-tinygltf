@@ -1204,7 +1204,7 @@ public:
     }/*Model() = default;
     bool_ = void; operator==cast(const(Model) &) const;*/
 
-    Accesso[] accessors;
+    Accessor[] accessors;
     Animation[] animations;
     Buffer[] buffers;
     BufferView[] bufferViews;
