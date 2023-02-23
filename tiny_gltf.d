@@ -1,6 +1,7 @@
 module test.tiny_gltf;
 
-import std.algorithm.mutation;
+
+import std.stdio;
 import std.string;
 
 // @nogc nothrow:
@@ -1264,6 +1265,7 @@ public:
 
     // Only accepts serialized gltf json for now
     this(string fileLocation) {
+        
 
 
     }/*TinyGLTF() : bin_data_(nullptr), bin_size_(0), is_binary_(false) {}*/
@@ -1294,49 +1296,4 @@ private:
 
     bool preserve_image_channels_ = false;  /// Default false(expand channels to
                                             /// RGBA) for backward compatibility.
-
-    // Warning & error messages
-    // string warn_;
-    // string err_;
-
-    // FsCallbacks fs = [
-    //     null, null, null, null
-        /*
-        #ifndef TINYGLTF_NO_FS
-
-            &tinygltf::FileExists, &tinygltf::ExpandFilePath,
-            &tinygltf::ReadWholeFile, &tinygltf::WriteWholeFile,
-
-            nullptr  // Fs callback user data
-
-        #else
-
-            nullptr, nullptr, nullptr, nullptr,
-
-            nullptr  // Fs callback user data
-
-        #endif
-        */
-    // ];
-    
-
-    // URICallbacks uri_cb = URICallbacks(null, &tinygltf.URIDecode, null);
-    /** This is what this used to look like in C kinda
-        // Use paths as-is by default. This will use JSON string escaping.
-        cast(URIEncodeFunction)0,
-        // Decode all URIs before using them as paths as the application may have
-        // percent encoded them.
-        &tinygltf::URIDecode,
-        // URI callback user data
-        null
-    );
-    */
-
-    // LoadImageDataFunction LoadImageData = null;
-    // void *load_image_user_data_ = null;
-    // bool user_image_loader_ = false;
-
-    // WriteImageDataFunction WriteImageData = null;
-    
-    // void *write_image_user_data_ = null;
 }
