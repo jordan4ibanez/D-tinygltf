@@ -1183,12 +1183,7 @@ class TinyGLTF {
     this(string fileLocation) {
         writeln("hello world");
 
-    }/*TinyGLTF() : bin_data_(nullptr), bin_size_(0), is_binary_(false) {}*/
-
-    //* Translation note: This literally did nothing
-    // ~TinyGLTF() {}
-    
-
+    }
 }
 
 unittest {
