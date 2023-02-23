@@ -1176,6 +1176,7 @@ class Model {
                 "appears to be corrupted, please double-check this model with the Khronos GLTF validator.\n" ~
                 "Link: https://github.khronos.org/glTF-Validator/\n"
             );
+            return false;
         }
 
         // Now it has to iterate the JSON object and store the data.
@@ -1263,6 +1264,14 @@ unittest {
     Model successModel = new Model("models/Cube/Cube.gltf");
     assert(successModel !is null);
     assert(successModel.loadFile() == true);
+
+    writeln("\nSUCCESS PASS\n");
+
+    // Now test a corrupted model.
+    Model corruptedModel = new Model("models/missing_brace/json_missing_brace.gltf");
+    assert(corruptedModel.loadFile() == false);
+
+    writeln("\nCORRUPTED PASS\n");
 
     /*
     Testing all the BoundsChecking debug gltf models.
