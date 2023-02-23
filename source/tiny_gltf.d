@@ -1116,10 +1116,6 @@ class Light {
 // Model loads all the data automatically through it's methods
 class Model {
 
-    this(string fileLocation) {
-        writeln("wow I'm a model");
-    }
-
     Accessor[] accessors;
     Animation[] animations;
     Buffer[] buffers;
@@ -1147,6 +1143,12 @@ class Model {
     // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
     string extras_json_string;
     string extensions_json_string;
+
+    this(string fileLocation) {
+        writeln("wow I'm a model");
+    }
+
+    
 }
 
 
