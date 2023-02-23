@@ -1263,7 +1263,17 @@ private:
                     }
                     // Double array
                     case "min": {
-
+                        assert(arrayValue.type() == JSONType.array);
+                        foreach (k,JSONValue v; arrayValue.array) {
+                            // std.json thinks that 1.0 and 0.0 is integer so we have to work with it
+                            if (v.type == JSONType.float_) {
+                                accessorObject.minValues ~= cast(double)v.floating;
+                            } else if (v.type == JSONType.integer) {
+                                accessorObject.minValues ~= cast(double)v.integer;
+                            }
+                        }
+                        write(accessorObject.minValues);
+                        break;
                     }
                     // Double array
                     case "max": {
