@@ -1197,7 +1197,9 @@ private:
         // This might look a bit complicated, but we're just iterating the tree of data
         // We start off with a set of keys and values, accessor, bufferViews, etc
         // Then we need to go down them because they're packed pretty tight
-        this.recurseJSONData(this.jsonData.object);
+        foreach (key,val; this.jsonData.object) {
+            writeln(key);
+        }
     }
 
     // This is static so we don't end up creating a whole bunch of delegate objects.
