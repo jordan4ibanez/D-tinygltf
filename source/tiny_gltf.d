@@ -1217,7 +1217,7 @@ private:
     
     void grabAccessorsData(JSONValue jsonObject) {
         
-        //* This is explicit to help code-d
+        //* This is explicit to help code-d and to be more readable for control flow
         //* Key is integer(size_t), value is JSONValue
         foreach (size_t key, JSONValue value; jsonObject.array) {
 
@@ -1292,7 +1292,6 @@ private:
                     // String
                     case "type": {
                         assert(arrayValue.type == JSONType.string);
-                        
                         // Assign the integral value of the enum
                         switch(arrayValue.str) {
                             case ("VEC2"): {
