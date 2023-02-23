@@ -1177,7 +1177,7 @@ public:
 
     // Only accepts serialized gltf json for now
     this(string fileLocation) {
-        
+        writeln("hello world");
 
 
     }/*TinyGLTF() : bin_data_(nullptr), bin_size_(0), is_binary_(false) {}*/
@@ -1187,6 +1187,12 @@ public:
 
     
 
+    //!* Translation Note: This is probaly ONLY going to support:
+    //* Vertex positions
+    //* Indices
+    //* Texture coordinates
+    //* Bones
+    //* Animations
 private:
     ///
     /// Loads glTF asset from string(memory).
@@ -1198,14 +1204,18 @@ private:
     //                     const char_ *str, const uint length,
     //                     const ref string base_dir, uint check_sections);
 
-    ubyte[] bin_data_ = null;
-    size_t bin_size_ = 0;
-    bool is_binary_ = false;
+    // ubyte[] bin_data_ = null;
+    // size_t bin_size_ = 0;
+    // bool is_binary_ = false;
 
-    bool serialize_default_values_ = false;  ///< Serialize default values?
+    // bool serialize_default_values_ = false;  ///< Serialize default values?
 
-    bool store_original_json_for_extras_and_extensions_ = false;
+    // bool store_original_json_for_extras_and_extensions_ = false;
 
-    bool preserve_image_channels_ = false;  /// Default false(expand channels to
-                                            /// RGBA) for backward compatibility.
+    // bool preserve_image_channels_ = false;  /// Default false(expand channels to
+    //                                         /// RGBA) for backward compatibility.
+}
+
+unittest {
+    Loader = 
 }
