@@ -1264,5 +1264,22 @@ unittest {
     assert(successModel !is null);
     assert(successModel.loadFile() == true);
 
-    //TODO: Corrupted model check
+    /*
+    Testing all the BoundsChecking debug gltf models.
+    
+    These all load, but they have wrong data.
+    */
+
+    Model integerFailure = new Model("models/BoundsChecking/integer-out-of-bounds.gltf");
+    assert(integerFailure.loadFile() == true);
+
+    Model bufferFailure = new Model("models/BoundsChecking/invalid-buffer-index.gltf");
+    assert(bufferFailure.loadFile() == true);
+
+    Model bufferViewFailure = new Model("models/BoundsChecking/invalid-buffer-view-index.gltf");
+    assert(bufferViewFailure.loadFile() == true);
+
+    Model primitiveFailure = new Model("models/BoundsChecking/invalid-primitive-indices.gltf");
+    assert(primitiveFailure.loadFile() == true);
+    
 }
