@@ -1112,10 +1112,13 @@ class Light {
     string extensions_json_string;
 }
 
+// Model is now the entry point
+// Model loads all the data automatically through it's methods
 class Model {
 
-public:
-    this() {}
+    this(string fileLocation) {
+        writeln("wow I'm a model");
+    }
 
     Accessor[] accessors;
     Animation[] animations;
@@ -1148,6 +1151,6 @@ public:
 
 
 unittest {
-    TinyGLTF loader = new TinyGLTF("here is the data");
-    assert(loader !is null);
+    Model model = new Model("hi there");
+    assert(model !is null);
 }
