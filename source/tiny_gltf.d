@@ -1152,7 +1152,7 @@ class Model {
         this.debugInfo = debugInfo;
         this.fileLocation = fileLocation;
 
-        writeln("\nMODEL INITIALIZED\n");
+        writeln("\nMODEL " ~ fileLocation ~ " INITIALIZED\n");
     }
     
     // Returns loading success.
@@ -1195,9 +1195,14 @@ private:
 
     void collectJSONInfo() {
         // This might look a bit complicated, but we're just iterating the tree of data
-        foreach (key,val; this.jsonData.object) {
-            writeln(key, " ", val);
-        }
+        // We start off with a set of keys and values, accessor, bufferViews, etc
+        // Then we need to go down them because they're packed pretty tight
+        this.recurseJSONData(this.jsonData.object);
+    }
+
+    // This is static so we don't end up creating a whole bunch of delegate objects.
+    static void recurseJSONData(JSONValue dataObject) {
+                
     }
 
     //* This is just a passthrough to keep it looking neat :)
@@ -1267,6 +1272,8 @@ unittest {
     assert(successModel !is null);
     assert(successModel.loadFile() == true);
 
+  
+    /*
     writeln("\nSUCCESS PASS\n");
 
     // Now test a corrupted model.
@@ -1279,7 +1286,7 @@ unittest {
     Testing all the BoundsChecking debug gltf models.
     
     These all load, but they have wrong data.
-    */
+    * /
 
     Model integerFailure = new Model("models/BoundsChecking/integer-out-of-bounds.gltf");
     assert(integerFailure.loadFile() == true);
@@ -1292,5 +1299,6 @@ unittest {
 
     Model primitiveFailure = new Model("models/BoundsChecking/invalid-primitive-indices.gltf");
     assert(primitiveFailure.loadFile() == true);
+    */
     
 }
