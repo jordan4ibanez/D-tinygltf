@@ -3,6 +3,7 @@ import std.string;
 import std.file;
 import std.json;
 import core.stdcpp.array;
+import std.conv;
 
 // import core.stdc.stddef: wchar_t;
 //
@@ -1215,16 +1216,25 @@ private:
     }
     
     void grabAccessorsData(JSONValue jsonObject) {
-        //* Key is integer, value is JSON object
-        foreach (key,value; jsonObject.array) {
+        
+        //* This is explicit to help code-d
+        //* Key is integer(size_t), value is JSONValue
+        foreach (size_t key, JSONValue value; jsonObject.array) {
+
             // We are assembling this accessorObject
             Accessor accessorObject = new Accessor();
-            //* Key is integer, value is JSON object
-            foreach (arrayKey, arrayValue; value.array) {
+            
+            // Now parse the string
+
+            //* Key is string, value is JSON value
+            foreach (string arrayKey, JSONValue arrayValue; value.object) {
+
+                writeln(arrayKey);
+                
                 switch(arrayKey) {
                     // Integer
                     case "bufferView": {
-
+                        // accessorObject.bufferView = arrayValue;
                     }
                     // Integer
                     case "byteOffset": {
