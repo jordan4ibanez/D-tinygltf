@@ -1198,13 +1198,22 @@ private:
         // We start off with a set of keys and values, accessor, bufferViews, etc
         // Then we need to go down them because they're packed pretty tight
         foreach (key,val; this.jsonData.object) {
-            writeln(key);
+
+            // writeln(key);
+
+            // Key's could be corrupted, so we need a default catch all
+            switch(key) {
+                case "accessors":{
+                    
+                }
+                default: //TODO: do a thing here or something, no idea yet
+            }
         }
     }
 
     // This is static so we don't end up creating a whole bunch of delegate objects.
-    static void recurseJSONData(JSONValue dataObject) {
-                
+    static void grabAccessorsData(JSONValue dataObject) {
+        
     }
 
     //* This is just a passthrough to keep it looking neat :)
