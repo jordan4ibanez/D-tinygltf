@@ -1146,45 +1146,6 @@ public:
     string extensions_json_string;
 }
 
-enum SectionCheck {
-    NO_REQUIRE = 0x00,
-    REQUIRE_VERSION = 0x01,
-    REQUIRE_SCENE = 0x02,
-    REQUIRE_SCENES = 0x04,
-    REQUIRE_NODES = 0x08,
-    REQUIRE_ACCESSORS = 0x10,
-    REQUIRE_BUFFERS = 0x20,
-    REQUIRE_BUFFER_VIEWS = 0x40,
-    REQUIRE_ALL = 0x7f
-}
-alias NO_REQUIRE = SectionCheck.NO_REQUIRE;
-alias REQUIRE_VERSION = SectionCheck.REQUIRE_VERSION;
-alias REQUIRE_SCENE = SectionCheck.REQUIRE_SCENE;
-alias REQUIRE_SCENES = SectionCheck.REQUIRE_SCENES;
-alias REQUIRE_NODES = SectionCheck.REQUIRE_NODES;
-alias REQUIRE_ACCESSORS = SectionCheck.REQUIRE_ACCESSORS;
-alias REQUIRE_BUFFERS = SectionCheck.REQUIRE_BUFFERS;
-alias REQUIRE_BUFFER_VIEWS = SectionCheck.REQUIRE_BUFFER_VIEWS;
-alias REQUIRE_ALL = SectionCheck.REQUIRE_ALL;
-
-
-///
-/// glTF Parser/Serializer context.
-///
-class TinyGLTF {
-    //!* Translation Note: This is probaly ONLY going to support:
-    //* Vertex positions
-    //* Indices
-    //* Texture coordinates
-    //* Bones
-    //* Animations
-
-    // Only accepts serialized gltf json for now
-    this(string fileLocation) {
-        writeln("hello world");
-
-    }
-}
 
 unittest {
     TinyGLTF loader = new TinyGLTF("here is the data");
