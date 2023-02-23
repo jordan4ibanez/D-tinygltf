@@ -723,7 +723,7 @@ class Texture {
     bool_ operator==cast(const(Texture) &) const !!*/
 }
 
-struct TextureInfo {
+class TextureInfo {
     int index = -1;     // required.
     int texCoord = 0;   // The set index of texture's TEXCOORD attribute used for
                         // texture coordinate mapping.
@@ -735,14 +735,15 @@ struct TextureInfo {
     string extras_json_string;
     string extensions_json_string;
 
-    this() {
-
+    this(int index = -1, int texCoord = 0) {
+        this.index = index;
+        this.texCoord = texCoord;
     }/*: index(-1), texCoord(0) {}
     DEFAULT_METHODS(TextureInfo)
     bool_ operator==cast(const(TextureInfo) &) const !!*/
 }
 
-struct NormalTextureInfo {
+class NormalTextureInfo {
     int index = -1;     // required
     int texCoord = 0;   // The set index of texture's TEXCOORD attribute used for
                         // texture coordinate mapping.
@@ -756,14 +757,17 @@ struct NormalTextureInfo {
     string extras_json_string;
     string extensions_json_string;
 
-    this() {
+    this(int index = -1, int texCoord = 0, double scale = 1.0) {
+        this.index = index;
+        this.texCoord = texCoord;
+        this.scale = scale;
 
     }/*: index(-1), texCoord(0), scale(1.0) {}
     DEFAULT_METHODS(NormalTextureInfo)
     bool_ operator==cast(const(NormalTextureInfo) &) const !!*/
 }
 
-struct OcclusionTextureInfo {
+class OcclusionTextureInfo {
     int index = -1;        // required
     int texCoord = 0;      // The set index of texture's TEXCOORD attribute used for
                            // texture coordinate mapping.
@@ -777,16 +781,18 @@ struct OcclusionTextureInfo {
     string extras_json_string;
     string extensions_json_string;
 
-    this(){
-
+    this(int index = -1, int texCoord = 0, double strength = 1.0){
+        this.index = index;
+        this.texCoord = texCoord;
+        this.strength = strength;
     }/*: index(-1), texCoord(0), strength(1.0) {}
     DEFAULT_METHODS(OcclusionTextureInfo)
     bool_ operator==cast(const(OcclusionTextureInfo) &) const !!*/
 }
 
 // pbrMetallicRoughness class defined in glTF 2.0 spec.
-struct PbrMetallicRoughness {
-    double[] baseColorFactor = [1.0,1.0,1.0,1.0];  // len = 4. default [1,1,1,1]
+class PbrMetallicRoughness {
+    double[4] baseColorFactor = [1.0,1.0,1.0,1.0];  // len = 4. default [1,1,1,1]
     TextureInfo baseColorTexture;
     double metallicFactor = 1.0;   // default 1
     double roughnessFactor = 1.0;  // default 1
@@ -799,8 +805,10 @@ struct PbrMetallicRoughness {
     string extras_json_string;
     string extensions_json_string;
 
-    this() {
-        
+    this(double[4] baseColorFactor = [1.0, 1.0, 1.0, 1.0], double metallicFactor = 1.0, double roughnessFactor = 1.0) {
+        this.baseColorFactor = baseColorFactor;
+        this.metallicFactor = metallicFactor;
+        this.roughnessFactor = roughnessFactor;
     }/*: baseColorFactor(std::vector<double>{1.0, 1.0, 1.0, 1.0}),
             metallicFactor(1.0),
             roughnessFactor(1.0) {}
@@ -811,7 +819,7 @@ struct PbrMetallicRoughness {
 // Each extension should be stored in a ParameterMap.
 // members not in the values could be included in the ParameterMap
 // to keep a single material model
-struct Material {
+class Material {
     string name;
 
     double[] emissiveFactor = [0.0,0.0,0.0];  // length 3. default [0, 0, 0]
@@ -837,15 +845,17 @@ struct Material {
     string extras_json_string;
     string extensions_json_string;
 
-    this() {
-
+    this(string alphaMode = "OPAQUE", double alphaCutoff = 0.5, bool doubleSided = false) {
+        this.alphaMode = alphaMode;
+        this.alphaCutoff = alphaCutoff;
+        this.doubleSided = doubleSided;
     }/*: alphaMode("OPAQUE"), alphaCutoff(0.5), doubleSided(false) {}
     DEFAULT_METHODS(Material)
 
     bool_ operator==cast(const(Material) &) const !!*/
 }
 
-struct BufferView {
+class BufferView {
     string name;
     int buffer = -1;        // Required
     size_t byteOffset = 0;  // minimum 0, default 0
@@ -863,8 +873,13 @@ struct BufferView {
 
     bool dracoDecoded = false;  // Flag indicating this has been draco decoded
 
-    this() {
-
+    this(int buffer = -1, int byteOffset = 0, int byteLength = 0, int byteStride = 0, int target = 0, bool dracoDecoded = false) {
+        this.buffer = buffer;
+        this.byteOffset = byteOffset;
+        this.byteLength = byteLength;
+        this.byteStride = byteStride;
+        this.target = target;
+        this.dracoDecoded = dracoDecoded;
     }/*: buffer(-1),
             byteOffset(0),
             byteLength(0),
@@ -875,7 +890,7 @@ struct BufferView {
     bool_ operator==cast(const(BufferView) &) const !!*/
 }
 
-struct Accessor {
+class Accessor {
     int bufferView = -1;  // optional in spec but required here since sparse accessor
                     // are not supported
     string name;
@@ -948,8 +963,14 @@ struct Accessor {
         return 0;
     }
 
-    this() {
-
+    this(int bufferView = -1, int byteOffset = 0, bool normalized = false, int componentType = -1, int count = 0, int type = -1) {
+        this.bufferView = bufferView;
+        this.byteOffset = byteOffset;
+        this.normalized = normalized;
+        this.componentType = componentType;
+        this.count = count;
+        this.type = type;
+        this.sparse.isSparse = false;
     }/*Accessor()
         : bufferView(-1),
             byteOffset(0),
