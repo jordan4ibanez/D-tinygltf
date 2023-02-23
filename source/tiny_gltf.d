@@ -1182,6 +1182,8 @@ class Model {
         // Now it has to iterate the JSON object and store the data.
         this.collectJSONInfo();
 
+        //TODO: iterate the JSON data and check if everything is pointing to things that exist
+
         return true;
     }
 
