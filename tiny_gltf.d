@@ -1255,108 +1255,108 @@ alias REQUIRE_BUFFER_VIEWS = SectionCheck.REQUIRE_BUFFER_VIEWS;
 alias REQUIRE_ALL = SectionCheck.REQUIRE_ALL;
 
 
-///
-/// URIEncodeFunction type. Signature for custom URI encoding of external
-/// resources such as .bin and image files. Used by tinygltf to re-encode the
-/// final location of saved files. object_type may be used to encode buffer and
-/// image URIs differently, for example. See
-/// https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html#uris
-///
-alias URIEncodeFunction = bool function(const(std) in_uri, const(std) object_type, std* out_uri, void* user_data);
+// ///
+// /// URIEncodeFunction type. Signature for custom URI encoding of external
+// /// resources such as .bin and image files. Used by tinygltf to re-encode the
+// /// final location of saved files. object_type may be used to encode buffer and
+// /// image URIs differently, for example. See
+// /// https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html#uris
+// ///
+// alias URIEncodeFunction = bool function(const(std) in_uri, const(std) object_type, std* out_uri, void* user_data);
 
-///
-/// URIDecodeFunction type. Signature for custom URI decoding of external
-/// resources such as .bin and image files. Used by tinygltf when computing
-/// filenames to write resources.
-///
-alias URIDecodeFunction = bool function(const(std) in_uri, std* out_uri, void* user_data);
+// ///
+// /// URIDecodeFunction type. Signature for custom URI decoding of external
+// /// resources such as .bin and image files. Used by tinygltf when computing
+// /// filenames to write resources.
+// ///
+// alias URIDecodeFunction = bool function(const(std) in_uri, std* out_uri, void* user_data);
 
-// Declaration of default uri decode function
-bool URIDecode(const(std) in_uri, std* out_uri, void* user_data);
+// // Declaration of default uri decode function
+// bool URIDecode(const(std) in_uri, std* out_uri, void* user_data);
 
-///
-/// A structure containing URI callbacks and a pointer to their user data.
-///
-struct URICallbacks {
-    URIEncodeFunction encode;  // Optional encode method
-    URIDecodeFunction decode;  // Required decode method
+// ///
+// /// A structure containing URI callbacks and a pointer to their user data.
+// ///
+// struct URICallbacks {
+//     URIEncodeFunction encode;  // Optional encode method
+//     URIDecodeFunction decode;  // Required decode method
 
-    void* user_data;  // An argument that is passed to all uri callbacks
-}
+//     void* user_data;  // An argument that is passed to all uri callbacks
+// }
 
-///
-/// LoadImageDataFunction type. Signature for custom image loading callbacks.
-///
-alias LoadImageDataFunction = bool function(Image*, const(int), std*, std*, int, int, const(ubyte)*, int, void* user_pointer);
+// ///
+// /// LoadImageDataFunction type. Signature for custom image loading callbacks.
+// ///
+// alias LoadImageDataFunction = bool function(Image*, const(int), std*, std*, int, int, const(ubyte)*, int, void* user_pointer);
 
-///
-/// WriteImageDataFunction type. Signature for custom image writing callbacks.
-/// The out_uri parameter becomes the URI written to the gltf and may reference
-/// a file or contain a data URI.
-///
-alias WriteImageDataFunction = bool function(const(std)* basepath, const(std)* filename, const(Image)* image, bool embedImages, const(URICallbacks)* uri_cb, std* out_uri, void* user_pointer);
+// ///
+// /// WriteImageDataFunction type. Signature for custom image writing callbacks.
+// /// The out_uri parameter becomes the URI written to the gltf and may reference
+// /// a file or contain a data URI.
+// ///
+// alias WriteImageDataFunction = bool function(const(std)* basepath, const(std)* filename, const(Image)* image, bool embedImages, const(URICallbacks)* uri_cb, std* out_uri, void* user_pointer);
 
-version (TINYGLTF_NO_STB_IMAGE) {} else {
-    // Declaration of default image loader callback
-    bool LoadImageData(Image* image, const(int) image_idx, std* err, std* warn, int req_width, int req_height, const(ubyte)* bytes, int size, void*);
-}
+// version (TINYGLTF_NO_STB_IMAGE) {} else {
+//     // Declaration of default image loader callback
+//     bool LoadImageData(Image* image, const(int) image_idx, std* err, std* warn, int req_width, int req_height, const(ubyte)* bytes, int size, void*);
+// }
 
-version (TINYGLTF_NO_STB_IMAGE_WRITE) {} else {
-    // Declaration of default image writer callback
-    bool WriteImageData(const(std)* basepath, const(std)* filename, const(Image)* image, bool embedImages, const(URICallbacks)* uri_cb, std* out_uri, void*);
-}
+// version (TINYGLTF_NO_STB_IMAGE_WRITE) {} else {
+//     // Declaration of default image writer callback
+//     bool WriteImageData(const(std)* basepath, const(std)* filename, const(Image)* image, bool embedImages, const(URICallbacks)* uri_cb, std* out_uri, void*);
+// }
 
-///
-/// FilExistsFunction type. Signature for custom filesystem callbacks.
-///
-alias FileExistsFunction = bool function(const(std) abs_filename, void*);
+// ///
+// /// FilExistsFunction type. Signature for custom filesystem callbacks.
+// ///
+// alias FileExistsFunction = bool function(const(std) abs_filename, void*);
 
-///
-/// ExpandFilePathFunction type. Signature for custom filesystem callbacks.
-///
-alias ExpandFilePathFunction = string function(const ref string, void *);
+// ///
+// /// ExpandFilePathFunction type. Signature for custom filesystem callbacks.
+// ///
+// alias ExpandFilePathFunction = string function(const ref string, void *);
 
-///
-/// ReadWholeFileFunction type. Signature for custom filesystem callbacks.
-///
-alias ReadWholeFileFunction = bool function(ubyte*, std*, const(std) string, void*);
+// ///
+// /// ReadWholeFileFunction type. Signature for custom filesystem callbacks.
+// ///
+// alias ReadWholeFileFunction = bool function(ubyte*, std*, const(std) string, void*);
 
-///
-/// WriteWholeFileFunction type. Signature for custom filesystem callbacks.
-///
-alias WriteWholeFileFunction = bool function(std*, const(std) string, const(std) vector, void*);
+// ///
+// /// WriteWholeFileFunction type. Signature for custom filesystem callbacks.
+// ///
+// alias WriteWholeFileFunction = bool function(std*, const(std) string, const(std) vector, void*);
 
-///
-/// A structure containing all required filesystem callbacks and a pointer to
-/// their user data.
-///
-struct FsCallbacks {
-    FileExistsFunction FileExists;
-    ExpandFilePathFunction ExpandFilePath;
-    ReadWholeFileFunction ReadWholeFile;
-    WriteWholeFileFunction WriteWholeFile;
+// ///
+// /// A structure containing all required filesystem callbacks and a pointer to
+// /// their user data.
+// ///
+// struct FsCallbacks {
+//     FileExistsFunction FileExists;
+//     ExpandFilePathFunction ExpandFilePath;
+//     ReadWholeFileFunction ReadWholeFile;
+//     WriteWholeFileFunction WriteWholeFile;
 
-    void* user_data;  // An argument that is passed to all fs callbacks
-}
+//     void* user_data;  // An argument that is passed to all fs callbacks
+// }
 
-version (TINYGLTF_NO_FS) {} else {
-// Declaration of default filesystem callbacks
+// version (TINYGLTF_NO_FS) {} else {
+// // Declaration of default filesystem callbacks
 
-bool FileExists(const(std) abs_filename, void*);
+// bool FileExists(const(std) abs_filename, void*);
 
-///
-/// Expand file path(e.g. `~` to home directory on posix, `%APPDATA%` to
-/// `C:\\Users\\tinygltf\\AppData`)
-///
-/// @param[in] filepath File path string. Assume UTF-8
-/// @param[in] userdata User data. Set to `nullptr` if you don't need it.
-///
-string ExpandFilePath(const ref string filepath, void *userdata);
+// ///
+// /// Expand file path(e.g. `~` to home directory on posix, `%APPDATA%` to
+// /// `C:\\Users\\tinygltf\\AppData`)
+// ///
+// /// @param[in] filepath File path string. Assume UTF-8
+// /// @param[in] userdata User data. Set to `nullptr` if you don't need it.
+// ///
+// string ExpandFilePath(const ref string filepath, void *userdata);
 
-bool ReadWholeFile(ubyte* out_, std* err, const(std) filepath, void*);
+// bool ReadWholeFile(ubyte* out_, std* err, const(std) filepath, void*);
 
-bool WriteWholeFile(std* err, const(std) filepath, const(std) contents, void*);
-}
+// bool WriteWholeFile(std* err, const(std) filepath, const(std) contents, void*);
+// }
 
 ///
 /// glTF Parser/Serializer context.
