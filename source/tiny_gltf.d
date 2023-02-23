@@ -571,13 +571,13 @@ class AnimationSampler {
         this.input = input;
         this.output = output;
         this.interpolation = interpolation;
-        
+
     }/*: input(-1), output(-1), interpolation("LINEAR") {}
     DEFAULT_METHODS(AnimationSampler)
     bool_ operator==cast(const(AnimationSampler) &) const !!*/
 }
 
-struct Animation {
+class Animation {
     string name;
     AnimationChannel[] channels;
     AnimationSampler[] samplers;
@@ -595,7 +595,7 @@ struct Animation {
     bool operator==(const Animation &) const;*/
 }
 
-struct Skin {
+class Skin {
     string name;
     int inverseBindMatrices = -1;  // required here but not in the spec
     int skeleton = -1;             // The index of the node used as a skeleton root
@@ -641,8 +641,11 @@ struct Sampler {
     string extras_json_string;
     string extensions_json_string;
 
-    this() {
-
+    this(int minFilter = -1, int magFilter = -1, int wrapS = TINYGLTF_TEXTURE_WRAP_REPEAT, int wrapT = TINYGLTF_TEXTURE_WRAP_REPEAT) {
+        this.minFilter = minFilter;
+        this.magFilter = magFilter;
+        this.wrapS = wrapS;
+        this.wrapT = wrapT;
     }/*: minFilter(-1),
             magFilter(-1),
             wrapS(TINYGLTF_TEXTURE_WRAP_REPEAT),
