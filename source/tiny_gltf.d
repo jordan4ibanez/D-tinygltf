@@ -1229,12 +1229,15 @@ private:
             //* Key is string, value is JSON value
             foreach (string arrayKey, JSONValue arrayValue; value.object) {
 
-                writeln(arrayKey);
+                write(arrayKey ~ ": ");
                 
                 switch(arrayKey) {
                     // Integer
                     case "bufferView": {
-                        // accessorObject.bufferView = arrayValue;
+                        assert(arrayValue.type() == JSONType.integer);
+                        accessorObject.bufferView = cast(int)arrayValue.integer;
+                        write(accessorObject.bufferView);
+                        break;
                     }
                     // Integer
                     case "byteOffset": {
@@ -1262,6 +1265,7 @@ private:
                     }
                     default: // TODO: UNKNOWN
                 }
+                write("\n");
             }
         }
     }
