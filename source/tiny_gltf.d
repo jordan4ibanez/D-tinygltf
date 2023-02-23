@@ -1211,10 +1211,16 @@ private:
                     this.grabAccessorsData(value);
                     break;
                 }
-                
+                case "bufferViews": {
+                    this.grabBufferViewsData(value);
+                    break;
+                }
                 default: // Unknown
             }
         }
+    }
+    void grabBufferViewsData(JSONValue jsonObject) {
+
     }
     
     void grabAccessorsData(JSONValue jsonObject) {
