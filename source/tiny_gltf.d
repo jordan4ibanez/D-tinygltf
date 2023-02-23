@@ -1119,6 +1119,7 @@ class Model {
 
     string fileLocation;
     bool debugInfo = false;
+    bool loadFailure = false;
 
     Accessor[] accessors;
     Animation[] animations;
@@ -1158,15 +1159,13 @@ class Model {
         writeln("wow I'm a model");
         
         if (!this.fileExists()) {
-            
-            
-            // Overkill debug info
             writeDebug(
                 "I'm very sorry, but the file:\n" ~
                 fileLocation ~ "\n" ~
                 "does not exist on the drive. Perhaps you are polling the wrong directory?\n"
             );
-            
+            this.loadFailure = true;
+            return;
         }
     }
 
