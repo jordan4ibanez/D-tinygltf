@@ -253,7 +253,7 @@ public:
     // Value[string] object;
 
     this() {
-        this.type_ = NULL_TYPE;
+        this.type_ = Type.NULL_TYPE;
         this.int_value_ = 0;
         this.real_value_ = 0.0;
         this.boolean_value = false;
@@ -265,79 +265,79 @@ public:
     // this. is not required, but I like it
     this(bool b) {
         this.boolean_value_ = b;
-        this.type = BOOL_TYPE;
+        this.type = Type.BOOL_TYPE;
     }
 
     this(int i) {
         this.int_value_ = i;
         this.real_value_ = i;
-        this.type = INT_TYPE;
+        this.type = Type.INT_TYPE;
     }
 
     this(double n) {
         this.real_value_ = n;
-        this.type_ = REAL_TYPE;
+        this.type_ = Type.REAL_TYPE;
     }
 
     this(string s) {
         this.string_value_ = s;
-        this.type = STRING_TYPE;
+        this.type = Type.STRING_TYPE;
     }
 
     this(ubyte[] v) {
         this.binary_value_ = v;
-        this.type = BINARY_TYPE;
+        this.type = Type.BINARY_TYPE;
     }
     
     this(const Value[] a) {
         this.array_value_ = a;
-        this.type = ARRAY_TYPE;
+        this.type = Type.ARRAY_TYPE;
     }
 
     this(const Value[string] o) {
         this.object_value_ = o;
-        this.type = OBJECT_TYPE;
+        this.type = Type.OBJECT_TYPE;
     }
 
-    tinygltf.type type(){
+    Type type(){
         return this.type_;
     }
 
     bool isBool() {
-        return (this.type_ == BOOL_TYPE);
+        return (this.type_ == Type.BOOL_TYPE);
     }
 
     bool isInt() {
-        return (this.type_ == INT_TYPE);
+        return (this.type_ == Type.INT_TYPE);
     }
 
     bool isNumber() {
-        return (this.type_ == REAL_TYPE) || (this.type_ == INT_TYPE);
+        return (this.type_ == Type.REAL_TYPE) || (this.type_ == Type.INT_TYPE);
     }
 
     bool isReal() {
-        return (this.type_ == REAL_TYPE);
+        return (this.type_ == Type.REAL_TYPE);
     }
 
     bool isString() {
-        return (this.type_ == STRING_TYPE);
+        return (this.type_ == Type.STRING_TYPE);
     }
 
     bool isBinary() {
-        return (this.type_ == BINARY_TYPE);
+        return (this.type_ == Type.BINARY_TYPE);
     }
 
     bool isArray() {
-        return (this.type_ == ARRAY_TYPE);
+        return (this.type_ == Type.ARRAY_TYPE);
     }
 
     bool isObject() {
-        return (this.type_ == OBJECT_TYPE);
+        return (this.type_ == Type.OBJECT_TYPE);
     }
 
     // Use this function if you want to have number value as double.
     double getNumberAsDouble() {
-        if (this.type_ == INT_TYPE) {
+        if (this.type_ == Type.INT_TYPE) {
             return cast(double)this.int_value_;
         } else {
             return this.real_value_;
@@ -347,7 +347,7 @@ public:
     // Use this function if you want to have number value as int.
     // TODO(syoyo): Support int value larger than 32 bits
     int getNumberAsInt() {
-        if (this.type_ == REAL_TYPE) {
+        if (this.type_ == Type.REAL_TYPE) {
             return cast(int)this.real_value_;
         } else {
             return this.int_value_;
@@ -386,8 +386,11 @@ public:
     // List keys
     string[] keys() const {
         // Clone in memory
-        string[] keys = this.object_value_;
-        return keys;
+        string[] tempKeys;
+        foreach (k,v; this.object_value_) {
+            tempKeys ~= k;
+        }
+        return tempKeys;
     }
 
     size_t size() {
