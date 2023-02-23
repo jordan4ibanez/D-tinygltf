@@ -1222,7 +1222,15 @@ private:
 
 
 unittest {
-    Model model = new Model("hi there");
-    assert(model !is null);
-    assert(model.loadFile() == false);
+    // Test fail state and disabling debug info
+    Model failedModel = new Model("This is a failure test.", false);
+    assert(failedModel !is null);
+    assert(failedModel.loadFile() == false);
+
+    writeln("\nFAILURE PASS!\n");
+
+    // Now test loading state again with a known model
+    Model successModel = new Model("models/Cube/Cube.gltf");
+    assert(successModel !is null);
+    assert(successModel.loadFile() == true);
 }
