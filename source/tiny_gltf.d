@@ -397,18 +397,12 @@ public:
         return (this.isArray() ? this.arrayLen() : keys().length);
     }
 
-    // This exists in D automatically
-    // bool operator == (tinygltf::Value &other);
-
-
     //* Translation note: This is the more D way to do this than the weird mixin in C
     mixin(TINYGLTF_VALUE_GET("bool", "boolean_value_"));
     mixin(TINYGLTF_VALUE_GET("double", "real_value_"));
     mixin(TINYGLTF_VALUE_GET("int", "int_value_"));
     mixin(TINYGLTF_VALUE_GET("string", "string_value_"));
-
     mixin(TINYGLTF_VALUE_GET("ubyteArray", "binary_value_", "ubyte[]"));
-
     mixin(TINYGLTF_VALUE_GET("Array", "array_value_", "Value[]"));
     mixin(TINYGLTF_VALUE_GET("Object", "object_value_", "Value[string]"));
 
@@ -439,33 +433,21 @@ string TINYGLTF_VALUE_GET(string ctype, string var, string returnType = "") {
     "}";
 }
 
-// * This is probably needed but check later
-// TINYGLTF_VALUE_GET(bool, boolean_value_)
-// TINYGLTF_VALUE_GET(double, real_value_)
-// TINYGLTF_VALUE_GET(int, int_value_)
-// TINYGLTF_VALUE_GET(std::string, string_value_)
-// TINYGLTF_VALUE_GET(std::vector<unsigned char_>, binary_value_)
-// TINYGLTF_VALUE_GET(Value::Array, array_value_)
-// TINYGLTF_VALUE_GET(Value::Object, object_value_)
-// version (__clang__) {
-// #pragma clang diagnostic push
-// #pragma clang diagnostic ignored "-Wc++98-compat"
-// #pragma clang diagnostic ignored "-Wpadded"
-// }
-
 /// Aggregate object for representing a color
 alias ColorValue = double[4];
 
 // === legacy interface ====
 // TODO(syoyo): Deprecate `Parameter` class.
-struct Parameter {
+class Parameter {
     bool bool_value = false;
     bool has_number_value = false;
-    string string_value;/*::string string_value !!*/
-    double[] number_array;/*:vector<double> number_array !!*/
+    string string_value;
+    double[] number_array;
     // Becomes an associative array
     int[string] json_double_value;/*:string, double> json_double_value !!*/
     double number_value = 0;
+
+    this() {}
 
     // context sensitive methods. depending the type of the Parameter you are
     // accessing, these are either valid or not
@@ -475,14 +457,14 @@ struct Parameter {
     /// Return the index of a texture if this Parameter is a texture map.
     /// Returned value is only valid if the parameter represent a texture from a
     /// material
-    int TextureIndex() const {
+    int textureIndex() const {
         return json_double_value.get("index", -1);
     }
 
     /// Return the index of a texture coordinate set if this Parameter is a
     /// texture map. Returned value is only valid if the parameter represent a
     /// texture from a material
-    int TextureTexCoord() const {
+    int textureTexCoord() const {
         // As per the spec, if texCoord is omitted, this parameter is 0
         return json_double_value.get("texCoord", 0);
     }
@@ -490,7 +472,7 @@ struct Parameter {
     /// Return the scale of a texture if this Parameter is a normal texture map.
     /// Returned value is only valid if the parameter represent a normal texture
     /// from a material
-    double TextureScale() const {
+    double textureScale() const {
         // As per the spec, if scale is omitted, this parameter is 1
         return json_double_value.get("scale", 1);
     }
@@ -498,7 +480,7 @@ struct Parameter {
     /// Return the strength of a texture if this Parameter is a an occlusion map.
     /// Returned value is only valid if the parameter represent an occlusion map
     /// from a material
-    double TextureStrength() const {
+    double textureStrength() const {
         // As per the spec, if strength is omitted, this parameter is 1
         return json_double_value.get("strength", 1);
     }
@@ -506,37 +488,32 @@ struct Parameter {
     /// Material factor, like the roughness or metalness of a material
     /// Returned value is only valid if the parameter represent a texture from a
     /// material
-    double Factor() const {
+    double factor() const {
         return number_value;
     }
 
     /// Return the color of a material
     /// Returned value is only valid if the parameter represent a texture from a
     /// material
-    ColorValue ColorFactor() {
+    ColorValue colorFactor() {
         //* Translation note: This is an alias now, we can just return double[4]
         return
             [// this aggregate initialize the std::array object, and uses C++11 RVO.
-            number_array[0], number_array[1], number_array[2],
-            (number_array.length > 3 ? number_array[3] : 1.0)
+                number_array[0], number_array[1], number_array[2],
+                (number_array.length > 3 ? number_array[3] : 1.0)
             ];
     }
-
-    // * Translation note: I think these are unneeded
-    //!TODO: Test if these are needed
-    //   Parameter() = default;
-    //    bool_; operator==cast(const(Parameter) &) const;
 }
 
 alias ParameterMap = Parameter[string];
 alias ExtensionMap = Value[string];
 
 class AnimationChannel {
-    int sampler = -1;     // required
-    int target_node = -1; // optional index of the node to target (alternative
-                            // target should be provided by extension)
-    string target_path;   // required with standard values of ["translation",
-                            // "rotation", "scale", "weights"]
+    int sampler = -1;      // required
+    int target_node = -1;  // optional index of the node to target (alternative
+                           // target should be provided by extension)
+    string target_path;    // required with standard values of ["translation",
+                           // "rotation", "scale", "weights"]
     Value extras;
     ExtensionMap extensions;
     ExtensionMap target_extensions;
@@ -547,13 +524,9 @@ class AnimationChannel {
     string target_extensions_json_string;
 
     this(int sampler = -1, int target_node = -1) {
-
         this.sampler = sampler;
         this.target_node = target_node;
-
-    }/*: sampler(-1), target_node(-1) {}
-    DEFAULT_METHODS(AnimationChannel)
-    bool_ operator==cast(const(AnimationChannel) &) const !!*/
+    }
 }
 
 class AnimationSampler {
@@ -569,14 +542,10 @@ class AnimationSampler {
     string extensions_json_string;
     
     this(int input = -1, int output = -1, string interpolation = "LINEAR"){
-
         this.input = input;
         this.output = output;
         this.interpolation = interpolation;
-
-    }/*: input(-1), output(-1), interpolation("LINEAR") {}
-    DEFAULT_METHODS(AnimationSampler)
-    bool_ operator==cast(const(AnimationSampler) &) const !!*/
+    }
 }
 
 class Animation {
@@ -590,11 +559,7 @@ class Animation {
     string extras_json_string;
     string extensions_json_string;
     
-    this() {
-
-    }/*Animation() = default;
-    DEFAULT_METHODS(Animation)
-    bool operator==(const Animation &) const;*/
+    this() {}
 }
 
 class Skin {
@@ -610,10 +575,7 @@ class Skin {
     string extras_json_string;
     string extensions_json_string;
 
-    this() {
-
-    }/*DEFAULT_METHODS(Skin)
-    bool operator==(const Skin &) const;*/
+    this() {}
 }
 
 class Sampler {
@@ -622,19 +584,16 @@ class Sampler {
     // `magFilter`. Set -1 in TinyGLTF(issue #186)
 
     int minFilter = -1;  // optional. -1 = no filter defined. ["NEAREST", "LINEAR",
-                        // "NEAREST_MIPMAP_NEAREST", "LINEAR_MIPMAP_NEAREST",
-                        // "NEAREST_MIPMAP_LINEAR", "LINEAR_MIPMAP_LINEAR"]
+                         // "NEAREST_MIPMAP_NEAREST", "LINEAR_MIPMAP_NEAREST",
+                         // "NEAREST_MIPMAP_LINEAR", "LINEAR_MIPMAP_LINEAR"]
 
     int magFilter = -1;  // optional. -1 = no filter defined. ["NEAREST", "LINEAR"]
 
-    int wrapS = TINYGLTF_TEXTURE_WRAP_REPEAT;  // ["CLAMP_TO_EDGE", "MIRRORED_REPEAT",
+    int wrapS = TINYGLTF_TEXTURE_WRAP_REPEAT;   // ["CLAMP_TO_EDGE", "MIRRORED_REPEAT",
                                                 // "REPEAT"], default "REPEAT"
 
-    int wrapT = TINYGLTF_TEXTURE_WRAP_REPEAT;  // ["CLAMP_TO_EDGE", "MIRRORED_REPEAT",
+    int wrapT = TINYGLTF_TEXTURE_WRAP_REPEAT;   // ["CLAMP_TO_EDGE", "MIRRORED_REPEAT",
                                                 // "REPEAT"], default "REPEAT"
-
-    // int wrapR = TINYGLTF_TEXTURE_WRAP_REPEAT;  // TinyGLTF extension. currently
-    // not used.
 
     Value extras;
     ExtensionMap extensions;
@@ -648,12 +607,7 @@ class Sampler {
         this.magFilter = magFilter;
         this.wrapS = wrapS;
         this.wrapT = wrapT;
-    }/*: minFilter(-1),
-            magFilter(-1),
-            wrapS(TINYGLTF_TEXTURE_WRAP_REPEAT),
-            wrapT(TINYGLTF_TEXTURE_WRAP_REPEAT) {}
-    DEFAULT_METHODS(Sampler)
-    bool_ operator==cast(const(Sampler) &) const !!*/
+    }
 }
 
 class Image {
@@ -692,16 +646,7 @@ class Image {
         this.component = component;
         this.bits = bits;
         this.pixel_type = pixel_type;
-    }/*: as_is(false) {
-        bufferView = -1 !!
-        width;
-        height;
-        component;
-        bits;
-        pixel_type;
-    }Image DEFAULT_METHODS(Image);
-
-    bool operator = cast(const(Image) &) const;*/
+    }
 }
 
 class Texture {
@@ -719,10 +664,7 @@ class Texture {
     this(int sampler = -1, int source = -1) {
         this.sampler = sampler;
         this.source = source;
-    }/*: sampler(-1), source(-1) {}
-    DEFAULT_METHODS(Texture)
-
-    bool_ operator==cast(const(Texture) &) const !!*/
+    }
 }
 
 class TextureInfo {
@@ -740,9 +682,7 @@ class TextureInfo {
     this(int index = -1, int texCoord = 0) {
         this.index = index;
         this.texCoord = texCoord;
-    }/*: index(-1), texCoord(0) {}
-    DEFAULT_METHODS(TextureInfo)
-    bool_ operator==cast(const(TextureInfo) &) const !!*/
+    }
 }
 
 class NormalTextureInfo {
@@ -764,9 +704,7 @@ class NormalTextureInfo {
         this.texCoord = texCoord;
         this.scale = scale;
 
-    }/*: index(-1), texCoord(0), scale(1.0) {}
-    DEFAULT_METHODS(NormalTextureInfo)
-    bool_ operator==cast(const(NormalTextureInfo) &) const !!*/
+    }
 }
 
 class OcclusionTextureInfo {
@@ -787,9 +725,7 @@ class OcclusionTextureInfo {
         this.index = index;
         this.texCoord = texCoord;
         this.strength = strength;
-    }/*: index(-1), texCoord(0), strength(1.0) {}
-    DEFAULT_METHODS(OcclusionTextureInfo)
-    bool_ operator==cast(const(OcclusionTextureInfo) &) const !!*/
+    }
 }
 
 // pbrMetallicRoughness class defined in glTF 2.0 spec.
@@ -811,11 +747,7 @@ class PbrMetallicRoughness {
         this.baseColorFactor = baseColorFactor;
         this.metallicFactor = metallicFactor;
         this.roughnessFactor = roughnessFactor;
-    }/*: baseColorFactor(std::vector<double>{1.0, 1.0, 1.0, 1.0}),
-            metallicFactor(1.0),
-            roughnessFactor(1.0) {}
-    DEFAULT_METHODS(PbrMetallicRoughness)
-    bool_ operator==cast(const(PbrMetallicRoughness) &) const !!*/
+    }
 }
 
 // Each extension should be stored in a ParameterMap.
@@ -851,10 +783,7 @@ class Material {
         this.alphaMode = alphaMode;
         this.alphaCutoff = alphaCutoff;
         this.doubleSided = doubleSided;
-    }/*: alphaMode("OPAQUE"), alphaCutoff(0.5), doubleSided(false) {}
-    DEFAULT_METHODS(Material)
-
-    bool_ operator==cast(const(Material) &) const !!*/
+    }
 }
 
 class BufferView {
@@ -882,14 +811,7 @@ class BufferView {
         this.byteStride = byteStride;
         this.target = target;
         this.dracoDecoded = dracoDecoded;
-    }/*: buffer(-1),
-            byteOffset(0),
-            byteLength(0),
-            byteStride(0),
-            target(0),
-            dracoDecoded(false) {}
-    DEFAULT_METHODS(BufferView)
-    bool_ operator==cast(const(BufferView) &) const !!*/
+    }
 }
 
 class Accessor {
@@ -973,16 +895,7 @@ class Accessor {
         this.count = count;
         this.type = type;
         this.sparse.isSparse = false;
-    }/*Accessor()
-        : bufferView(-1),
-            byteOffset(0),
-            normalized(false),
-            componentType(-1),
-            count(0),
-            type(-1) {
-        sparse.isSparse = false;
     }
-    bool_; operator==cast(const(tinygltf)::Accessor &) const;*/
 }
 
 class PerspectiveCamera {
@@ -996,13 +909,7 @@ class PerspectiveCamera {
         this.yfov = yfov;
         this.zfar = zfar;
         this.znear = znear;
-    }/*: aspectRatio(0.0),
-            yfov(0.0),
-            zfar(0.0)  // 0 = use infinite projection matrix
-            ,
-            znear(0.0) {}
-    DEFAULT_METHODS(PerspectiveCamera)
-    bool_ operator==cast(const(PerspectiveCamera) &) const !!*/
+    }
 
     ExtensionMap extensions;
     Value extras;
@@ -1023,9 +930,7 @@ class OrthographicCamera {
         this.ymag = ymag;
         this.zfar = zfar;
         this.znear = znear;
-    }/*: xmag(0.0), ymag(0.0), zfar(0.0), znear(0.0) {}
-    DEFAULT_METHODS(OrthographicCamera)
-    bool_ operator==cast(const(OrthographicCamera) &) const !!*/
+    }
 
     ExtensionMap extensions;
     Value extras;
@@ -1045,11 +950,7 @@ class Camera {
     ExtensionMap extensions;
     Value extras;
 
-    this() {
-
-    }/*Camera() {}
-    DEFAULT_METHODS(Camera)
-    bool operator==(const Camera &) const;*/
+    this() {}
 
     // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
     string extras_json_string;
@@ -1082,12 +983,7 @@ class Primitive {
         this.material = material;
         this.indices = indices;
         this.mode = mode;
-    }/*Primitive() {
-        material = -1;
-        indices = -1;
-        mode = -1;
     }
-    bool_; operator==cast(const(Primitive) &) const;*/
 }
 
 class Mesh {
@@ -1102,12 +998,7 @@ class Mesh {
     string extras_json_string;
     string extensions_json_string;
 
-    this() {
-
-    }
-    /*Mesh() = default;
-    DEFAULT_METHODS(Mesh)
-    bool operator==(const Mesh &) const;*/
+    this() {}
 }
 
 class Node {
@@ -1118,8 +1009,6 @@ public:
         this.skin = skin;
         this.mesh = mesh;
     }
-    // Node() : camera(-1), skin(-1), mesh(-1) {}
-    // bool_ = void; operator==cast(const(Node) &) const;
 
     int camera = -1;  // the index of the camera referenced by this node
 
@@ -1153,11 +1042,7 @@ class Buffer {
     string extras_json_string;
     string extensions_json_string;
 
-    this() {
-        
-    }/*Buffer() = default;
-    DEFAULT_METHODS(Buffer)
-    bool operator==(const Buffer &) const;*/
+    this() {}
 }
 
 class Asset {
@@ -1172,11 +1057,7 @@ class Asset {
     string extras_json_string;
     string extensions_json_string;
 
-    this() {
-        
-    }/*Asset() = default;
-    DEFAULT_METHODS(Asset)
-    bool operator==(const Asset &) const;*/
+    this() {}
 }
 
 class Scene {
@@ -1190,11 +1071,7 @@ class Scene {
     string extras_json_string;
     string extensions_json_string;
 
-    this() {
-
-    }/*Scene() = default;
-    DEFAULT_METHODS(Scene)
-    bool operator==(const Scene &) const;*/
+    this() {}
 }
 
 class SpotLight {
@@ -1204,9 +1081,7 @@ class SpotLight {
     this(double innerConeAngle = 0.0, double outerConeAngle = 0.7_853_981_634) {
         this.innerConeAngle = innerConeAngle;
         this.outerConeAngle = outerConeAngle;
-    }/*: innerConeAngle(0.0), outerConeAngle(0.7853981634) {}
-    DEFAULT_METHODS(SpotLight)
-    bool_ operator==cast(const(SpotLight) &) const !!*/
+    }
 
     ExtensionMap extensions;
     Value extras;
@@ -1227,10 +1102,7 @@ class Light {
     this(double intensity = 1.0, double range = 0.0) {
         this.intensity = intensity;
         this.range = range;
-    }/*: intensity(1.0), range(0.0) {}
-    DEFAULT_METHODS(Light)
-
-    bool_ operator==cast(const(Light) &) const !!*/
+    }
 
     ExtensionMap extensions;
     Value extras;
@@ -1243,10 +1115,7 @@ class Light {
 class Model {
 
 public:
-    this() {
-
-    }/*Model() = default;
-    bool_ = void; operator==cast(const(Model) &) const;*/
+    this() {}
 
     Accessor[] accessors;
     Animation[] animations;
