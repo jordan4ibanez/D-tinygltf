@@ -1,6 +1,7 @@
 import std.stdio;
 import std.string;
 import std.file;
+import std.json;
 
 // import core.stdc.stddef: wchar_t;
 //
@@ -1117,10 +1118,6 @@ class Light {
 // Model loads all the data automatically through it's methods
 class Model {
 
-    string fileLocation;
-    bool debugInfo = false;
-    bool loadFailure = false;
-
     Accessor[] accessors;
     Animation[] animations;
     Buffer[] buffers;
@@ -1149,27 +1146,39 @@ class Model {
     string extras_json_string;
     string extensions_json_string;
 
-    // Take in the raw string so people can do whatever they want with their file location
+    // Takes in a raw string so you can do whatever they want with your file location.
     this(string fileLocation, bool debugInfo = true) {
-
+        //* Model can work with it's internal fields so we don't have to chain them
         this.debugInfo = debugInfo;
-
-        // Now we can pass this around the model :)
         this.fileLocation = fileLocation;
+
         writeln("wow I'm a model");
-        
+    }
+    
+    // Returns loading success.
+    bool loadFile(){
         if (!this.fileExists()) {
             writeDebug(
                 "I'm very sorry, but the file:\n" ~
                 fileLocation ~ "\n" ~
                 "does not exist on the drive. Perhaps you are polling the wrong directory?\n"
             );
-            this.loadFailure = true;
-            return;
+            return false;
         }
+
+        //* Implementation Note: This converts the data into a usable object from raw data.
+        void[] rawData = std.file.read(this.fileLocation);
+        string jsonString = cast(string)rawData;
+        this.jsonData = parseJSON(jsonString);
+
+        return true;
     }
 
 private:
+
+    string fileLocation;
+    bool debugInfo = false;
+    JSONValue jsonData;
 
     //* This is just a passthrough to keep it looking neat :)
     bool fileExists() {
@@ -1207,4 +1216,5 @@ private:
 unittest {
     Model model = new Model("hi there");
     assert(model !is null);
+    assert(model.loadFile() == false);
 }
