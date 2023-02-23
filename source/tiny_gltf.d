@@ -702,7 +702,7 @@ class Image {
     bool operator = cast(const(Image) &) const;*/
 }
 
-struct Texture {
+class Texture {
     string name;
 
     int sampler = -1;
@@ -714,8 +714,9 @@ struct Texture {
     string extras_json_string;
     string extensions_json_string;
 
-    this() {
-        
+    this(int sampler = -1, int source = -1) {
+        this.sampler = sampler;
+        this.source = source;
     }/*: sampler(-1), source(-1) {}
     DEFAULT_METHODS(Texture)
 
