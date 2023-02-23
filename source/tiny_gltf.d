@@ -1228,22 +1228,18 @@ private:
 
             //* Key is string, value is JSON value
             foreach (string arrayKey, JSONValue arrayValue; value.object) {
-
-                write(arrayKey ~ ": ");
                 
                 switch(arrayKey) {
                     // Integer
                     case "bufferView": {
                         assert(arrayValue.type() == JSONType.integer);
                         accessorObject.bufferView = cast(int)arrayValue.integer;
-                        write(accessorObject.bufferView);
                         break;
                     }
                     // Integer
                     case "byteOffset": {
                         assert(arrayValue.type() == JSONType.integer);
                         accessorObject.byteOffset = cast(int)arrayValue.integer;
-                        write(accessorObject.byteOffset);
                         break;
 
                     }
@@ -1251,14 +1247,12 @@ private:
                     case "componentType": {
                         assert(arrayValue.type() == JSONType.integer);
                         accessorObject.componentType = cast(int)arrayValue.integer;
-                        write(accessorObject.componentType);
                         break;
                     }
                     // Integer
                     case "count": {
                         assert(arrayValue.type() == JSONType.integer);
                         accessorObject.count = cast(int)arrayValue.integer;
-                        write(accessorObject.count);
                         break;
                     }
                     // Double array
@@ -1272,7 +1266,6 @@ private:
                                 accessorObject.minValues ~= cast(double)v.integer;
                             }
                         }
-                        write(accessorObject.minValues);
                         break;
                     }
                     // Double array
@@ -1286,7 +1279,6 @@ private:
                                 accessorObject.maxValues ~= cast(double)v.integer;
                             }
                         }
-                        write(accessorObject.maxValues);
                         break;
                     }
                     // String
@@ -1330,15 +1322,16 @@ private:
                                 accessorObject.type = TINYGLTF_TYPE_MATRIX;
                                 break;
                             }
-                            default: //TODO: Unknown
+                            default: // Unknown
                         }
-                        write(accessorObject.type);
                         break;
                     }
-                    default: // TODO: UNKNOWN
+                    default: // UNKNOWN
                 }
-                write("\n");
             }
+
+            // Finally dump the accessor in
+            this.accessors ~= accessorObject;
         }
     }
 
