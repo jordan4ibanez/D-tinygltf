@@ -1,5 +1,6 @@
 import std.stdio;
 import std.string;
+import std.file;
 
 // import core.stdc.stddef: wchar_t;
 //
@@ -1116,6 +1117,9 @@ class Light {
 // Model loads all the data automatically through it's methods
 class Model {
 
+    string fileLocation;
+    bool debugInfo = false;
+
     Accessor[] accessors;
     Animation[] animations;
     Buffer[] buffers;
@@ -1144,11 +1148,57 @@ class Model {
     string extras_json_string;
     string extensions_json_string;
 
-    this(string fileLocation) {
+    // Take in the raw string so people can do whatever they want with their file location
+    this(string fileLocation, bool debugInfo = true) {
+
+        this.debugInfo = debugInfo;
+
+        // Now we can pass this around the model :)
+        this.fileLocation = fileLocation;
         writeln("wow I'm a model");
+        
+        if (!this.fileExists()) {
+            
+            if (this.debugInfo){
+                // Overkill debug info
+                writeDebug(
+                    "I'm very sorry, but the file:\n" ~
+                    fileLocation ~ "\n" ~
+                    "does not exist on the drive. Perhaps you are polling the wrong directory?\n"
+                );
+            }
+        }
     }
 
-    
+private:
+
+    //* This is just a passthrough to keep it looking neat :)
+    bool fileExists() {
+        return exists(this.fileLocation);
+    }
+
+    void loadJson(string fileLocation) {
+        string s = `{ "language": "D", "rating": 3.5, "code": "42" }`;
+
+    }
+
+
+    //*===================== DEBUGGING TOOLS ============================
+    void writeDebugHeader() {
+        writeln(
+        "=========================\n" ~
+        "DEBUG INFO\n" ~
+        "=========================\n"
+        );
+    }
+    void writeDebug(string input) {
+        writeDebugHeader();
+        writeln(input);
+        writeDebugFooter();
+    }
+    void writeDebugFooter() {
+        writeln("=========================\n");
+    }
 }
 
 
