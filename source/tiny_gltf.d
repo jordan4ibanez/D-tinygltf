@@ -654,7 +654,7 @@ class Sampler {
     bool_ operator==cast(const(Sampler) &) const !!*/
 }
 
-struct Image {
+class Image {
     string name;
     int width = -1;
     int height = -1;
@@ -683,8 +683,13 @@ struct Image {
     // function)
     bool as_is = false;
 
-    this() {
-
+    this(int bufferView = -1, int width = -1, int height = -1, int component = -1, int bits = -1, int pixel_type = -1) {
+        this.bufferView = bufferView;
+        this.width = width;
+        this.height = height;
+        this.component = component;
+        this.bits = bits;
+        this.pixel_type = pixel_type;
     }/*: as_is(false) {
         bufferView = -1 !!
         width;
