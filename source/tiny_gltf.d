@@ -1291,7 +1291,50 @@ private:
                     }
                     // String
                     case "type": {
-
+                        assert(arrayValue.type == JSONType.string);
+                        
+                        // Assign the integral value of the enum
+                        switch(arrayValue.str) {
+                            case ("VEC2"): {
+                                accessorObject.type = TINYGLTF_TYPE_VEC2;
+                                break;
+                            }
+                            case ("VEC3"): {
+                                accessorObject.type = TINYGLTF_TYPE_VEC3;
+                                break;
+                            }
+                            case ("VEC4"): {
+                                accessorObject.type = TINYGLTF_TYPE_VEC4;
+                                break;
+                            }
+                            case ("MAT2"): {
+                                accessorObject.type = TINYGLTF_TYPE_MAT2;
+                                break;
+                            }
+                            case ("MAT3"): {
+                                accessorObject.type = TINYGLTF_TYPE_MAT3;
+                                break;
+                            }
+                            case ("MAT4"): {
+                                accessorObject.type = TINYGLTF_TYPE_MAT4;
+                                break;
+                            }
+                            case ("SCALAR"): {
+                                accessorObject.type = TINYGLTF_TYPE_SCALAR;
+                                break;
+                            }
+                            case ("VECTOR"): {
+                                accessorObject.type = TINYGLTF_TYPE_VECTOR;
+                                break;
+                            }
+                            case ("MATRIX"): {
+                                accessorObject.type = TINYGLTF_TYPE_MATRIX;
+                                break;
+                            }
+                            default: //TODO: Unknown
+                        }
+                        write(accessorObject.type);
+                        break;
                     }
                     default: // TODO: UNKNOWN
                 }
