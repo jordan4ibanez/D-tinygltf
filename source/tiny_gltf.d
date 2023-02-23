@@ -1170,7 +1170,7 @@ class Model {
         
         // Turn the raw disk data into a usable JSON object with the std.json library.
         // Can throw an exception, which we catch and return as false.
-        // Going to be extra nice and throw in a link to it straight in the terminal.
+        // Going to be extra nice and throw in a link to khronos verifier straight in the terminal.
         if (!this.loadJson()) {
             writeDebug(
                 "I'm very sorry, but the file:\n"~
