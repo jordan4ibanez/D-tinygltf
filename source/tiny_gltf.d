@@ -407,7 +407,7 @@ public:
     mixin(TINYGLTF_VALUE_GET("int", "int_value_"));
     mixin(TINYGLTF_VALUE_GET("string", "string_value_"));
     mixin(TINYGLTF_VALUE_GET("ubyteArray", "binary_value_", "ubyte[]"));
-    mixin(TINYGLTF_VALUE_GET("Array", "array_value_"));
+    mixin(TINYGLTF_VALUE_GET("Array", "array_value_", "Value[]"));
     mixin(TINYGLTF_VALUE_GET("Object", "object_value_"));
 
 protected:
