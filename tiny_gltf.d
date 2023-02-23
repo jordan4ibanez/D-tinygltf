@@ -624,12 +624,6 @@ struct Sampler {
     int wrapT = TINYGLTF_TEXTURE_WRAP_REPEAT;  // ["CLAMP_TO_EDGE", "MIRRORED_REPEAT",
                                                 // "REPEAT"], default "REPEAT"
 
-    int TINYGLTF_TEXTURE_WRAP_REPEAT;  // ["CLAMP_TO_EDGE", "MIRRORED_REPEAT",
-                                        // "REPEAT"], default "REPEAT"
-
-    int TINYGLTF_TEXTURE_WRAP_REPEAT;  // ["CLAMP_TO_EDGE", "MIRRORED_REPEAT",
-                                        // "REPEAT"], default "REPEAT"
-
     // int wrapR = TINYGLTF_TEXTURE_WRAP_REPEAT;  // TinyGLTF extension. currently
     // not used.
 
