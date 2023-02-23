@@ -260,18 +260,18 @@ public:
         this.type_ = NULL_TYPE;
         this.int_value_ = 0;
         this.real_value_ = 0.0;
-        this.boolean_value = false;
+        this.boolean_value_ = false;
     }
     
     this(bool b) {
         this.boolean_value_ = b;
-        this.type = BOOL_TYPE;
+        this.type_ = BOOL_TYPE;
     }
 
     this(int i) {
         this.int_value_ = i;
         this.real_value_ = i;
-        this.type = INT_TYPE;
+        this.type_ = INT_TYPE;
     }
 
     this(double n) {
@@ -281,22 +281,22 @@ public:
 
     this(string s) {
         this.string_value_ = s;
-        this.type = STRING_TYPE;
+        this.type_ = STRING_TYPE;
     }
 
     this(ubyte[] v) {
         this.binary_value_ = v;
-        this.type = BINARY_TYPE;
+        this.type_ = BINARY_TYPE;
     }
     
-    this(const Value[] a) {
+    this(Value[] a) {
         this.array_value_ = a;
-        this.type = ARRAY_TYPE;
+        this.type_ = ARRAY_TYPE;
     }
 
-    this(const Value[string] o) {
+    this(Value[string] o) {
         this.object_value_ = o;
-        this.type = OBJECT_TYPE;
+        this.type_ = OBJECT_TYPE;
     }
 
     Type type(){
@@ -355,7 +355,7 @@ public:
     }
 
     // Lookup value from an array
-    Value get(int idx) const {
+    Value get(int idx) {
         static Value null_value;
         assert(this.isArray());
         assert(idx >= 0);
@@ -363,7 +363,7 @@ public:
     }
 
     // Lookup value from a key-value pair
-    Value get(const string key) const {
+    Value get(const string key) {
         static Value null_value;
         assert(this.isArray());
         assert(this.isObject());
@@ -384,7 +384,7 @@ public:
     }
 
     // List keys
-    string[] keys() const {
+    string[] keys() {
         // Clone in memory
         string[] tempKeys;
         foreach (k,v; this.object_value_) {
@@ -406,9 +406,11 @@ public:
     mixin(TINYGLTF_VALUE_GET("double", "real_value_"));
     mixin(TINYGLTF_VALUE_GET("int", "int_value_"));
     mixin(TINYGLTF_VALUE_GET("string", "string_value_"));
+
     mixin(TINYGLTF_VALUE_GET("ubyteArray", "binary_value_", "ubyte[]"));
+
     mixin(TINYGLTF_VALUE_GET("Array", "array_value_", "Value[]"));
-    mixin(TINYGLTF_VALUE_GET("Object", "object_value_"));
+    mixin(TINYGLTF_VALUE_GET("Object", "object_value_", "Value[string]"));
 
 protected:
 
@@ -432,7 +434,7 @@ string TINYGLTF_VALUE_GET(string ctype, string var, string returnType = "") {
     const string fancyCType = capitalize(ctype);
     return
     "\n" ~
-    returnType ~ " Get" ~ fancyCType ~ "() const {\n" ~
+    returnType ~ " Get" ~ fancyCType ~ "() {\n" ~
          "return this." ~ var ~ ";\n" ~
     "}";
 }
@@ -516,7 +518,7 @@ struct Parameter {
         return
             [// this aggregate initialize the std::array object, and uses C++11 RVO.
             number_array[0], number_array[1], number_array[2],
-            (number_array.size() > 3 ? number_array[3] : 1.0)
+            (number_array.length > 3 ? number_array[3] : 1.0)
             ];
     }
 
