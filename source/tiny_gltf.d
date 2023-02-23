@@ -215,7 +215,7 @@ pragma(inline, true) private int getComponentSizeInBytes(uint componentType) {
     }
 }
 
-pragma(inline, true) private int GetNumComponentsInType(uint ty) {
+pragma(inline, true) private int getNumComponentsInType(uint ty) {
     if (ty == TINYGLTF_TYPE_SCALAR) {
         return 1;
     } else if (ty == TINYGLTF_TYPE_VEC2) {
@@ -932,13 +932,13 @@ class Accessor {
     int byteStride(const BufferView bufferViewObject) const {
         if (bufferViewObject.byteStride == 0) {
             // Assume data is tightly packed.
-            int componentSizeInBytes = GetComponentSizeInBytes(componentType);
+            int componentSizeInBytes = getComponentSizeInBytes(componentType);
 
             if (componentSizeInBytes <= 0) {
                 return -1;
             }
             
-            Accessor numComponents = GetNumComponentsInType(type);
+            int numComponents = getNumComponentsInType(type);
             
             if (numComponents <= 0) {
                 return -1;
@@ -949,7 +949,7 @@ class Accessor {
         } else {
             // Check if byteStride is a multiple of the size of the accessor's component
             // type.
-            int componentSizeInBytes = GetComponentSizeInBytes(componentType);
+            int componentSizeInBytes = getComponentSizeInBytes(componentType);
 
             if (componentSizeInBytes <= 0) {
                 return -1;
@@ -958,11 +958,11 @@ class Accessor {
             if ((bufferViewObject.byteStride % componentSizeInBytes) != 0) {
                 return -1;
             }
-            return bufferViewObject.byteStride;
+            return cast(int)bufferViewObject.byteStride;
         }
 
         // unreachable return 0;
-        return 0;
+        // return 0;
     }
 
     this(int bufferView = -1, int byteOffset = 0, bool normalized = false, int componentType = -1, int count = 0, int type = -1) {
