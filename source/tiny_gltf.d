@@ -1202,18 +1202,19 @@ private:
             // writeln(key);
 
             // Key's could be corrupted, so we need a default catch all
+            //* key is a string, val is a json string
             switch(key) {
                 case "accessors":{
-                    
+                    this.grabAccessorsData(val);
+                    break;
                 }
                 default: //TODO: do a thing here or something, no idea yet
             }
         }
     }
-
-    // This is static so we don't end up creating a whole bunch of delegate objects.
+    
     static void grabAccessorsData(JSONValue dataObject) {
-        
+                        
     }
 
     //* This is just a passthrough to keep it looking neat :)
