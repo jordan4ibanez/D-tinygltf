@@ -252,17 +252,17 @@ public:
     // C++ map is an Associative Array
     // Value[string] object;
 
+    // The value becomes whatever it is constructed with
+    // It is a zeitgeist basically
+    // The period of time in this zeitgeist is the life time of it
+    // this. is not required, but I like it
     this() {
         this.type_ = NULL_TYPE;
         this.int_value_ = 0;
         this.real_value_ = 0.0;
         this.boolean_value = false;
     }
-
-    // The value becomes whatever it is constructed with
-    // It is a zeitgeist basically
-    // The period of time in this zeitgeist is the life time of it
-    // this. is not required, but I like it
+    
     this(bool b) {
         this.boolean_value_ = b;
         this.type = BOOL_TYPE;
