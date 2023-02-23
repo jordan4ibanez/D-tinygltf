@@ -1152,7 +1152,7 @@ class Model {
         this.debugInfo = debugInfo;
         this.fileLocation = fileLocation;
 
-        writeln("wow I'm a model");
+        writeln("\nMODEL INITIALIZED\n");
     }
     
     // Returns loading success.
