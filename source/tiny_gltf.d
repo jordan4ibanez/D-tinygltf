@@ -835,7 +835,7 @@ class Accessor {
     string extensions_json_string;
 
     double[] minValues;  // optional. integer value is promoted to double
-    double[]maxValues;   // optional. integer value is promoted to double
+    double[] maxValues;  // optional. integer value is promoted to double
 
     struct _Sparse {
         int count;
@@ -1247,7 +1247,7 @@ private:
                         break;
 
                     }
-                    // TINYGLTF_COMPONENT_TYPE_ (Which is an integer)
+                    // Integer, alias to TINYGLTF_COMPONENT_TYPE_
                     case "componentType": {
                         assert(arrayValue.type() == JSONType.integer);
                         accessorObject.componentType = cast(int)arrayValue.integer;
@@ -1256,15 +1256,28 @@ private:
                     }
                     // Integer
                     case "count": {
-
-                    }
-                    // Double array
-                    case "max": {
-
+                        assert(arrayValue.type() == JSONType.integer);
+                        accessorObject.count = cast(int)arrayValue.integer;
+                        write(accessorObject.count);
+                        break;
                     }
                     // Double array
                     case "min": {
 
+                    }
+                    // Double array
+                    case "max": {
+                        assert(arrayValue.type() == JSONType.array);
+                        foreach (k,JSONValue v; arrayValue.array) {
+                            // std.json thinks that 1.0 and 0.0 is integer so we have to work with it
+                            if (v.type == JSONType.float_) {
+                                accessorObject.maxValues ~= cast(double)v.floating;
+                            } else if (v.type == JSONType.integer) {
+                                accessorObject.maxValues ~= cast(double)v.integer;
+                            }
+                        }
+                        write(accessorObject.maxValues);
+                        break;
                     }
                     // String
                     case "type": {
