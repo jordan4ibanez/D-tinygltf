@@ -191,6 +191,15 @@ enum Type {
     OBJECT_TYPE
 }
 
+alias NULL_TYPE   = Type.NULL_TYPE;
+alias REAL_TYPE   = Type.REAL_TYPE;
+alias INT_TYPE    = Type.INT_TYPE;
+alias BOOL_TYPE   = Type.BOOL_TYPE;
+alias STRING_TYPE = Type.STRING_TYPE;
+alias ARRAY_TYPE  = Type.ARRAY_TYPE;
+alias BINARY_TYPE = Type.BINARY_TYPE;
+alias OBJECT_TYPE = Type.OBJECT_TYPE;
+
 
 pragma(inline, true) private int getComponentSizeInBytes(uint componentType) {
     if (componentType == TINYGLTF_COMPONENT_TYPE_BYTE) {
@@ -896,7 +905,7 @@ struct Accessor {
     /// Utility function to compute byteStride for a given bufferView object.
     /// Returns -1 upon invalid glTF value or parameter configuration.
     ///
-    int ByteStride(const BufferView bufferViewObject) const {
+    int byteStride(const BufferView bufferViewObject) const {
         if (bufferViewObject.byteStride == 0) {
             // Assume data is tightly packed.
             int componentSizeInBytes = GetComponentSizeInBytes(componentType);
