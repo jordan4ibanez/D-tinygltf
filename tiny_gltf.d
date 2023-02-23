@@ -380,7 +380,7 @@ public:
     bool has(const string key) {
         if (!this.isObject())
             return false;
-        return (key in object_value_) != null;
+        return (key in this.object_value_) != null;
     }
 
     // List keys
