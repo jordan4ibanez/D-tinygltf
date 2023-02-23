@@ -373,7 +373,7 @@ public:
     size_t arrayLen() {
         if (!this.isArray())
             return 0;
-        return array_value_.length;
+        return this.array_value_.length;
     }
 
     // Valid only for object type.
