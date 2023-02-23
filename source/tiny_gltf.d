@@ -1198,7 +1198,7 @@ private:
     //                     const char_ *str, const uint length,
     //                     const ref string base_dir, uint check_sections);
 
-    const(ubyte)* bin_data_ = null;
+    ubyte[] bin_data_ = null;
     size_t bin_size_ = 0;
     bool is_binary_ = false;
 
