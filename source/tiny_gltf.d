@@ -1159,14 +1159,14 @@ class Model {
         
         if (!this.fileExists()) {
             
-            if (this.debugInfo){
-                // Overkill debug info
-                writeDebug(
-                    "I'm very sorry, but the file:\n" ~
-                    fileLocation ~ "\n" ~
-                    "does not exist on the drive. Perhaps you are polling the wrong directory?\n"
-                );
-            }
+            
+            // Overkill debug info
+            writeDebug(
+                "I'm very sorry, but the file:\n" ~
+                fileLocation ~ "\n" ~
+                "does not exist on the drive. Perhaps you are polling the wrong directory?\n"
+            );
+            
         }
     }
 
@@ -1192,6 +1192,9 @@ private:
         );
     }
     void writeDebug(string input) {
+        if (!this.debugInfo) {
+            return;
+        }
         writeDebugHeader();
         writeln(input);
         writeDebugFooter();
