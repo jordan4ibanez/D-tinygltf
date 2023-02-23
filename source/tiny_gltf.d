@@ -2,6 +2,7 @@ import std.stdio;
 import std.string;
 import std.file;
 import std.json;
+import core.stdcpp.array;
 
 // import core.stdc.stddef: wchar_t;
 //
@@ -1197,15 +1198,15 @@ private:
         // This might look a bit complicated, but we're just iterating the tree of data
         // We start off with a set of keys and values, accessor, bufferViews, etc
         // Then we need to go down them because they're packed pretty tight
-        foreach (key,val; this.jsonData.object) {
+        foreach (key,value; this.jsonData.objectNoRef) {
 
             // writeln(key);
 
             // Key's could be corrupted, so we need a default catch all
-            //* key is a string, val is a json string
+            //* key is a string, value is a JSONValue object
             switch(key) {
                 case "accessors":{
-                    this.grabAccessorsData(val);
+                    this.grabAccessorsData(value);
                     break;
                 }
                 default: //TODO: do a thing here or something, no idea yet
@@ -1213,8 +1214,46 @@ private:
         }
     }
     
-    void grabAccessorsData(JSONValue dataObject) {
-                        
+    void grabAccessorsData(JSONValue jsonObject) {
+        //* Key is integer, value is JSON object
+        foreach (key,value; jsonObject.array) {
+            // We are assembling this accessorObject
+            Accessor accessorObject = new Accessor();
+            //* Key is integer, value is JSON object
+            foreach (arrayKey, arrayValue; value.array) {
+                switch(arrayKey) {
+                    // Integer
+                    case "bufferView": {
+
+                    }
+                    // Integer
+                    case "byteOffset": {
+
+                    }
+                    // TINYGLTF_COMPONENT_TYPE_
+                    case "componentType": {
+
+                    }
+                    // Integer
+                    case "count": {
+
+                    }
+                    // Double array
+                    case "max": {
+
+                    }
+                    // Double array
+                    case "min": {
+
+                    }
+                    // String
+                    case "type": {
+
+                    }
+                    default: // TODO: UNKNOWN
+                }
+            }
+        }
     }
 
     //* This is just a passthrough to keep it looking neat :)
