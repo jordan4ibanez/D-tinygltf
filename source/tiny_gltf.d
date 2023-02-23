@@ -545,7 +545,7 @@ class AnimationChannel {
     string target_extensions_json_string;
 
     this(int sampler = -1, int target_node = -1) {
-        
+
         this.sampler = sampler;
         this.target_node = target_node;
 
@@ -554,7 +554,7 @@ class AnimationChannel {
     bool_ operator==cast(const(AnimationChannel) &) const !!*/
 }
 
-struct AnimationSampler {
+class AnimationSampler {
     int input = -1;                   // required
     int output = -1;                  // required
     string interpolation = "LINEAR";  // "LINEAR", "STEP","CUBICSPLINE" or user defined
@@ -566,8 +566,10 @@ struct AnimationSampler {
     string extras_json_string;
     string extensions_json_string;
     
-    this(){
-
+    this(int input = -1, int output = -1, string interpolation = "LINEAR"){
+        this.input = input;
+        this.output = output;
+        this.interpolation = interpolation;
     }/*: input(-1), output(-1), interpolation("LINEAR") {}
     DEFAULT_METHODS(AnimationSampler)
     bool_ operator==cast(const(AnimationSampler) &) const !!*/
