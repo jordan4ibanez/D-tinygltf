@@ -614,7 +614,7 @@ class Skin {
     bool operator==(const Skin &) const;*/
 }
 
-struct Sampler {
+class Sampler {
     string name;
     // glTF 2.0 spec does not define default value for `minFilter` and
     // `magFilter`. Set -1 in TinyGLTF(issue #186)
