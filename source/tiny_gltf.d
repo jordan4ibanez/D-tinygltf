@@ -529,7 +529,7 @@ struct Parameter {
 alias ParameterMap = Parameter[string];
 alias ExtensionMap = Value[string];
 
-struct AnimationChannel {
+class AnimationChannel {
     int sampler = -1;     // required
     int target_node = -1; // optional index of the node to target (alternative
                             // target should be provided by extension)
@@ -544,7 +544,10 @@ struct AnimationChannel {
     string extensions_json_string;
     string target_extensions_json_string;
 
-    this() {
+    this(int sampler = -1, int target_node = -1) {
+        
+        this.sampler = sampler;
+        this.target_node = target_node;
 
     }/*: sampler(-1), target_node(-1) {}
     DEFAULT_METHODS(AnimationChannel)
