@@ -1,6 +1,3 @@
-module test.tiny_gltf;
-
-
 import std.stdio;
 import std.string;
 
@@ -170,8 +167,8 @@ enum TINYGLTF_TARGET_ELEMENT_ARRAY_BUFFER = (34963);
 enum TINYGLTF_SHADER_TYPE_VERTEX_SHADER = (35633);
 enum TINYGLTF_SHADER_TYPE_FRAGMENT_SHADER = (35632);
 
-enum TINYGLTF_DOUBLE_EPS = (1.e-12);
-enum string TINYGLTF_DOUBLE_EQUAL(string a, string b) = ` (std::fabs((b) - (a)) < TINYGLTF_DOUBLE_EPS)`;
+// enum TINYGLTF_DOUBLE_EPS = (1.e-12);
+// enum string TINYGLTF_DOUBLE_EQUAL(string a, string b) = ` (std::fabs((b) - (a)) < TINYGLTF_DOUBLE_EPS)`;
 
 
 enum Type {
@@ -530,7 +527,7 @@ struct Parameter {
 }
 
 alias ParameterMap = Parameter[string];
-alias ExtensionMap = ExtensionMap[string];
+alias ExtensionMap = Value[string];
 
 struct AnimationChannel {
     int sampler = -1;     // required
