@@ -1203,7 +1203,7 @@ private:
         foreach (key,value; this.jsonData.objectNoRef) {
 
             //! Don't remove this until everything is accounted for
-            writeln(key);
+            // writeln(key);
 
             //TODO: surround this with try catch, return false on failure along with debug info on which one failed
 
@@ -1236,11 +1236,15 @@ private:
             // We are assembling this buffer
             Buffer bufferObject = new Buffer();
 
+            writeln("-----");
+
             // Now parse the string
             //* Key is string, value is JSON value
             foreach (string arrayKey, JSONValue arrayValue; value.object) {
+                writeln(arrayKey, " ", arrayValue);
                 switch (arrayKey) {
-
+                    
+                    
                 }
             }
         }
