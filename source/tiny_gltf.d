@@ -1363,6 +1363,12 @@ private:
                         }
                         break;
                     }
+                    // String
+                    case "name": {
+                        assert(arrayValue.type == JSONType.string);
+                        nodeObject.name = arrayValue.str;
+                        break;
+                    }
                     default: // Unknown
 
                 }
