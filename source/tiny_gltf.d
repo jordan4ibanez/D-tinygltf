@@ -1274,9 +1274,13 @@ private:
                     // Double[16] (matrix4)
                     case "matrix": {
                         assert(arrayValue.type == JSONType.array);
+                        // std.json thinks that 1.0 and 0.0 is integer so we have to work with it
                         foreach(size_t k, JSONValue v; arrayValue.array){
-                            assert(v.type == JSONType.float_);
-                            nodeObject.matrix ~= v.floating;
+                            if (arrayValue.type == JSONType.float_) {
+                                nodeObject.matrix ~= v.floating;
+                            } else if (arrayValue.type == JSONType.integer) {
+                                nodeObject.matrix ~= cast(double)v.integer;
+                            }
                         }
                         break;
                     }
@@ -1289,6 +1293,7 @@ private:
                     // Double[4] (quaternion)
                     case "rotation": {
                         assert(arrayValue.type == JSONType.array);
+                        // std.json thinks that 1.0 and 0.0 is integer so we have to work with it
                         foreach(size_t k, JSONValue v; arrayValue.array){
                             if (arrayValue.type == JSONType.float_) {
                                 nodeObject.rotation ~= v.floating;
@@ -1301,6 +1306,7 @@ private:
                     // Double[3] (vector3)
                     case "scale": {
                         assert(arrayValue.type == JSONType.array);
+                        // std.json thinks that 1.0 and 0.0 is integer so we have to work with it
                         foreach(size_t k, JSONValue v; arrayValue.array){
                             if (arrayValue.type == JSONType.float_) {
                                 nodeObject.scale ~= v.floating;
@@ -1313,6 +1319,7 @@ private:
                     // Double[3] (vector3)
                     case "translation": {
                         assert(arrayValue.type == JSONType.array);
+                        // std.json thinks that 1.0 and 0.0 is integer so we have to work with it
                         foreach(size_t k, JSONValue v; arrayValue.array){
                             if (arrayValue.type == JSONType.float_) {
                                 nodeObject.translation ~= v.floating;
@@ -1325,6 +1332,7 @@ private:
                     // Integer[]
                     case "weights": {
                         assert(arrayValue.type == JSONType.array);
+                        // std.json thinks that 1.0 and 0.0 is integer so we have to work with it
                         foreach(size_t k, JSONValue v; arrayValue.array){
                             if (arrayValue.type == JSONType.float_) {
                                 nodeObject.weights ~= v.floating;
@@ -1367,7 +1375,15 @@ private:
                     }
                     // Array
                     case "weights": {
-                        //TODO
+                        assert(arrayValue.type == JSONType.array);
+                        // std.json thinks that 1.0 and 0.0 is integer so we have to work with it
+                        foreach(size_t k, JSONValue v; arrayValue.array){
+                            if (arrayValue.type == JSONType.float_) {
+                                meshObject.weights ~= v.floating;
+                            } else if (arrayValue.type == JSONType.integer) {
+                                meshObject.weights ~= cast(double)v.integer;
+                            }
+                        }
                     }
                     default:
                 }
@@ -1392,7 +1408,7 @@ private:
             //* Key is string, value is JSON value
             foreach (string arrayKey, JSONValue arrayValue; value.object) {
                 switch (arrayKey) {
-                    // Associative Array
+                    // Integer[String] Associative Array
                     case "attributes": {
                         assert(arrayValue.type == JSONType.object);
                         foreach (string attributeKey, JSONValue attributeValue; arrayValue) {
@@ -1419,7 +1435,7 @@ private:
                         primitiveObject.mode = cast(int)arrayValue.integer;
                         break;
                     }
-                    // Integer array
+                    // Integer[]
                     case "targets": {
                         // TODO
                         break;
