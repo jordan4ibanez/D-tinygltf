@@ -1187,9 +1187,6 @@ class Model {
         // Now it has to iterate the JSON object and store the data.
         this.collectJSONInfo();
 
-        //TODO: iterate the JSON data and check if everything is pointing to things that exist
-        //TODO Check the spec because there is one of these things that can't have equal values for something
-
         return true;
     }
 
