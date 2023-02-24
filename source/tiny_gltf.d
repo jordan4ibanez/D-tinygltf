@@ -1239,6 +1239,7 @@ private:
     }
 
     void grabNodesData(JSONValue jsonObject) {
+
         //* This is explicit to help code-d and to be more readable for control flow
         //* Key is integer(size_t), value is JSON value
         foreach (size_t key, JSONValue value; jsonObject.array) {
@@ -1249,32 +1250,51 @@ private:
             //* Key is string, value is JSON value
             foreach (string arrayKey, JSONValue arrayValue; value.object) {
                 switch (arrayKey) {
+                    // Integer
                     case "camera": {
                         assert(arrayValue.type == JSONType.integer);
+                        nodeObject.camera = cast(int)arrayValue.integer;
+                        break;
                     }
-                    case "": {
+                    // Integer[]
+                    case "children": {
                         
+                        break;
                     }
-                    case "": {
+                    // Integer
+                    case "skin": {
                         
+                        break;
                     }
-                    case "": {
+                    // Double[16] (matrix4)
+                    case "matrix": {
                         
+                        break;
                     }
-                    case "": {
+                    // Integer
+                    case "mesh": {
                         
+                        break;
                     }
-                    case "": {
+                    // Double[4] (quaternion)
+                    case "rotation": {
                         
+                        break;
                     }
-                    case "": {
+                    // Double[3] (vector3)
+                    case "scale": {
                         
+                        break;
                     }
-                    case "": {
+                    // Double[3] (vector3)
+                    case "translation": {
                         
+                        break;
                     }
-                    case "": {
-                        
+                    // Integer[]
+                    case "weights": {
+                        // TODO
+                        break;
                     }
                     default: // Unknown
 
