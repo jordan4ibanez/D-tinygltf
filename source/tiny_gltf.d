@@ -1185,6 +1185,7 @@ class Model {
         this.collectJSONInfo();
 
         //TODO: iterate the JSON data and check if everything is pointing to things that exist
+        //TODO Check the spec because there is one of these things that can't have equal values for something
 
         return true;
     }
@@ -1221,6 +1222,7 @@ private:
             }
         }
     }
+
     void grabBufferViewsData(JSONValue jsonObject) {
         //* This is explicit to help code-d and to be more readable for control flow
         //* Key is integer(size_t), value is JSONValue
