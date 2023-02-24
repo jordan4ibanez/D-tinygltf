@@ -1233,9 +1233,53 @@ private:
                     this.grabNodesData(value);
                     break;
                 }
+                case "asset": {
+                    this.grabAssetData(value);
+                    break;
+                }
                 default: // Unknown
             }
         }
+    }
+
+    void grabAssetData(JSONValue jsonObject) {
+
+        //* This is explicit to help code-d and to be more readable for control flow
+
+        //* Implementation note: There is only one asset so this looks a bit different    
+
+        // We are assembling this asset
+        Asset assetObject = new Asset();
+
+        // Now parse the string
+
+        //* Key is string, value is JSON value
+        foreach (string arrayKey, JSONValue arrayValue; jsonObject.object) {
+            switch (arrayKey) {
+                case "copyright": {
+                    assert(arrayValue.type == JSONType.string);
+                    assetObject.copyright = arrayValue.str;
+                    break;
+                }
+                case "generator": {
+                    assert(arrayValue.type == JSONType.string);
+                    assetObject.generator = arrayValue.str;
+                    break;
+                }
+                case "version": {
+                    assert(arrayValue.type == JSONType.string);
+                    assetObject.version_ = arrayValue.str;
+                    break;
+                }
+                case "minVersion": {
+                    assert(arrayValue.type == JSONType.string);
+                    assetObject.minVersion = arrayValue.str;
+                    break;
+                }
+                default: // Unknown
+            }
+        }
+        this.asset = assetObject;    
     }
 
     void grabNodesData(JSONValue jsonObject) {
@@ -1246,6 +1290,8 @@ private:
 
             // We are assembling this node
             Node nodeObject = new Node();
+
+            // Now parse the string
 
             //* Key is string, value is JSON value
             foreach (string arrayKey, JSONValue arrayValue; value.object) {
