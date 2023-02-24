@@ -1674,6 +1674,10 @@ private:
                         }
                         break;
                     }
+                    case "name": {
+                        assert(arrayValue.type == JSONType.string);
+                        accessorObject.name = arrayValue.str;
+                    }
                     default: // UNKNOWN
                 }
             }
