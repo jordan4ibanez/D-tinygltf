@@ -1225,9 +1225,101 @@ private:
                     this.grabBuffersData(value);
                     break;
                 }
+                case "meshes": {
+                    this.grabMeshesData(value);
+                    break;
+                }
                 default: // Unknown
             }
         }
+    }
+
+    void grabMeshesData(JSONValue jsonObject) {
+        //* This is explicit to help code-d and to be more readable for control flow
+        //* Key is integer(size_t), value is JSON value
+        foreach (size_t key, JSONValue value; jsonObject.array) {
+
+            //* Implementation note: Meshes are a special type.
+            //* They contain a vector of Primitive objects.
+ 
+            // We are assembling this mesh
+            Mesh meshObject = new Mesh();
+
+            // Now parse the string
+
+            //* Key is string, value is JSON value
+            foreach (string arrayKey, JSONValue arrayValue; value.object) {
+                switch (arrayKey) {
+                    case "primitives": {
+                        assert(arrayValue.type == JSONType.array);
+                        // Goes to a primitive assembler because it's complex.
+                        meshObject.primitives = this.grabPrimitiveData(arrayValue);
+                        break;
+                    }
+                    case "weights": {
+                        //TODO
+                    }
+                    default:
+                }
+            }
+        }
+    }
+    
+    Primitive[] grabPrimitiveData(JSONValue jsonObject) {
+
+        // This is assembling an array of primitives
+        Primitive[] returningPrimitives;
+
+        //* This is explicit to help code-d and to be more readable for control flow
+        //* Key is integer(size_t), value is JSON value
+        foreach (size_t key, JSONValue value; jsonObject.array) {
+
+            // We are assembling this primitive
+            Primitive primitiveObject = new Primitive();
+
+            // Now parse the string
+
+            //* Key is string, value is JSON value
+            foreach (string arrayKey, JSONValue arrayValue; value.object) {
+                switch (arrayKey) {
+                    // Associative Array
+                    case "attributes": {
+                        assert(arrayValue.type == JSONType.object);
+                        foreach (string attributeKey, JSONValue attributeValue; arrayValue) {
+                            assert(attributeValue.type == JSONType.integer);
+                            primitiveObject.attributes[attributeKey] = cast(int)attributeValue.integer;
+                        }
+                        break;
+                    }
+                    // Integer
+                    case "indices": {
+                        assert(arrayValue.type == JSONType.integer);
+                        primitiveObject.indices = cast(int)arrayValue.integer;
+                        break;
+                    }
+                    // Integer
+                    case "material": {
+                        assert(arrayValue.type == JSONType.integer);
+                        primitiveObject.material = cast(int)arrayValue.integer;
+                        break;
+                    }
+                    // Integer
+                    case "mode": {
+                        assert(arrayValue.type == JSONType.integer);
+                        primitiveObject.mode = cast(int)arrayValue.integer;
+                        break;
+                    }
+                    // Integer array
+                    case "targets": {
+                        // TODO
+                        break;
+                    }
+                    default: // Unknown
+                }
+            }
+            returningPrimitives ~= primitiveObject;
+        }
+        return returningPrimitives;
     }
 
     void grabBuffersData(JSONValue jsonObject) {
@@ -1240,6 +1332,7 @@ private:
             Buffer bufferObject = new Buffer();
 
             // Now parse the string
+
             //* Key is string, value is JSON value
             foreach (string arrayKey, JSONValue arrayValue; value.object) {
                 switch (arrayKey) {
