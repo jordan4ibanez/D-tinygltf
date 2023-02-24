@@ -1415,6 +1415,7 @@ private:
                     case "name": {
                         assert(arrayValue.type == JSONType.string);
                         meshObject.name = arrayValue.str;
+                        break;
                     }
                     default:
                 }
@@ -1515,6 +1516,7 @@ private:
                     case "name": {
                         assert(arrayValue.type == JSONType.string);
                         bufferObject.name = arrayValue.str;
+                        break;
                     }
                     default: // Unknown
                 }
@@ -1565,6 +1567,7 @@ private:
                     case "name": {
                         assert(arrayValue.type == JSONType.string);
                         bufferViewObject.name = arrayValue.str;
+                        break;
                     }
                     default: // Unknown
                 }
@@ -1677,6 +1680,7 @@ private:
                     case "name": {
                         assert(arrayValue.type == JSONType.string);
                         accessorObject.name = arrayValue.str;
+                        break;
                     }
                     default: // UNKNOWN
                 }
