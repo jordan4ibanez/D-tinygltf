@@ -1329,7 +1329,7 @@ private:
                         }
                         break;
                     }
-                    // Integer[]
+                    // Double[]
                     case "weights": {
                         assert(arrayValue.type == JSONType.array);
                         // std.json thinks that 1.0 and 0.0 is integer so we have to work with it
@@ -1366,14 +1366,14 @@ private:
             //* Key is string, value is JSON value
             foreach (string arrayKey, JSONValue arrayValue; value.object) {
                 switch (arrayKey) {
-                    // Json object
+                    // Json Object
                     case "primitives": {
                         assert(arrayValue.type == JSONType.array);
                         // Goes to a primitive assembler because it's complex.
                         meshObject.primitives = this.grabPrimitiveData(arrayValue);
                         break;
                     }
-                    // Array
+                    // Double[]
                     case "weights": {
                         assert(arrayValue.type == JSONType.array);
                         // std.json thinks that 1.0 and 0.0 is integer so we have to work with it
@@ -1571,7 +1571,7 @@ private:
                         accessorObject.count = cast(int)arrayValue.integer;
                         break;
                     }
-                    // Double array
+                    // Double[]
                     case "min": {
                         assert(arrayValue.type() == JSONType.array);
                         foreach (k,JSONValue v; arrayValue.array) {
@@ -1584,7 +1584,7 @@ private:
                         }
                         break;
                     }
-                    // Double array
+                    // Double[]
                     case "max": {
                         assert(arrayValue.type() == JSONType.array);
                         foreach (k,JSONValue v; arrayValue.array) {
