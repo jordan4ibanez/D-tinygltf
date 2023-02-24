@@ -1229,7 +1229,56 @@ private:
                     this.grabMeshesData(value);
                     break;
                 }
+                case "nodes": {
+                    this.grabNodesData(value);
+                    break;
+                }
                 default: // Unknown
+            }
+        }
+    }
+
+    void grabNodesData(JSONValue jsonObject) {
+        //* This is explicit to help code-d and to be more readable for control flow
+        //* Key is integer(size_t), value is JSON value
+        foreach (size_t key, JSONValue value; jsonObject.array) {
+
+            // We are assembling this node
+            Node nodeObject = new Node();
+
+            //* Key is string, value is JSON value
+            foreach (string arrayKey, JSONValue arrayValue; value.object) {
+                switch (arrayKey) {
+                    case "camera": {
+                        assert(arrayValue.type == JSONType.integer);
+                    }
+                    case "": {
+                        
+                    }
+                    case "": {
+                        
+                    }
+                    case "": {
+                        
+                    }
+                    case "": {
+                        
+                    }
+                    case "": {
+                        
+                    }
+                    case "": {
+                        
+                    }
+                    case "": {
+                        
+                    }
+                    case "": {
+                        
+                    }
+                    default: // Unknown
+
+                }
             }
         }
     }
@@ -1250,12 +1299,14 @@ private:
             //* Key is string, value is JSON value
             foreach (string arrayKey, JSONValue arrayValue; value.object) {
                 switch (arrayKey) {
+                    // Json object
                     case "primitives": {
                         assert(arrayValue.type == JSONType.array);
                         // Goes to a primitive assembler because it's complex.
                         meshObject.primitives = this.grabPrimitiveData(arrayValue);
                         break;
                     }
+                    // Array
                     case "weights": {
                         //TODO
                     }
@@ -1347,6 +1398,7 @@ private:
                         bufferObject.data = Base64.decode(data);
                         break;
                     }
+                    // Integer
                     case "byteLength": {
                         assert(arrayValue.type == JSONType.integer);
                         bufferObject.byteLength = cast(int)arrayValue.integer;
