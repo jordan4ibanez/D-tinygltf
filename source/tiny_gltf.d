@@ -1511,6 +1511,7 @@ private:
                         bufferObject.byteLength = cast(int)arrayValue.integer;
                         break;
                     }
+                    // String
                     case "name": {
                         assert(arrayValue.type == JSONType.string);
                         bufferObject.name = arrayValue.str;
@@ -1538,27 +1539,32 @@ private:
                 switch (arrayKey) {
                     // Integer
                     case "byteOffset": {
-                        assert(arrayValue.type() == JSONType.integer);
+                        assert(arrayValue.type == JSONType.integer);
                         bufferViewObject.byteOffset = cast(int)arrayValue.integer;
                         break;
                     }
                     // Integer, alias to TINYGLTF_TARGET_
                     case "target": {
-                        assert(arrayValue.type() == JSONType.integer);
+                        assert(arrayValue.type == JSONType.integer);
                         bufferViewObject.target = cast(int)arrayValue.integer;
                         break;
                     }
                     // Integer
                     case "buffer": {
-                        assert(arrayValue.type() == JSONType.integer);
+                        assert(arrayValue.type == JSONType.integer);
                         bufferViewObject.buffer = cast(int)arrayValue.integer;
                         break;
                     }
                     // Integer
                     case "byteLength": {
-                        assert(arrayValue.type() == JSONType.integer);
+                        assert(arrayValue.type == JSONType.integer);
                         bufferViewObject.byteLength = cast(int)arrayValue.integer;
                         break;
+                    }
+                    // String
+                    case "name": {
+                        assert(arrayValue.type == JSONType.string);
+                        bufferViewObject.name = arrayValue.str;
                     }
                     default: // Unknown
                 }
