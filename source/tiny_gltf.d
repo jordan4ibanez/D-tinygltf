@@ -5,7 +5,7 @@ import std.json;
 import core.stdcpp.array;
 import std.conv;
 import std.algorithm.iteration;
-import std.regex;
+import std.base64;
 
 // import core.stdc.stddef: wchar_t;
 //
@@ -1039,6 +1039,7 @@ public:
 class Buffer {
     string name;
     ubyte[] data;
+    int byteLength = -1;
     string uri;  // considered as required here but not in the spec (need to clarify)
                  // uri is not decoded(e.g. whitespace may be represented as %20)
     Value extras;
@@ -1249,18 +1250,23 @@ private:
                     // String - REQUIRED to be a string of data
                     case "uri": {
                         assert(arrayValue.type == JSONType.string);
+
                         // Needs to strip out this header info
                         string data = arrayValue.str.replace("data:application/octet-stream;base64,", "");
+                        
                         // If it's a bin, fail state
                         assert(data.length != arrayValue.str.length);
-                        bufferObject.data = cast(ubyte[])data.dup;
-                        // Needs to be identical
-                        assert(data == bufferObject.data);
-                        write("an encoded value");
+
+                        bufferObject.data = Base64.decode(data);
+                        
+                        // This is printing the URI length to make sure it's the same byte length as byteLength
+                        write(to!string(bufferObject.data.length) ~ " ");
                         break;
                     }
                     case "byteLength": {
-                        
+                        assert(arrayValue.type == JSONType.integer);
+                        bufferObject.byteLength = cast(int)arrayValue.integer;
+                        write(bufferObject.byteLength);
                         break;
                     }
                     default: // Unknown
