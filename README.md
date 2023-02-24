@@ -1,6 +1,6 @@
 # D tiny glTF embedded loader library.
 
-`TinyGLTF` is a D glTF 2.0 https://github.com/KhronosGroup/glTF library for loading embedded json gltf models.
+`TinyGLTF` is a D glTF 2.0 https://github.com/KhronosGroup/glTF library for loading embedded json gltf models. This only supports pure ``JSON`` encoded (embedded) models so you can load them up into your cool game.
 
 I'm still working on this so the readme is going to look a bit bad.
 
