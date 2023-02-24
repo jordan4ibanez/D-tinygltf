@@ -1367,6 +1367,8 @@ private:
 
                 }
             }
+
+            this.nodes ~= nodeObject;
         }
     }
 
@@ -1391,6 +1393,7 @@ private:
                     case "primitives": {
                         assert(arrayValue.type == JSONType.array);
                         // Goes to a primitive assembler because it's complex.
+                        // This returns an array of primitives, automatically assigns it.
                         meshObject.primitives = this.grabPrimitiveData(arrayValue);
                         break;
                     }
@@ -1697,7 +1700,7 @@ private:
             return cast(double)input.integer;
         }
         // Something went HORRIBLY wrong with the model.
-        return 0.0;
+        throw new Exception("THIS MODEL HAS A DIFFERENT TYPE THAT'S NOT INTEGRAL AS A DOUBLE!");
     }
 
 
