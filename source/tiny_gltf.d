@@ -1204,6 +1204,8 @@ private:
             //! Don't remove this until everything is accounted for
             // writeln(key);
 
+            //TODO: surround this with try catch, return false on failure along with debug info on which one failed
+
             // Key's could be corrupted, so we need a default catch all
             //* key is a string, value is a JSONValue object
             switch (key) {
@@ -1229,44 +1231,37 @@ private:
 
             // Now parse the string
 
-            writeln("---");
-
             //* Key is string, value is JSON value
             foreach (string arrayKey, JSONValue arrayValue; value.object) {
-                write(arrayKey ~ ": ");
                 switch (arrayKey) {
                     // Integer
                     case "byteOffset": {
                         assert(arrayValue.type() == JSONType.integer);
                         bufferViewObject.byteOffset = cast(int)arrayValue.integer;
-                        write(bufferViewObject.byteOffset);
                         break;
                     }
                     // Integer, alias to TINYGLTF_TARGET_
                     case "target": {
                         assert(arrayValue.type() == JSONType.integer);
                         bufferViewObject.target = cast(int)arrayValue.integer;
-                        write(bufferViewObject.target);
                         break;
                     }
                     // Integer
                     case "buffer": {
                         assert(arrayValue.type() == JSONType.integer);
                         bufferViewObject.buffer = cast(int)arrayValue.integer;
-                        write(bufferViewObject.buffer);
                         break;
                     }
                     // Integer
                     case "byteLength": {
                         assert(arrayValue.type() == JSONType.integer);
                         bufferViewObject.byteLength = cast(int)arrayValue.integer;
-                        write(bufferViewObject.byteLength);
                         break;
                     }
                     default: // Unknown
                 }
-                write("\n");
             }
+            this.bufferViews ~= bufferViewObject;
         }
     }
     
