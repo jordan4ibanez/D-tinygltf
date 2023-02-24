@@ -1511,6 +1511,10 @@ private:
                         bufferObject.byteLength = cast(int)arrayValue.integer;
                         break;
                     }
+                    case "name": {
+                        assert(arrayValue.type == JSONType.string);
+                        bufferObject.name = arrayValue.str;
+                    }
                     default: // Unknown
                 }
             }
