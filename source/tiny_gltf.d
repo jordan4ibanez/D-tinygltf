@@ -1274,13 +1274,8 @@ private:
                     // Double[16] (matrix4)
                     case "matrix": {
                         assert(arrayValue.type == JSONType.array);
-                        // std.json thinks that 1.0 and 0.0 is integer so we have to work with it
                         foreach(size_t k, JSONValue v; arrayValue.array){
-                            if (arrayValue.type == JSONType.float_) {
-                                nodeObject.matrix ~= v.floating;
-                            } else if (arrayValue.type == JSONType.integer) {
-                                nodeObject.matrix ~= cast(double)v.integer;
-                            }
+                            nodeObject.matrix ~= grabDouble(v);
                         }
                         break;
                     }
@@ -1293,52 +1288,32 @@ private:
                     // Double[4] (quaternion)
                     case "rotation": {
                         assert(arrayValue.type == JSONType.array);
-                        // std.json thinks that 1.0 and 0.0 is integer so we have to work with it
                         foreach(size_t k, JSONValue v; arrayValue.array){
-                            if (arrayValue.type == JSONType.float_) {
-                                nodeObject.rotation ~= v.floating;
-                            } else if (arrayValue.type == JSONType.integer) {
-                                nodeObject.rotation ~= cast(double)v.integer;
-                            }
+                            nodeObject.rotation ~= this.grabDouble(v);
                         }
                         break;
                     }
                     // Double[3] (vector3)
                     case "scale": {
                         assert(arrayValue.type == JSONType.array);
-                        // std.json thinks that 1.0 and 0.0 is integer so we have to work with it
                         foreach(size_t k, JSONValue v; arrayValue.array){
-                            if (arrayValue.type == JSONType.float_) {
-                                nodeObject.scale ~= v.floating;
-                            } else if (arrayValue.type == JSONType.integer) {
-                                nodeObject.scale ~= cast(double)v.integer;
-                            }
+                            nodeObject.scale ~= this.grabDouble(v);
                         }
                         break;
                     }
                     // Double[3] (vector3)
                     case "translation": {
                         assert(arrayValue.type == JSONType.array);
-                        // std.json thinks that 1.0 and 0.0 is integer so we have to work with it
                         foreach(size_t k, JSONValue v; arrayValue.array){
-                            if (arrayValue.type == JSONType.float_) {
-                                nodeObject.translation ~= v.floating;
-                            } else if (arrayValue.type == JSONType.integer) {
-                                nodeObject.translation ~= cast(double)v.integer;
-                            }
+                            nodeObject.translation ~= this.grabDouble(v);
                         }
                         break;
                     }
                     // Double[]
                     case "weights": {
                         assert(arrayValue.type == JSONType.array);
-                        // std.json thinks that 1.0 and 0.0 is integer so we have to work with it
                         foreach(size_t k, JSONValue v; arrayValue.array){
-                            if (arrayValue.type == JSONType.float_) {
-                                nodeObject.weights ~= v.floating;
-                            } else if (arrayValue.type == JSONType.integer) {
-                                nodeObject.weights ~= cast(double)v.integer;
-                            }
+                            nodeObject.weights ~= this.grabDouble(v);
                         }
                         break;
                     }
@@ -1376,14 +1351,10 @@ private:
                     // Double[]
                     case "weights": {
                         assert(arrayValue.type == JSONType.array);
-                        // std.json thinks that 1.0 and 0.0 is integer so we have to work with it
                         foreach(size_t k, JSONValue v; arrayValue.array){
-                            if (arrayValue.type == JSONType.float_) {
-                                meshObject.weights ~= v.floating;
-                            } else if (arrayValue.type == JSONType.integer) {
-                                meshObject.weights ~= cast(double)v.integer;
-                            }
+                            meshObject.weights ~= this.grabDouble(v);
                         }
+                        break;
                     }
                     default:
                 }
@@ -1575,12 +1546,7 @@ private:
                     case "min": {
                         assert(arrayValue.type() == JSONType.array);
                         foreach (k,JSONValue v; arrayValue.array) {
-                            // std.json thinks that 1.0 and 0.0 is integer so we have to work with it
-                            if (v.type == JSONType.float_) {
-                                accessorObject.minValues ~= cast(double)v.floating;
-                            } else if (v.type == JSONType.integer) {
-                                accessorObject.minValues ~= cast(double)v.integer;
-                            }
+                            accessorObject.minValues ~= this.grabDouble(v);
                         }
                         break;
                     }
@@ -1588,12 +1554,7 @@ private:
                     case "max": {
                         assert(arrayValue.type() == JSONType.array);
                         foreach (k,JSONValue v; arrayValue.array) {
-                            // std.json thinks that 1.0 and 0.0 is integer so we have to work with it
-                            if (v.type == JSONType.float_) {
-                                accessorObject.maxValues ~= cast(double)v.floating;
-                            } else if (v.type == JSONType.integer) {
-                                accessorObject.maxValues ~= cast(double)v.integer;
-                            }
+                            accessorObject.maxValues ~= this.grabDouble(v);
                         }
                         break;
                     }
@@ -1680,6 +1641,17 @@ private:
         }
 
         return true;
+    }
+
+    // std.json thinks that 1.0 and 0.0 is integer so we have to work with it
+    static double grabDouble(JSONValue input) {
+        if (input.type == JSONType.float_) {
+            return input.floating;
+        } else if (input.type == JSONType.integer) {
+            return cast(double)input.integer;
+        }
+        // Something went HORRIBLY wrong with the model.
+        return 0.0;
     }
 
 
