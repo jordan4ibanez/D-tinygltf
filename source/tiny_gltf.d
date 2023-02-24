@@ -1342,6 +1342,7 @@ private:
     }
 
     void grabMeshesData(JSONValue jsonObject) {
+
         //* This is explicit to help code-d and to be more readable for control flow
         //* Key is integer(size_t), value is JSON value
         foreach (size_t key, JSONValue value; jsonObject.array) {
