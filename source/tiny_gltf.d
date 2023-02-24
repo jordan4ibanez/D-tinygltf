@@ -1202,7 +1202,7 @@ private:
         foreach (key,value; this.jsonData.objectNoRef) {
 
             //! Don't remove this until everything is accounted for
-            writeln(key);
+            // writeln(key);
 
             // Key's could be corrupted, so we need a default catch all
             //* key is a string, value is a JSONValue object
@@ -1220,7 +1220,54 @@ private:
         }
     }
     void grabBufferViewsData(JSONValue jsonObject) {
+        //* This is explicit to help code-d and to be more readable for control flow
+        //* Key is integer(size_t), value is JSONValue
+        foreach (size_t key, JSONValue value; jsonObject.array) {
 
+            // We are assembling this bufferView
+            BufferView bufferViewObject = new BufferView();
+
+            // Now parse the string
+
+            writeln("---");
+
+            //* Key is string, value is JSON value
+            foreach (string arrayKey, JSONValue arrayValue; value.object) {
+                write(arrayKey ~ ": ");
+                switch (arrayKey) {
+                    // Integer
+                    case "byteOffset": {
+                        assert(arrayValue.type() == JSONType.integer);
+                        bufferViewObject.byteOffset = cast(int)arrayValue.integer;
+                        write(bufferViewObject.byteOffset);
+                        break;
+                    }
+                    // Integer, alias to TINYGLTF_TARGET_
+                    case "target": {
+                        assert(arrayValue.type() == JSONType.integer);
+                        bufferViewObject.target = cast(int)arrayValue.integer;
+                        write(bufferViewObject.target);
+                        break;
+                    }
+                    // Integer
+                    case "buffer": {
+                        assert(arrayValue.type() == JSONType.integer);
+                        bufferViewObject.buffer = cast(int)arrayValue.integer;
+                        write(bufferViewObject.buffer);
+                        break;
+                    }
+                    // Integer
+                    case "byteLength": {
+                        assert(arrayValue.type() == JSONType.integer);
+                        bufferViewObject.byteLength = cast(int)arrayValue.integer;
+                        write(bufferViewObject.byteLength);
+                        break;
+                    }
+                    default: // Unknown
+                }
+                write("\n");
+            }
+        }
     }
     
     void grabAccessorsData(JSONValue jsonObject) {
@@ -1229,7 +1276,7 @@ private:
         //* Key is integer(size_t), value is JSONValue
         foreach (size_t key, JSONValue value; jsonObject.array) {
 
-            // We are assembling this accessorObject
+            // We are assembling this accessor
             Accessor accessorObject = new Accessor();
             
             // Now parse the string
