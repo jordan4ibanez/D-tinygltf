@@ -1239,40 +1239,30 @@ private:
             // We are assembling this buffer
             Buffer bufferObject = new Buffer();
 
-            writeln("-----");
-
             // Now parse the string
             //* Key is string, value is JSON value
             foreach (string arrayKey, JSONValue arrayValue; value.object) {
-                write(arrayKey ~ ": ");
                 switch (arrayKey) {
-                    
                     // String - REQUIRED to be a string of data
                     case "uri": {
                         assert(arrayValue.type == JSONType.string);
-
                         // Needs to strip out this header info
                         string data = arrayValue.str.replace("data:application/octet-stream;base64,", "");
-                        
                         // If it's a bin, fail state
                         assert(data.length != arrayValue.str.length);
-
+                        // Now decode it
                         bufferObject.data = Base64.decode(data);
-                        
-                        // This is printing the URI length to make sure it's the same byte length as byteLength
-                        write(to!string(bufferObject.data.length) ~ " ");
                         break;
                     }
                     case "byteLength": {
                         assert(arrayValue.type == JSONType.integer);
                         bufferObject.byteLength = cast(int)arrayValue.integer;
-                        write(bufferObject.byteLength);
                         break;
                     }
                     default: // Unknown
                 }
-                write("\n");
             }
+            this.buffers ~= bufferObject;
         }
     }
 
