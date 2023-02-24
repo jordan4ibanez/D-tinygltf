@@ -1411,9 +1411,15 @@ private:
                         }
                         break;
                     }
+                    // String
+                    case "name": {
+                        assert(arrayValue.type == JSONType.string);
+                        meshObject.name = arrayValue.str;
+                    }
                     default:
                 }
             }
+            this.meshes ~= meshObject;
         }
     }
     
