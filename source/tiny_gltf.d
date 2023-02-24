@@ -1258,42 +1258,80 @@ private:
                     }
                     // Integer[]
                     case "children": {
-                        
+                        assert(arrayValue.type == JSONType.array);
+                        foreach(size_t k, JSONValue v; arrayValue.array){
+                            assert(v.type == JSONType.integer);
+                            nodeObject.children ~= cast(int)v.integer;
+                        }
                         break;
                     }
                     // Integer
                     case "skin": {
-                        
+                        assert(arrayValue.type == JSONType.integer);
+                        nodeObject.skin = cast(int)arrayValue.integer;
                         break;
                     }
                     // Double[16] (matrix4)
                     case "matrix": {
-                        
+                        assert(arrayValue.type == JSONType.array);
+                        foreach(size_t k, JSONValue v; arrayValue.array){
+                            assert(v.type == JSONType.float_);
+                            nodeObject.matrix ~= v.floating;
+                        }
                         break;
                     }
                     // Integer
                     case "mesh": {
-                        
+                        assert(arrayValue.type == JSONType.integer);
+                        nodeObject.mesh = cast(int)arrayValue.integer;
                         break;
                     }
                     // Double[4] (quaternion)
                     case "rotation": {
-                        
+                        assert(arrayValue.type == JSONType.array);
+                        foreach(size_t k, JSONValue v; arrayValue.array){
+                            if (arrayValue.type == JSONType.float_) {
+                                nodeObject.rotation ~= v.floating;
+                            } else if (arrayValue.type == JSONType.integer) {
+                                nodeObject.rotation ~= cast(double)v.integer;
+                            }
+                        }
                         break;
                     }
                     // Double[3] (vector3)
                     case "scale": {
-                        
+                        assert(arrayValue.type == JSONType.array);
+                        foreach(size_t k, JSONValue v; arrayValue.array){
+                            if (arrayValue.type == JSONType.float_) {
+                                nodeObject.scale ~= v.floating;
+                            } else if (arrayValue.type == JSONType.integer) {
+                                nodeObject.scale ~= cast(double)v.integer;
+                            }
+                        }
                         break;
                     }
                     // Double[3] (vector3)
                     case "translation": {
-                        
+                        assert(arrayValue.type == JSONType.array);
+                        foreach(size_t k, JSONValue v; arrayValue.array){
+                            if (arrayValue.type == JSONType.float_) {
+                                nodeObject.translation ~= v.floating;
+                            } else if (arrayValue.type == JSONType.integer) {
+                                nodeObject.translation ~= cast(double)v.integer;
+                            }
+                        }
                         break;
                     }
                     // Integer[]
                     case "weights": {
-                        // TODO
+                        assert(arrayValue.type == JSONType.array);
+                        foreach(size_t k, JSONValue v; arrayValue.array){
+                            if (arrayValue.type == JSONType.float_) {
+                                nodeObject.weights ~= v.floating;
+                            } else if (arrayValue.type == JSONType.integer) {
+                                nodeObject.weights ~= cast(double)v.integer;
+                            }
+                        }
                         break;
                     }
                     default: // Unknown
