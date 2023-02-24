@@ -1767,6 +1767,7 @@ unittest {
     assert(successModel.loadFile() == true);
 
   
+    // These weren't pure json so they didn't work :(
     /*
     writeln("\nSUCCESS PASS\n");
 
