@@ -4,6 +4,8 @@ import std.file;
 import std.json;
 import core.stdcpp.array;
 import std.conv;
+import std.algorithm.iteration;
+import std.regex;
 
 // import core.stdc.stddef: wchar_t;
 //
@@ -1241,11 +1243,29 @@ private:
             // Now parse the string
             //* Key is string, value is JSON value
             foreach (string arrayKey, JSONValue arrayValue; value.object) {
-                writeln(arrayKey, " ", arrayValue);
+                write(arrayKey ~ ": ");
                 switch (arrayKey) {
                     
-                    
+                    // String - REQUIRED to be a string of data
+                    case "uri": {
+                        assert(arrayValue.type == JSONType.string);
+                        // Needs to strip out this header info
+                        string data = arrayValue.str.replace("data:application/octet-stream;base64,", "");
+                        // If it's a bin, fail state
+                        assert(data.length != arrayValue.str.length);
+                        bufferObject.data = cast(ubyte[])data.dup;
+                        // Needs to be identical
+                        assert(data == bufferObject.data);
+                        write("an encoded value");
+                        break;
+                    }
+                    case "byteLength": {
+                        
+                        break;
+                    }
+                    default: // Unknown
                 }
+                write("\n");
             }
         }
     }
@@ -1478,7 +1498,7 @@ unittest {
     writeln("\nFAILURE PASS!\n");
 
     // Now test loading state again with a known model
-    Model successModel = new Model("models/Cube/Cube.gltf");
+    Model successModel = new Model("models/cube_embedded/cube.gltf");
     assert(successModel !is null);
     assert(successModel.loadFile() == true);
 
