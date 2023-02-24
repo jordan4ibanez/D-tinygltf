@@ -9,7 +9,7 @@ For now, you can kind of follow this to use it in D maybe (It's C++):
 
 
 
-Keep in mind that you just create a Model object then load it. See the unit test at the bottom of the source file.
+Keep in mind that you just create a ``Model`` object with a file location, then load it using ``loadFile()`` which will return a success boolean. See the unit test at the bottom of the source file.
 
 ## Change Log: 
 
